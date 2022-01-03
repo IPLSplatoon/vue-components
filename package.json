@@ -1,6 +1,6 @@
 {
     "name": "@iplsplatoon/vue-components",
-    "version": "0.1.1",
+    "version": "1.0.0",
     "description": "Vue components for internal Inkling Performance Labs utilities.",
     "homepage": "https://github.com/IPLSplatoon/vue-components",
     "repository": "https://github.com/IPLSplatoon/vue-components",
@@ -14,6 +14,7 @@
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
     "dependencies": {
+        "@fortawesome/free-solid-svg-icons": "^5.15.4",
         "lodash": "^4.17.21"
     },
     "files": [
