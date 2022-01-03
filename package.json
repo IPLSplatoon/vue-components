@@ -1,0 +1,60 @@
+{
+    "name": "@iplsplatoon/vue-components",
+    "version": "1.0.0",
+    "scripts": {
+        "build": "cross-env NODE_ENV=production webpack && vue-tsc --declaration --emitDeclarationOnly",
+        "test": "jest",
+        "lint": "eslint ./src"
+    },
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "dependencies": {
+        "lodash": "^4.17.21"
+    },
+    "files": [
+        "dist/**/*"
+    ],
+    "peerDependencies": {
+        "vue": "^3.2.26"
+    },
+    "devDependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.36",
+        "@fortawesome/vue-fontawesome": "^3.0.0-5",
+        "@types/jest": "^27.4.0",
+        "@types/lodash": "^4.14.178",
+        "@typescript-eslint/eslint-plugin": "^5.8.1",
+        "@typescript-eslint/parser": "^5.8.1",
+        "@vue/compiler-sfc": "^3.2.26",
+        "@vue/test-utils": "^2.0.0-rc.18",
+        "@vue/vue3-jest": "^27.0.0-alpha.4",
+        "cross-env": "^7.0.3",
+        "css-loader": "^6.5.1",
+        "eslint": "^8.6.0",
+        "eslint-import-resolver-typescript": "^2.5.0",
+        "eslint-import-resolver-webpack": "^0.13.2",
+        "eslint-plugin-import": "^2.25.4",
+        "eslint-plugin-vue": "^8.2.0",
+        "fork-ts-checker-webpack-plugin": "^6.5.0",
+        "jest": "^27.4.5",
+        "sass": "^1.45.2",
+        "sass-loader": "^12.4.0",
+        "style-loader": "^3.3.1",
+        "ts-jest": "^27.1.2",
+        "ts-loader": "^9.2.6",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.4",
+        "vue": "^3.2.26",
+        "vue-loader": "^17.0.0",
+        "vue-tsc": "^0.30.1",
+        "webpack": "^5.65.0",
+        "webpack-bundle-analyzer": "^4.5.0",
+        "webpack-cli": "^4.9.1"
+    },
+    "license": "MIT",
+    "jest": {
+        "projects": [
+            "<rootDir>/src/jest.config.ts"
+        ]
+    }
+}

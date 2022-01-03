@@ -1,0 +1,5 @@
+node_modules
+dist
+
+# Files from packaging for local testing
+/*.tgz
