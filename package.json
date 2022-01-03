@@ -1,12 +1,13 @@
 {
     "name": "@iplsplatoon/vue-components",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Vue components for internal Inkling Performance Labs utilities.",
     "homepage": "https://github.com/IPLSplatoon/vue-components",
     "repository": "https://github.com/IPLSplatoon/vue-components",
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack && vue-tsc --declaration --emitDeclarationOnly",
         "test": "jest",
+        "test:ci": "jest --json --outputFile=result.json --testLocationInResults",
         "lint": "eslint ./src"
     },
     "main": "dist/index.js",
