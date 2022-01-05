@@ -54,7 +54,7 @@ export default defineComponent({
             default: null
         },
         modelValue: {
-            type: [String, Number],
+            type: [String, Number, null] as PropType<string | number | null>,
             default: ''
         },
         type: {
@@ -98,7 +98,7 @@ export default defineComponent({
         return {
             model: computed({
                 get() {
-                    return String(props.modelValue);
+                    return props.modelValue?.toString() ?? '';
                 },
                 set(value: string) {
                     emit('update:modelValue', props.formatter ? props.formatter(value) : value);
@@ -110,7 +110,7 @@ export default defineComponent({
             handleFocusEvent(e: Event) {
                 if (e.type === 'blur') {
                     if (input.value) {
-                        input.value.value = props.modelValue.toString();
+                        input.value.value = props.modelValue?.toString() ?? '';
                     }
                 }
                 emit('focuschange', e.type !== 'blur');
