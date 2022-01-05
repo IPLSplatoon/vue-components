@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils';
 
 describe('IplInput', () => {
     it('provides props to inner elements', () => {
-        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', type: 'number', disabled: true } });
+        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', type: 'number', disabled: true, modelValue: 'value!!' } });
 
         const input = wrapper.get('input');
         expect(input.element.name).toEqual('input');
@@ -59,6 +59,16 @@ describe('IplInput', () => {
         innerInput.trigger('blur');
 
         expect(innerInput.element.value).toEqual('value!');
+    });
+
+    it('sets input value to blank on blur if model value is null', () => {
+        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', modelValue: null } });
+        const innerInput = wrapper.get('input');
+
+        innerInput.element.value = 'value!!!!!!!!!';
+        innerInput.trigger('blur');
+
+        expect(innerInput.element.value).toEqual('');
     });
 
     it('sends event and updates v-model on input', async () => {
@@ -155,6 +165,7 @@ describe('IplInput', () => {
         it('allows valid input types', () => {
             expect(validator('text')).toEqual(true);
             expect(validator('number')).toEqual(true);
+            expect(validator('color')).toEqual(true);
         });
 
         it('rejects invalid types', () => {
