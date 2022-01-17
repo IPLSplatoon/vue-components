@@ -1,10 +1,11 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
-function dashboardConfig() {
+function config() {
     return {
         mode: isProd ? 'production' : 'development',
         entry: {
@@ -49,6 +50,7 @@ function dashboardConfig() {
                 },
                 {
                     test: /\.s[ac]ss$/,
+                    exclude: /node_modules/,
                     use: [
                         'style-loader',
                         {
@@ -82,6 +84,11 @@ function dashboardConfig() {
                         }
                     }
                 }
+            }),
+            new CopyPlugin({
+                patterns: [
+                    { from: 'src/styles/**/*.scss', to: 'scss/[name][ext]' }
+                ]
             })
         ],
         optimization: (isProd) ? {
@@ -99,4 +106,4 @@ function dashboardConfig() {
     };
 }
 
-module.exports = dashboardConfig();
+module.exports = config();
