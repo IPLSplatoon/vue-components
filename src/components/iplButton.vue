@@ -1,7 +1,7 @@
 <template>
     <a
         class="ipl-button"
-        href="#"
+        href="javascript:void(0);"
         :style="buttonStyle"
         :class="{
             disabled: disabledInternal,
@@ -260,7 +260,8 @@ export default defineComponent({
         position: absolute;
         left: 0; top: 0;
         width: 100%; height: 100%;
-        background-color: rgba(0, 0, 0, 0);
+        background-color: #000;
+        opacity: 0;
         transition-duration: $transition-duration-low;
         pointer-events: none;
     }
@@ -272,13 +273,13 @@ export default defineComponent({
     &:not(.disabled) {
         &:hover {
             &:after {
-                background-color: rgba(0, 0, 0, 0.1);
+                opacity: 0.1;
             }
         }
 
         &:active {
             &:after {
-                background-color: rgba(0, 0, 0, 0.2);
+                opacity: 0.2;
             }
         }
 
