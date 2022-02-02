@@ -1,3 +1,7 @@
+# 1.2.0
+
+- Allow ipl-button `href` property to be customized
+
 # 1.1.0
 
 - Bundle scss styles in distribution to provide dependents with color constants

@@ -1,7 +1,7 @@
 <template>
     <a
         class="ipl-button"
-        href="javascript:void(0);"
+        :href="isBlank(href) ? 'javascript:void(0);' : href"
         :style="buttonStyle"
         :class="{
             disabled: disabledInternal,
@@ -31,6 +31,7 @@ import { buttonColors, themeColors } from '../styles/colors';
 import isEmpty from 'lodash/isEmpty';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getContrastingTextColor } from '../helpers/colorHelper';
+import { isBlank } from '../helpers/stringHelper';
 
 export default defineComponent({
     name: 'IplButton',
@@ -86,6 +87,10 @@ export default defineComponent({
         disableOnSuccess: {
             type: Boolean,
             default: false
+        },
+        href: {
+            type: String,
+            default: ''
         }
     },
 
@@ -191,7 +196,8 @@ export default defineComponent({
                     default:
                         return props.label;
                 }
-            })
+            }),
+            isBlank
         };
     }
 });

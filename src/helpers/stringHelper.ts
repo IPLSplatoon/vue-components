@@ -16,3 +16,7 @@ export function padNumber(value: number | string, minLength = 2): string {
 export function formatNumber(value: number): string {
     return new Intl.NumberFormat('en-US').format(value);
 }
+
+export function isBlank(value?: string | null): boolean {
+    return value === null || value === undefined || value.trim() === '';
+}
