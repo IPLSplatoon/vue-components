@@ -18,6 +18,18 @@ describe('iplButton', () => {
         expect(wrapper.find('span.label').text()).toEqual('Button');
     });
 
+    it('applies default href to button if one is not given', () => {
+        const wrapper = shallowMount(IplButton, { props: { label: 'Button' } });
+
+        expect(wrapper.find('a').element.href).toEqual('javascript:void(0);');
+    });
+
+    it('applies given href to button if present', () => {
+        const wrapper = shallowMount(IplButton, { props: { label: 'Button', href: 'https://google.com/' } });
+
+        expect(wrapper.find('a').element.href).toEqual('https://google.com/');
+    });
+
     it('creates icon if given', () => {
         const wrapper = shallowMount(IplButton, { props: { icon: 'cool-icon' } });
 
