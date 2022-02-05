@@ -1,3 +1,7 @@
+# 1.2.1
+
+- Slightly change ipl-select padding to closer match ipl-input style
+
 # 1.2.0
 
 - Allow ipl-button `href` property to be customized
