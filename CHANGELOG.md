@@ -2,6 +2,7 @@
 
 - Use inject/provide to pass validators to ipl-input instead of props
 - Export more helpers for validation, parsing colors and other small tasks
+- Add `clickable` prop to ipl-space
 
 # 1.2.1
 
