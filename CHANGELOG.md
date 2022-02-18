@@ -1,3 +1,8 @@
+# 2.0.0
+
+- Use inject/provide to pass validators to ipl-input instead of props
+- Export more helpers for validation, parsing colors and other small tasks
+
 # 1.2.1
 
 - Slightly change ipl-select padding to closer match ipl-input style

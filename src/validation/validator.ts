@@ -1,4 +1,4 @@
-import { reactive, watch, WatchSource } from 'vue';
+import { provide, reactive, watch, WatchSource } from 'vue';
 
 export interface ValidatorResult {
     isValid: boolean | null
@@ -33,4 +33,8 @@ export function validator<T>(
 
 export function allValid(validators: Record<string, ValidatorResult>): boolean {
     return Object.values(validators).every(validator => validator.isValid);
+}
+
+export function provideValidators(validators: Record<string, ValidatorResult>): void {
+    provide('validators', validators);
 }
