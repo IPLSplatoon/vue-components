@@ -15,3 +15,8 @@ export { default as IplSpace } from './components/iplSpace.vue';
 export { default as IplToggle } from './components/iplToggle.vue';
 export { default as IplToggleButton } from './components/iplToggleButton.vue';
 export { default as IplUpload } from './components/iplUpload.vue';
+export * from './helpers/stringHelper';
+export * from './helpers/colorHelper';
+export * from './validation/validator';
+export * from './validation/numberValidators';
+export * from './validation/stringValidators';
