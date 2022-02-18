@@ -101,8 +101,12 @@ describe('IplInput', () => {
         const wrapper = mount(IplInput, {
             props: {
                 label: 'Label',
-                name: 'input',
-                validator: undefined
+                name: 'input'
+            },
+            global: {
+                provide: {
+                    validators: undefined
+                }
             }
         });
 
@@ -113,10 +117,17 @@ describe('IplInput', () => {
         const wrapper = mount(IplInput, {
             props: {
                 label: 'Label',
-                name: 'input',
-                validator: {
-                    isValid: false,
-                    message: 'very bad!!!'
+                name: 'input'
+            },
+            global: {
+                provide: {
+                    validators: {
+                        otherInput: { },
+                        input: {
+                            isValid: false,
+                            message: 'very bad!!!'
+                        }
+                    }
                 }
             }
         });
@@ -131,10 +142,17 @@ describe('IplInput', () => {
             props: {
                 label: 'Label',
                 name: 'input',
-                validator: {
-                    isValid: true,
-                    message: 'ok'
+            },
+            global: {
+                provide: {
+                    validators: {
+                        input: {
+                            isValid: true,
+                            message: 'ok'
+                        }
+                    }
                 }
+
             }
         });
 
@@ -147,9 +165,15 @@ describe('IplInput', () => {
         const wrapper = mount(IplInput, {
             props: {
                 label: 'Label',
-                name: 'input',
-                validator: {
-                    isValid: null
+                name: 'input-name'
+            },
+            global: {
+                provide: {
+                    validators: {
+                        'input-name': {
+                            isValid: null
+                        }
+                    }
                 }
             }
         });

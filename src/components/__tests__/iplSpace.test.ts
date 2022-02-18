@@ -14,12 +14,21 @@ describe('IplSpace', () => {
         expect(wrapper.get('.ipl-space').classes()).toContain('color-dark');
     });
 
+    it('has expected class when clickable', () => {
+        const wrapper = shallowMount(IplSpace, { props: { color: 'blue', clickable: true } });
+
+        const classes = wrapper.get('.ipl-space').classes();
+        expect(classes).toContain('color-blue');
+        expect(classes).toContain('clickable');
+    });
+
     describe('validator: color', () => {
         const validator = IplSpace.props.color.validator as (value?: string | null) => boolean;
 
         it('allows expected color values', () => {
             expect(validator('dark')).toEqual(true);
             expect(validator('light')).toEqual(true);
+            expect(validator('blue')).toEqual(true);
         });
 
         it('does not allow unexpected color values', () => {

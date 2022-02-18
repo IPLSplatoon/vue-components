@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, Ref, ref } from 'vue';
+import { computed, defineComponent, inject, PropType, Ref, ref } from 'vue';
 import { ValidatorResult } from '../validation/validator';
 import IplLabel from './iplLabel.vue';
 
@@ -68,10 +68,6 @@ export default defineComponent({
             type: String,
             required: true
         },
-        validator: {
-            type: Object as PropType<ValidatorResult>,
-            default: null
-        },
         centered: {
             type: Boolean,
             default: false
@@ -94,6 +90,8 @@ export default defineComponent({
 
     setup(props, { emit }) {
         const input: Ref<HTMLInputElement | null> = ref(null);
+        const validators = inject<Record<string, ValidatorResult> | null>('validators', null);
+        const validator = computed(() => validators?.[props.name]);
 
         return {
             model: computed({
@@ -105,8 +103,9 @@ export default defineComponent({
                 }
             }),
             isValid: computed(() => {
-                return !props.validator ? true : props.validator?.isValid ?? true;
+                return !validator.value ? true : validator.value?.isValid ?? true;
             }),
+            validator,
             handleFocusEvent(e: Event) {
                 if (e.type === 'blur') {
                     if (input.value) {
