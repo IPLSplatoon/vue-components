@@ -3,7 +3,15 @@ import { mount } from '@vue/test-utils';
 
 describe('IplInput', () => {
     it('provides props to inner elements', () => {
-        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', type: 'number', disabled: true, modelValue: 'value!!' } });
+        const wrapper = mount(IplInput, {
+            props: {
+                label: 'Label',
+                name: 'input',
+                type: 'number',
+                disabled: true,
+                modelValue: 'value!!'
+            }
+        });
 
         const input = wrapper.get('input');
         expect(input.element.name).toEqual('input');
@@ -23,14 +31,14 @@ describe('IplInput', () => {
     });
 
     it('gives class to input if set as centered', () => {
-        const wrapper = mount(IplInput, { props: {  label: 'Label', name: 'input', centered: true  } });
+        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', centered: true } });
 
         const input = wrapper.get('input');
         expect(input.element.classList).toContain('centered');
     });
 
     it('has class if type is color', () => {
-        const wrapper = mount(IplInput, { props: { name: 'input', type: 'color'  } });
+        const wrapper = mount(IplInput, { props: { name: 'input', type: 'color' } });
 
         const textInputWrapper = wrapper.get('.ipl-input__text-input-wrapper');
         expect(textInputWrapper.element.classList).toContain('is-color');
@@ -46,9 +54,9 @@ describe('IplInput', () => {
 
         const events = wrapper.emitted().focuschange;
         expect(events.length).toEqual(3);
-        expect(events[0]).toEqual([true]);
-        expect(events[1]).toEqual([false]);
-        expect(events[2]).toEqual([true]);
+        expect(events[0]).toEqual([ true ]);
+        expect(events[1]).toEqual([ false ]);
+        expect(events[2]).toEqual([ true ]);
     });
 
     it('sets input value to match v-model value on blur', () => {
@@ -81,11 +89,17 @@ describe('IplInput', () => {
         expect(emitted.input.length).toEqual(1);
         const modelValueUpdates = emitted['update:modelValue'];
         expect(modelValueUpdates.length).toEqual(1);
-        expect(modelValueUpdates[0]).toEqual(['new text']);
+        expect(modelValueUpdates[0]).toEqual([ 'new text' ]);
     });
 
     it('updates v-model with formatted input if formatter is passed to component', async () => {
-        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', formatter: (value: string) => `${value}_formatted` } });
+        const wrapper = mount(IplInput, {
+            props: {
+                label: 'Label',
+                name: 'input',
+                formatter: (value: string) => `${value}_formatted`
+            }
+        });
         const innerInput = wrapper.get('input');
 
         await innerInput.setValue('new text');
@@ -94,7 +108,7 @@ describe('IplInput', () => {
         expect(emitted.input.length).toEqual(1);
         const modelValueUpdates = emitted['update:modelValue'];
         expect(modelValueUpdates.length).toEqual(1);
-        expect(modelValueUpdates[0]).toEqual(['new text_formatted']);
+        expect(modelValueUpdates[0]).toEqual([ 'new text_formatted' ]);
     });
 
     it('shows no message if validator does not exist', () => {
@@ -122,7 +136,7 @@ describe('IplInput', () => {
             global: {
                 provide: {
                     validators: {
-                        otherInput: { },
+                        otherInput: {},
                         input: {
                             isValid: false,
                             message: 'very bad!!!'
@@ -186,10 +200,16 @@ describe('IplInput', () => {
     describe('validator: type', () => {
         const validator = IplInput.props.type.validator as (value?: string | null) => boolean;
 
-        it('allows valid input types', () => {
-            expect(validator('text')).toEqual(true);
-            expect(validator('number')).toEqual(true);
-            expect(validator('color')).toEqual(true);
+        it.each([
+            'text',
+            'number',
+            'color',
+            'email',
+            'password',
+            'url',
+            'search'
+        ])('allows valid input type %s', type => {
+            expect(validator(type)).toEqual(true);
         });
 
         it('rejects invalid types', () => {
