@@ -90,6 +90,7 @@ export default defineComponent({
 
     > .message-content {
         overflow-wrap: anywhere;
+        flex-grow: 1;
 
         > .close-button {
             float: right;
