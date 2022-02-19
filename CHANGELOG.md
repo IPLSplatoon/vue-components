@@ -1,3 +1,11 @@
+# 2.1.1
+
+- Fix ipl-message content sometimes not taking up the whole width of the component as expected
+
+# 2.1.0
+
+- Allow ipl-input to accept more types
+
 # 2.0.0
 
 - Use inject/provide to pass validators to ipl-input instead of props
