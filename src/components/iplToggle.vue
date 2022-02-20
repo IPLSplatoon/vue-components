@@ -8,13 +8,13 @@
                 class="true-option"
                 :class="{ selected: model }"
             >
-                Show
+                {{ trueLabel }}
             </span>
             <span
                 class="false-option"
                 :class="{ selected: !model }"
             >
-                Hide
+                {{ falseLabel }}
             </span>
         </div>
         <div
@@ -34,6 +34,14 @@ export default defineComponent({
         modelValue: {
             type: Boolean,
             default: false
+        },
+        trueLabel: {
+            type: String,
+            default: 'Show'
+        },
+        falseLabel: {
+            type: String,
+            default: 'Hide'
         }
     },
 
@@ -63,7 +71,7 @@ export default defineComponent({
     @import './src/styles/constants';
 
     .ipl-toggle__container {
-        height: 44px;
+        min-height: 44px;
         background-color: $background-tertiary;
         border-radius: $border-radius-inner;
         position: relative;
@@ -97,7 +105,6 @@ export default defineComponent({
         .ipl-toggle__text {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            height: 100%;
             width: 100%;
             align-items: center;
             justify-items: center;
@@ -106,10 +113,15 @@ export default defineComponent({
             font-size: 1em;
             font-weight: 700;
             user-select: none;
+            margin: 4px;
+            gap: 8px;
 
             span {
                 color: $text-color-disabled;
                 transition-duration: $transition-duration-med;
+                text-align: center;
+                overflow-wrap: break-word;
+                word-break: break-all;
 
                 &.selected {
                     color: $text-color;

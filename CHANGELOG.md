@@ -1,3 +1,7 @@
+# 2.2.0
+
+- Allow ipl-toggle to accept custom label text
+
 # 2.1.1
 
 - Fix ipl-message content sometimes not taking up the whole width of the component as expected
