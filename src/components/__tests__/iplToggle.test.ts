@@ -2,6 +2,24 @@ import IplToggle from '../iplToggle.vue';
 import { shallowMount } from '@vue/test-utils';
 
 describe('IplToggle', () => {
+    it('matches snapshot', () => {
+        const wrapper = shallowMount(IplToggle, { props: { modelValue: false } });
+
+        expect(wrapper.html()).toMatchSnapshot();
+    });
+
+    it('matches snapshot with custom labels', () => {
+        const wrapper = shallowMount(IplToggle, {
+            props: {
+                modelValue: false,
+                trueLabel: 'Enable',
+                falseLabel: 'Disable'
+            }
+        });
+
+        expect(wrapper.html()).toMatchSnapshot();
+    });
+
     it('toggles value on click', async () => {
         const wrapper = shallowMount(IplToggle, { props: { modelValue: false } });
 
@@ -9,7 +27,7 @@ describe('IplToggle', () => {
 
         const emitted = wrapper.emitted()['update:modelValue'];
         expect(emitted.length).toEqual(1);
-        expect(emitted[0]).toEqual([true]);
+        expect(emitted[0]).toEqual([ true ]);
     });
 
     it('gives class to true option text when value is true', () => {
