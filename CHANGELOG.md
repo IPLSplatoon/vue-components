@@ -1,3 +1,7 @@
+# 2.2.1
+
+- Incredibly minor: Remove default margin from ipl-button
+
 # 2.2.0
 
 - Allow ipl-toggle to accept custom label text
