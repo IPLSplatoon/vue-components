@@ -1,3 +1,7 @@
+# 2.3.0
+
+- Emit event when ipl-button is right-clicked
+
 # 2.2.1
 
 - Incredibly minor: Remove default margin from ipl-button

@@ -70,6 +70,14 @@ describe('iplButton', () => {
         expect(wrapper.emitted().click.length).toEqual(1);
     });
 
+    it('emits event on right click', async () => {
+        const wrapper = shallowMount(IplButton, { props: { label: 'Button' } });
+
+        await wrapper.find('a').trigger('contextmenu');
+
+        expect(wrapper.emitted().rightClick.length).toEqual(1);
+    });
+
     it('does not emit event if disabled', async () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', disabled: true } });
 
