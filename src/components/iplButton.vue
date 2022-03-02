@@ -220,7 +220,6 @@ export default defineComponent({
     cursor: pointer;
     display: block;
     width: 100%;
-    margin: 0;
     padding: 10px 0;
     position: relative;
     outline-width: 0;
