@@ -10,6 +10,7 @@
             'is-loading': buttonState === 'loading'
         }"
         @click="handleClick"
+        @contextmenu="$emit('rightClick', $event)"
     >
         <span
             v-if="!isIconButton"
@@ -94,7 +95,7 @@ export default defineComponent({
         }
     },
 
-    emits: [ 'click' ],
+    emits: [ 'click', 'rightClick' ],
 
     setup(props, { emit }) {
         if (isEmpty(props.icon) && isEmpty(props.label)) {

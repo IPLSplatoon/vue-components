@@ -58,3 +58,8 @@ Briefly disables the button and displays `successMessage` when the button is cli
 ### click
 
 Emitted when the button's action should be carried out. If `async` is set to true, this handler should return a promise.
+
+### rightClick
+
+Emitted when the button is right-clicked. Passes the event on through to the handler, into which `preventDefault()`
+can be called if desired.

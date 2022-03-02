@@ -10,4 +10,17 @@ To use the components, import them as follows:
 
 `import { IplButton } from '@iplsplatoon/vue-components';`
 
+## Development
+
+To test this package on another project:
+
+- Run a build (`yarn build`)
+- Package the built files (`yarn pack`). The command will output the directory where the completed tarball was saved.
+- Install the package, giving npm or yarn the path to your tarball
+  - Example: `npm i /users/inkfarer/iplsplatoon-vue-components-v2.3.0.tgz`
+  - This will change the contents of your lockfile. Please ensure you don't commit a lockfile containing a path to a
+    local tarball!
+
+---
+
 View more documentation in the `docs` folder of this repository.
