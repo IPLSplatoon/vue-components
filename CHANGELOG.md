@@ -1,3 +1,7 @@
+# 2.3.1
+
+- Reduce compilation target to improve browser support
+
 # 2.3.0
 
 - Emit event when ipl-button is right-clicked
