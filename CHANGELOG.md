@@ -1,3 +1,7 @@
+# 2.4.0
+
+- Add ipl-radio
+
 # 2.3.1
 
 - Reduce compilation target to improve browser support
