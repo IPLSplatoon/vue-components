@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IplRadio matches snapshot 1`] = `
+"<div class=\\"ipl-radio__wrapper\\"><label class=\\"ipl-label\\">Radio!</label>
+  <div class=\\"ipl-radio__options layout horizontal\\">
+    <div class=\\"ipl-radio__option wrap-anywhere selected\\" data-test=\\"option_opt1\\">Option One</div>
+    <div class=\\"ipl-radio__option wrap-anywhere\\" data-test=\\"option_opt2\\">Option Two</div>
+    <div class=\\"ipl-radio__option wrap-anywhere disabled\\" data-test=\\"option_opt3\\">Option Three</div>
+  </div>
+</div>"
+`;
