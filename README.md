@@ -21,6 +21,16 @@ To test this package on another project:
   - This will change the contents of your lockfile. Please ensure you don't commit a lockfile containing a path to a
     local tarball!
 
+To test this package locally:
+
+- Run the serve command (`yarn serve`)
+- Edit or add examples in the `examples` directory.
+
+To run unit tests:
+
+- Run `yarn test`
+- To update snapshot files, run `yarn test:update`
+
 ---
 
 View more documentation in the `docs` folder of this repository.

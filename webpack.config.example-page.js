@@ -1,31 +1,18 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-
-const isProd = process.env.NODE_ENV === 'production';
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 function config() {
     return {
-        mode: isProd ? 'production' : 'development',
+        mode: 'development',
         entry: {
-            app: './src/index.ts'
+            app: './examples/index.ts'
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
-            publicPath: '/dist/',
             filename: 'index.js',
-            library: '@iplsplatoon/vue-components',
-            libraryTarget: 'umd',
             clean: true
-        },
-        externals: {
-            vue: {
-                commonjs: 'vue',
-                commonjs2: 'vue',
-                amd: 'vue',
-                root: 'Vue'
-            }
         },
         resolve: {
             extensions: ['.js', '.json', '.vue', '.ts', '.tsx']
@@ -43,7 +30,7 @@ function config() {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: !isProd,
+                                sourceMap: true,
                                 esModule: false
                             }
                         }
@@ -57,7 +44,7 @@ function config() {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: !isProd,
+                                sourceMap: true,
                                 esModule: false
                             }
                         },
@@ -86,24 +73,15 @@ function config() {
                     }
                 }
             }),
-            new CopyPlugin({
-                patterns: [
-                    { from: 'src/styles/**/*.scss', to: 'scss/[name][ext]' }
-                ]
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                title: 'Example',
+                template: 'examples/template.html'
             })
         ],
-        optimization: isProd ? {
-            splitChunks: {
-                chunks: 'all',
-                cacheGroups: {
-                    common: {
-                        minChunks: 2
-                    },
-                    defaultVendors: false,
-                    default: false
-                }
-            }
-        } : undefined
+        devServer: {
+            static: './dist'
+        }
     };
 }
 
