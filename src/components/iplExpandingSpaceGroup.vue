@@ -19,11 +19,14 @@ export default defineComponent({
 
     emits: [ 'update:modelValue' ],
 
-    setup(props) {
+    setup(props, { emit }) {
         const selectedSpace = ref<string | null>(null);
 
         watch(() => props.modelValue, newValue => {
             selectedSpace.value = newValue;
+        }, { immediate: true });
+        watch(selectedSpace, newValue => {
+            emit('update:modelValue', newValue);
         }, { immediate: true });
 
         provide('activeSpace', selectedSpace);
