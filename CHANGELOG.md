@@ -1,3 +1,9 @@
+# 2.5.0
+
+- Add `v-model:expanded` to ipl-expanding-space, reflecting the component's expanded state.
+- Add an examples page for development use (`yarn serve`)
+- Use Font Awesome 6
+
 # 2.4.0
 
 - Add ipl-radio

@@ -2,6 +2,8 @@
 
 A group of `ipl-expanding-space` elements. Only one space in a group may be expanded at one time.
 
+Each `ipl-expanding-space` contained within a group must have a `key` attribute set in order for the group to function properly.
+
 ## Props
 
 ### modelValue

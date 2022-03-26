@@ -3,7 +3,7 @@ import { config, mount } from '@vue/test-utils';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 describe('IplDialogTitle', () => {
-    config.global.mocks = {
+    config.global.stubs = {
         FontAwesomeIcon: true
     };
 
