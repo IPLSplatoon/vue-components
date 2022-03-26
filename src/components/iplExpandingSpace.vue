@@ -13,14 +13,14 @@
             <font-awesome-icon
                 icon="chevron-left"
                 class="icon"
-                :class="{ 'content-expanded': shouldShowContent }"
+                :class="{ 'content-expanded': contentVisible }"
             />
             <div class="header-extra">
                 <slot name="header-extra" />
             </div>
         </div>
         <div
-            v-show="shouldShowContent"
+            v-show="contentVisible"
             class="content"
         >
             <slot />
@@ -30,7 +30,7 @@
 
 <script lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { computed, defineComponent, getCurrentInstance, inject, ref, WritableComputedRef } from 'vue';
+import { defineComponent, getCurrentInstance, inject, ref, watch, WritableComputedRef } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 
@@ -47,28 +47,56 @@ export default defineComponent({
         title: {
             type: String,
             default: ''
+        },
+        expanded: {
+            type: Boolean,
+            default: false
         }
     },
 
-    setup() {
-        const contentVisible = ref(false);
+    emits: ['update:expanded'],
+
+    setup(props, { emit }) {
         const key = getCurrentInstance()?.vnode.key as string;
+        const contentVisible = ref(props.expanded);
+
+        function setIsExpanded(isExpanded: boolean): void {
+            if (isInGroup) {
+                activeSpace.value = isExpanded ? key : null;
+            } else {
+                contentVisible.value = isExpanded;
+            }
+        }
+
+        function emitExpandedPropUpdate(isExpanded: boolean): void {
+            emit('update:expanded', isExpanded);
+        }
+
+        watch(() => props.expanded, newValue => {
+            if (newValue !== contentVisible.value) {
+                setIsExpanded(newValue);
+            }
+        });
+
         const activeSpace = inject<WritableComputedRef<string | null> | null>('activeSpace', null);
         const isInGroup = activeSpace != null;
-        const shouldShowContent = computed(() => isInGroup ? activeSpace.value === key : contentVisible.value);
+        if (isInGroup) {
+            watch(activeSpace, newValue => {
+                const newIsExpanded = newValue === key;
+                contentVisible.value = newIsExpanded;
+                emitExpandedPropUpdate(newIsExpanded);
+            }, { immediate: true });
+        }
 
         return {
             contentVisible,
-            activeSpace,
-            isInGroup,
             handleHeaderClick() {
-                if (isInGroup) {
-                    activeSpace.value = shouldShowContent.value ? null : key;
-                } else {
-                    contentVisible.value = !contentVisible.value;
+                const newValue = !contentVisible.value;
+                setIsExpanded(newValue);
+                if (!isInGroup) {
+                    emitExpandedPropUpdate(newValue);
                 }
-            },
-            shouldShowContent
+            }
         };
     }
 });

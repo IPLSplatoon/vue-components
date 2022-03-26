@@ -7,7 +7,7 @@ describe('IplExpandingSpace', () => {
         FontAwesomeIcon: true
     };
 
-    it('toggles content and sets appropriate classes on header click', async () => {
+    it('toggles content and sets appropriate classes and updates props on header click', async () => {
         const wrapper = shallowMount(IplExpandingSpace);
         const header = wrapper.get('.ipl-expansion-panel__header-background');
         const content = wrapper.get('.content');
@@ -16,13 +16,35 @@ describe('IplExpandingSpace', () => {
         await header.trigger('click');
         expect(content.isVisible()).toEqual(true);
         expect(icon.classes()).toContain('content-expanded');
+        const firstEmit = wrapper.emitted('update:expanded');
+        expect(firstEmit).toEqual([[true]]);
 
         await header.trigger('click');
         expect(content.isVisible()).toEqual(false);
         expect(icon.classes()).not.toContain('content-expanded');
+        const secondEmit = wrapper.emitted('update:expanded');
+        expect(secondEmit).toEqual([[true], [false]]);
     });
 
-    it('uses data from injected property if part of a group', async () => {
+    it('toggles content and sets appropriate classes when props change', async () => {
+        const wrapper = shallowMount(IplExpandingSpace);
+        const content = wrapper.get('.content');
+        const icon = wrapper.get('.icon');
+
+        await wrapper.setProps({
+            expanded: true
+        });
+        expect(content.isVisible()).toEqual(true);
+        expect(icon.classes()).toContain('content-expanded');
+
+        await wrapper.setProps({
+            expanded: false
+        });
+        expect(content.isVisible()).toEqual(false);
+        expect(icon.classes()).not.toContain('content-expanded');
+    });
+
+    it('sets injected active space value when part of a group', async () => {
         const activeSpace = ref<string | null>(null);
         const wrapper = shallowMount(IplExpandingSpace, {
             global: { provide: { activeSpace } },
@@ -36,8 +58,36 @@ describe('IplExpandingSpace', () => {
         expect(content.isVisible()).toEqual(true);
         expect(activeSpace.value).toEqual('coolkey');
         expect(icon.classes()).toContain('content-expanded');
+        const firstEmit = wrapper.emitted('update:expanded');
+        expect(firstEmit).toEqual([[false], [true]]);
 
         await header.trigger('click');
+        expect(content.isVisible()).toEqual(false);
+        expect(activeSpace.value).toBeNull();
+        expect(icon.classes()).not.toContain('content-expanded');
+        const secondEmit = wrapper.emitted('update:expanded');
+        expect(secondEmit).toEqual([[false], [true], [false]]);
+    });
+
+    it('sets injected active space value when props are changed', async () => {
+        const activeSpace = ref<string | null>(null);
+        const wrapper = shallowMount(IplExpandingSpace, {
+            global: { provide: { activeSpace } },
+            props: { key: 'coolkey' }
+        });
+        const content = wrapper.get('.content');
+        const icon = wrapper.get('.icon');
+
+        await wrapper.setProps({
+            expanded: true
+        });
+        expect(content.isVisible()).toEqual(true);
+        expect(activeSpace.value).toEqual('coolkey');
+        expect(icon.classes()).toContain('content-expanded');
+
+        await wrapper.setProps({
+            expanded: false
+        });
         expect(content.isVisible()).toEqual(false);
         expect(activeSpace.value).toBeNull();
         expect(icon.classes()).not.toContain('content-expanded');
@@ -56,6 +106,8 @@ describe('IplExpandingSpace', () => {
         await wrapper.vm.$nextTick();
 
         expect(content.isVisible()).toEqual(false);
+        const emitted = wrapper.emitted('update:expanded');
+        expect(emitted).toEqual([[true], [false]]);
     });
 
     it('gets title from props', () => {
