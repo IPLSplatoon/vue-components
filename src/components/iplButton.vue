@@ -225,7 +225,7 @@ export default defineComponent({
     position: relative;
     outline-width: 0;
 
-    transition-duration: $transition-duration-low;
+    transition-duration: background-color $transition-duration-low, color $transition-duration-low;
 
     &.has-icon {
         flex-grow: 0;
