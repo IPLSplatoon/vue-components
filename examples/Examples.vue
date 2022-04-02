@@ -10,6 +10,8 @@
         <button-example />
         <h2 id="async-button-example">ipl-button (async)</h2>
         <async-button-example />
+        <h2 id="toggle-example">ipl-toggle</h2>
+        <toggle-example />
     </div>
 </template>
 
@@ -20,9 +22,10 @@ import ExpandingSpaceGroupExample from './components/ExpandingSpaceGroupExample.
 import PageIndex from './components/PageIndex.vue';
 import ButtonExample from './components/ButtonExample.vue';
 import AsyncButtonExample from './components/AsyncButtonExample.vue';
+import ToggleExample from './components/ToggleExample.vue';
 
 export default defineComponent({
-    components: { ButtonExample, AsyncButtonExample, PageIndex, ExpandingSpaceGroupExample, ExpandingSpaceExample }
+    components: { ToggleExample, ButtonExample, AsyncButtonExample, PageIndex, ExpandingSpaceGroupExample, ExpandingSpaceExample }
 });
 </script>
 
