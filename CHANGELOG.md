@@ -1,3 +1,8 @@
+# 2.6.0
+
+- Add `use-neutral-colors` prop to ipl-toggle
+- Fix an issue with ipl-toggle not displaying correctly in some cases
+
 # 2.5.0
 
 - Add `v-model:expanded` to ipl-expanding-space, reflecting the component's expanded state.

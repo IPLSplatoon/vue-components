@@ -1,6 +1,6 @@
 <template>
     <div
-        class="ipl-toggle__container layout horizontal center-horizontal"
+        class="ipl-toggle__container"
         @click="toggleValue"
     >
         <div class="ipl-toggle__text">
@@ -19,7 +19,7 @@
         </div>
         <div
             class="ipl-toggle__button"
-            :class="{ 'is-true': model }"
+            :class="{ 'is-true': model, 'color-neutral': useNeutralColors }"
         />
     </div>
 </template>
@@ -42,6 +42,10 @@ export default defineComponent({
         falseLabel: {
             type: String,
             default: 'Hide'
+        },
+        useNeutralColors: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -69,6 +73,7 @@ export default defineComponent({
 <style lang="scss" scoped>
     @import './src/styles/colors';
     @import './src/styles/constants';
+    @import './src/styles/constants';
 
     .ipl-toggle__container {
         min-height: 44px;
@@ -77,6 +82,9 @@ export default defineComponent({
         position: relative;
         cursor: pointer;
         transition-duration: $transition-duration-low;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
 
         &:hover {
             background-color: $background-tertiary-hover;
@@ -86,6 +94,10 @@ export default defineComponent({
 
                 &.is-true {
                     background-color: $green-hover;
+                }
+
+                &.color-neutral {
+                    background-color: $blue-hover;
                 }
             }
         }
@@ -98,6 +110,10 @@ export default defineComponent({
 
                 &.is-true {
                     background-color: $green-active;
+                }
+
+                &.color-neutral {
+                    background-color: $blue-active;
                 }
             }
         }
@@ -144,6 +160,10 @@ export default defineComponent({
                 // Fixes oddities with Safari on iOS
                 left: calc(0% + 2px);
                 background-color: $green;
+            }
+
+            &.color-neutral {
+                background-color: $blue;
             }
         }
     }
