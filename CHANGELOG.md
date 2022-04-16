@@ -1,3 +1,7 @@
+# 2.6.1
+
+- Fix some ipl-button properties not animating as expected
+
 # 2.6.0
 
 - Add `use-neutral-colors` prop to ipl-toggle

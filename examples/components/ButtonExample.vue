@@ -10,12 +10,17 @@
             class="top-margin"
             @click="onButtonClick"
         />
-        <ipl-button
-            label="Disabled"
-            disabled
-            class="top-margin"
-            @click="onButtonClick"
-        />
+        <div class="disabled-buttons-layout top-margin">
+            <ipl-button
+                :label="disabledButtonDisabled ? 'Disabled' : 'Enabled'"
+                :disabled="disabledButtonDisabled"
+                @click="onButtonClick"
+            />
+            <ipl-button
+                label="Toggle disabled"
+                @click="onDisabledToggleClick"
+            />
+        </div>
         <ipl-button
             label="Link"
             href="https://google.com"
@@ -64,6 +69,7 @@ export default defineComponent({
 
     setup() {
         const hexButtonColor = ref('#AAAAAA');
+        const disabledButtonDisabled = ref(true);
 
         return {
             hexButtonColor,
@@ -75,8 +81,23 @@ export default defineComponent({
             },
             setHexButtonColor() {
                 hexButtonColor.value = '#' + Math.floor(Math.random()*16777215).toString(16);
+            },
+
+            disabledButtonDisabled,
+            onDisabledToggleClick() {
+                disabledButtonDisabled.value = !disabledButtonDisabled.value;
             }
         };
     }
 });
 </script>
+
+<style lang="scss">
+.disabled-buttons-layout {
+    display: flex;
+
+    > .ipl-button:last-child {
+        margin-left: 8px;
+    }
+}
+</style>

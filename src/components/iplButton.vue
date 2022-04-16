@@ -138,7 +138,7 @@ export default defineComponent({
             buttonStyle: computed(() => {
                 const buttonColor = buttonColors[colorInternal.value] ?? colorInternal.value;
                 return ({
-                    backgroundColor: buttonColor,
+                    backgroundColor: disabledInternal.value ? themeColors.backgroundColorTertiary : buttonColor,
                     color: disabledInternal.value ? themeColors.disabledText : getContrastingTextColor(buttonColor)
                 });
             }),
@@ -225,7 +225,7 @@ export default defineComponent({
     position: relative;
     outline-width: 0;
 
-    transition-duration: background-color $transition-duration-low, color $transition-duration-low;
+    transition: background-color $transition-duration-low, color $transition-duration-low;
 
     &.has-icon {
         flex-grow: 0;
@@ -256,8 +256,6 @@ export default defineComponent({
     }
 
     &.disabled {
-        background-color: $background-tertiary !important;
-        color: $text-color-disabled;
         cursor: default;
     }
 
