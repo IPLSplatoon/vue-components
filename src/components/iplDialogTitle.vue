@@ -1,5 +1,5 @@
 <template>
-    <div class="ipl-dialog-title layout horizontal center-vertical">
+    <div class="ipl-dialog-title">
         <span class="ipl-dialog-title__title-text">{{ title }}</span>
         <font-awesome-icon
             icon="times"
@@ -47,6 +47,9 @@ export default defineComponent({
 @import './src/styles/constants';
 
 .ipl-dialog-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: calc(100% - 16px);
     height: 40px;
     font-weight: 500;

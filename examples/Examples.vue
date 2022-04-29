@@ -12,6 +12,8 @@
         <async-button-example />
         <h2 id="toggle-example">ipl-toggle</h2>
         <toggle-example />
+        <h2 id="dialog-title-example">ipl-dialog-title</h2>
+        <dialog-title-example />
     </div>
 </template>
 
@@ -23,9 +25,18 @@ import PageIndex from './components/PageIndex.vue';
 import ButtonExample from './components/ButtonExample.vue';
 import AsyncButtonExample from './components/AsyncButtonExample.vue';
 import ToggleExample from './components/ToggleExample.vue';
+import DialogTitleExample from './components/DialogTitleExample.vue';
 
 export default defineComponent({
-    components: { ToggleExample, ButtonExample, AsyncButtonExample, PageIndex, ExpandingSpaceGroupExample, ExpandingSpaceExample }
+    components: {
+        DialogTitleExample,
+        ToggleExample,
+        ButtonExample,
+        AsyncButtonExample,
+        PageIndex,
+        ExpandingSpaceGroupExample,
+        ExpandingSpaceExample
+    }
 });
 </script>
 
