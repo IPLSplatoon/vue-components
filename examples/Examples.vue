@@ -18,6 +18,8 @@
         <data-row-example />
         <h2 id="message-example">ipl-message</h2>
         <message-example />
+        <h2 id="radio-example">ipl-radio</h2>
+        <radio-example />
     </div>
 </template>
 
@@ -32,9 +34,11 @@ import ToggleExample from './components/ToggleExample.vue';
 import DialogTitleExample from './components/DialogTitleExample.vue';
 import DataRowExample from './components/DataRowExample.vue';
 import MessageExample from './components/MessageExample.vue';
+import RadioExample from './components/RadioExample.vue';
 
 export default defineComponent({
     components: {
+        RadioExample,
         MessageExample,
         DataRowExample,
         DialogTitleExample,
