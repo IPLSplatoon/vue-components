@@ -14,6 +14,8 @@
         <toggle-example />
         <h2 id="dialog-title-example">ipl-dialog-title</h2>
         <dialog-title-example />
+        <h2 id="data-row-example">ipl-data-row</h2>
+        <data-row-example />
     </div>
 </template>
 
@@ -26,9 +28,11 @@ import ButtonExample from './components/ButtonExample.vue';
 import AsyncButtonExample from './components/AsyncButtonExample.vue';
 import ToggleExample from './components/ToggleExample.vue';
 import DialogTitleExample from './components/DialogTitleExample.vue';
+import DataRowExample from './components/DataRowExample.vue';
 
 export default defineComponent({
     components: {
+        DataRowExample,
         DialogTitleExample,
         ToggleExample,
         ButtonExample,
