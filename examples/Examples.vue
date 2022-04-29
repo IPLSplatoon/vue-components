@@ -20,6 +20,8 @@
         <message-example />
         <h2 id="radio-example">ipl-radio</h2>
         <radio-example />
+        <h2 id="upload-example">ipl-upload</h2>
+        <upload-example />
     </div>
 </template>
 
@@ -35,9 +37,11 @@ import DialogTitleExample from './components/DialogTitleExample.vue';
 import DataRowExample from './components/DataRowExample.vue';
 import MessageExample from './components/MessageExample.vue';
 import RadioExample from './components/RadioExample.vue';
+import UploadExample from './components/UploadExample.vue';
 
 export default defineComponent({
     components: {
+        UploadExample,
         RadioExample,
         MessageExample,
         DataRowExample,
