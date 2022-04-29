@@ -1,3 +1,7 @@
+# 2.8.0
+
+- Allow close action in ipl-dialog-title to be disabled
+
 # 2.7.0
 
 - Allow ipl-progress-bar to accept arbitrary hex color values
