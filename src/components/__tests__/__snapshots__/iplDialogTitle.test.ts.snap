@@ -5,3 +5,9 @@ exports[`IplDialogTitle matches snapshot 1`] = `
   <font-awesome-icon-stub icon=\\"times\\" border=\\"false\\" fixedwidth=\\"false\\" listitem=\\"false\\" pulse=\\"false\\" swapopacity=\\"false\\" spin=\\"false\\" symbol=\\"false\\" inverse=\\"false\\" class=\\"close-icon\\" data-test=\\"close-button\\"></font-awesome-icon-stub>
 </div>"
 `;
+
+exports[`IplDialogTitle matches snapshot when closing is disabled 1`] = `
+"<div class=\\"ipl-dialog-title\\"><span class=\\"ipl-dialog-title__title-text\\">Cool Dialog</span>
+  <font-awesome-icon-stub icon=\\"times\\" border=\\"false\\" fixedwidth=\\"false\\" listitem=\\"false\\" pulse=\\"false\\" swapopacity=\\"false\\" spin=\\"false\\" symbol=\\"false\\" inverse=\\"false\\" class=\\"close-icon closing-disabled\\" data-test=\\"close-button\\"></font-awesome-icon-stub>
+</div>"
+`;
