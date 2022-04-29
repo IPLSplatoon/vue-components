@@ -24,6 +24,8 @@
         <upload-example />
         <h2 id="input-example">ipl-input</h2>
         <input-example />
+        <h2 id="progress-bar-example">ipl-progress-bar</h2>
+        <progress-bar-example />
     </div>
 </template>
 
@@ -41,9 +43,11 @@ import MessageExample from './components/MessageExample.vue';
 import RadioExample from './components/RadioExample.vue';
 import UploadExample from './components/UploadExample.vue';
 import InputExample from './components/InputExample.vue';
+import ProgressBarExample from './components/ProgressBarExample.vue';
 
 export default defineComponent({
     components: {
+        ProgressBarExample,
         InputExample,
         UploadExample,
         RadioExample,
