@@ -2,7 +2,7 @@
     <div class="ipl-input__wrapper">
         <div
             class="ipl-input__text-input-wrapper"
-            :class="{ 'has-error': !isValid, 'is-color': type === 'color', 'layout horizontal': !!extra }"
+            :class="{ 'has-error': !isValid, 'is-color': type === 'color', 'with-extra': !!extra }"
         >
             <div>
                 <ipl-label :class="{ 'has-error': !isValid }">
@@ -151,6 +151,15 @@ export default defineComponent({
 
     &.is-color {
         border-bottom: unset !important;
+    }
+
+    &.with-extra {
+        display: flex;
+        flex-direction: row;
+
+        > div {
+            flex-grow: 1;
+        }
     }
 }
 

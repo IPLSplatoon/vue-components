@@ -26,8 +26,7 @@ describe('IplInput', () => {
 
         expect(wrapper.get('.extra').text()).toEqual('extra');
         const wrapperClasses = wrapper.get('.ipl-input__text-input-wrapper').element.classList;
-        expect(wrapperClasses).toContain('layout');
-        expect(wrapperClasses).toContain('horizontal');
+        expect(wrapperClasses).toContain('with-extra');
     });
 
     it('gives class to input if set as centered', () => {

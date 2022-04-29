@@ -22,6 +22,8 @@
         <radio-example />
         <h2 id="upload-example">ipl-upload</h2>
         <upload-example />
+        <h2 id="input-example">ipl-input</h2>
+        <input-example />
     </div>
 </template>
 
@@ -38,9 +40,11 @@ import DataRowExample from './components/DataRowExample.vue';
 import MessageExample from './components/MessageExample.vue';
 import RadioExample from './components/RadioExample.vue';
 import UploadExample from './components/UploadExample.vue';
+import InputExample from './components/InputExample.vue';
 
 export default defineComponent({
     components: {
+        InputExample,
         UploadExample,
         RadioExample,
         MessageExample,
