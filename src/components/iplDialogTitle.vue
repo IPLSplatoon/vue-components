@@ -4,6 +4,7 @@
         <font-awesome-icon
             icon="times"
             class="close-icon"
+            :class="{ 'closing-disabled': closingDisabled }"
             data-test="close-button"
             @click="close"
         />
@@ -27,6 +28,10 @@ export default defineComponent({
         title: {
             type: String,
             required: true
+        },
+        closingDisabled: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -35,7 +40,9 @@ export default defineComponent({
     setup(props, { emit }) {
         return {
             close() {
-                emit('close');
+                if (!props.closingDisabled) {
+                    emit('close');
+                }
             }
         };
     }
@@ -64,17 +71,25 @@ export default defineComponent({
 
     .close-icon {
         cursor: pointer;
-        margin-right: 8px;
+        margin-right: 2px;
         padding: 4px 7px;
         border-radius: $border-radius-inner;
         transition-duration: $transition-duration-med;
+        color: $text-color;
 
-        &:hover {
-            background-color: $background-primary-hover;
+        &.closing-disabled {
+            color: $text-color-disabled;
+            cursor: default;
         }
 
-        &:active {
-            background-color: $background-primary-active;
+        &:not(.closing-disabled) {
+            &:hover {
+                background-color: $background-primary-hover;
+            }
+
+            &:active {
+                background-color: $background-primary-active;
+            }
         }
     }
 }

@@ -1,8 +1,16 @@
 <template>
-    <ipl-dialog-title
-        title="Dialog Title"
-        @close="onClose"
-    />
+    <div>
+        <ipl-dialog-title
+            title="Dialog Title"
+            @close="onClose"
+        />
+        <ipl-dialog-title
+            title="Dialog Title (Closing disabled)"
+            closing-disabled
+            class="top-margin"
+            @close="onClose"
+        />
+    </div>
 </template>
 
 <script lang="ts">
