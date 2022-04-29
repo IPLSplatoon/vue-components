@@ -1,6 +1,6 @@
 <template>
     <div class="ipl-expansion-panel__content">
-        <div class="ipl-expansion-panel__header layout horizontal center-vertical">
+        <div class="ipl-expansion-panel__header">
             <div
                 class="ipl-expansion-panel__header-background"
                 @click.self="handleHeaderClick"

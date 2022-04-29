@@ -1,7 +1,7 @@
 <template>
     <div class="ipl-radio__wrapper">
         <ipl-label>{{ label }}</ipl-label>
-        <div class="ipl-radio__options layout horizontal">
+        <div class="ipl-radio__options">
             <div
                 v-for="option in options"
                 :key="option.value"
@@ -70,6 +70,8 @@ export default defineComponent({
 @import './src/styles/constants';
 
 .ipl-radio__options {
+    display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
 
     > .ipl-radio__option {

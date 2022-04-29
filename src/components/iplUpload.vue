@@ -1,6 +1,6 @@
 <template>
     <label
-        class="ipl-upload layout horizontal center-vertical center-horizontal"
+        class="ipl-upload"
         :class="{ active: isDraggedOver }"
         @dragenter="setDraggedOver(true)"
         @dragleave.self="setDraggedOver(false)"
@@ -83,6 +83,10 @@ export default defineComponent({
 @import './src/styles/constants';
 
 label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     border-radius: $border-radius-inner;
     padding: 8px 16px;

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="ipl-message__wrapper layout horizontal center-vertical"
+        class="ipl-message__wrapper"
         :class="`ipl-message__type-${type}`"
     >
         <font-awesome-icon
@@ -78,6 +78,9 @@ export default defineComponent({
 @import './src/styles/constants';
 
 .ipl-message__wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     border-radius: $border-radius-outer;
     border-width: 2px;
     border-style: solid;

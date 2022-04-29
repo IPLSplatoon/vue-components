@@ -12,6 +12,18 @@
         <async-button-example />
         <h2 id="toggle-example">ipl-toggle</h2>
         <toggle-example />
+        <h2 id="dialog-title-example">ipl-dialog-title</h2>
+        <dialog-title-example />
+        <h2 id="data-row-example">ipl-data-row</h2>
+        <data-row-example />
+        <h2 id="message-example">ipl-message</h2>
+        <message-example />
+        <h2 id="radio-example">ipl-radio</h2>
+        <radio-example />
+        <h2 id="upload-example">ipl-upload</h2>
+        <upload-example />
+        <h2 id="input-example">ipl-input</h2>
+        <input-example />
     </div>
 </template>
 
@@ -23,9 +35,28 @@ import PageIndex from './components/PageIndex.vue';
 import ButtonExample from './components/ButtonExample.vue';
 import AsyncButtonExample from './components/AsyncButtonExample.vue';
 import ToggleExample from './components/ToggleExample.vue';
+import DialogTitleExample from './components/DialogTitleExample.vue';
+import DataRowExample from './components/DataRowExample.vue';
+import MessageExample from './components/MessageExample.vue';
+import RadioExample from './components/RadioExample.vue';
+import UploadExample from './components/UploadExample.vue';
+import InputExample from './components/InputExample.vue';
 
 export default defineComponent({
-    components: { ToggleExample, ButtonExample, AsyncButtonExample, PageIndex, ExpandingSpaceGroupExample, ExpandingSpaceExample }
+    components: {
+        InputExample,
+        UploadExample,
+        RadioExample,
+        MessageExample,
+        DataRowExample,
+        DialogTitleExample,
+        ToggleExample,
+        ButtonExample,
+        AsyncButtonExample,
+        PageIndex,
+        ExpandingSpaceGroupExample,
+        ExpandingSpaceExample
+    }
 });
 </script>
 

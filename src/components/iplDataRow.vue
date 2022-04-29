@@ -1,5 +1,5 @@
 <template>
-    <div class="ipl-data-row layout horizontal">
+    <div class="ipl-data-row">
         <ipl-label>{{ label }}</ipl-label>
         <div class="value">{{ value ?? '―' }}</div>
     </div>
@@ -29,6 +29,8 @@ export default defineComponent({
 @import './src/styles/colors';
 
 .ipl-data-row {
+    display: flex;
+    flex-direction: row;
     border-bottom: 1px solid $input-color;
     width: 100%;
     padding: 2px 0;
