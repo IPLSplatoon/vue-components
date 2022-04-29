@@ -1,3 +1,7 @@
+# 2.7.0
+
+- Allow ipl-progress-bar to accept arbitrary hex color values
+
 # 2.6.2
 
 - Fix some components having an incorrect appearance without some external stylesheets 

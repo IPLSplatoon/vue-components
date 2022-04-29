@@ -59,6 +59,7 @@ import { defineComponent } from '@vue/runtime-core';
 import { ref } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBrush } from '@fortawesome/free-solid-svg-icons/faBrush';
+import { getRandomColor } from '../helpers';
 
 library.add(faBrush);
 
@@ -80,7 +81,7 @@ export default defineComponent({
                 alert('I have an icon :)');
             },
             setHexButtonColor() {
-                hexButtonColor.value = '#' + Math.floor(Math.random()*16777215).toString(16);
+                hexButtonColor.value = getRandomColor();
             },
 
             disabledButtonDisabled,

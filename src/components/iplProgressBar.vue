@@ -5,7 +5,7 @@
     >
         <div
             class="progress-bar"
-            :style="{ width: `${normalizedValue}%`, backgroundColor: hexColor }"
+            :style="{ width: `${normalizedValue}%`, backgroundColor: normalizedColor }"
         />
     </div>
 </template>
@@ -23,25 +23,30 @@ export default defineComponent({
             required: true
         },
         color: {
-            type: String as PropType<'blue' | 'pink' | 'yellow'>,
-            required: true,
+            type: String as PropType<string | keyof typeof progressBarColors>,
+            default: 'blue',
             validator: (value: string) => {
-                return ['blue', 'pink', 'yellow'].includes(value);
+                return (value.startsWith('#') && value.trim().length === 7) || Object.keys(progressBarColors).includes(value);
             }
         },
         backgroundColor: {
-            type: String as PropType<'light' | 'dark'>,
+            type: String as PropType<keyof typeof progressBarBackgroundColors>,
             default: 'light',
             validator: (value: string) => {
-                return ['light', 'dark'].includes(value);
+                return Object.keys(progressBarBackgroundColors).includes(value);
             }
         }
     },
 
     setup(props) {
         return {
-            normalizedValue: computed(() => Math.max(Math.min(props.value, 100), 4)),
-            hexColor: computed(() => progressBarColors[props.color]),
+            normalizedValue: computed(() => Math.max(Math.min(props.value, 100), 0)),
+            normalizedColor: computed(() => {
+                if (props.color.startsWith('#')) {
+                    return props.color;
+                }
+                return (progressBarColors as Record<string, string>)[props.color];
+            }),
             hexBackgroundColor: computed(() => progressBarBackgroundColors[props.backgroundColor])
         };
     }
@@ -60,6 +65,7 @@ export default defineComponent({
 
     .progress-bar {
         height: 100%;
+        min-width: 10px;
         border-radius: 6px;
         transition-duration: $transition-duration-low;
     }
