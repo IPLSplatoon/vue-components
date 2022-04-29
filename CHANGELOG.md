@@ -1,3 +1,7 @@
+# 2.6.2
+
+- Fix some components having an incorrect appearance without some external stylesheets 
+
 # 2.6.1
 
 - Fix some ipl-button properties not animating as expected
