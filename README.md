@@ -32,7 +32,3 @@ To run unit tests:
 
 - Run `yarn test`
 - To update snapshot files, run `yarn test:update`
-
----
-
-View more documentation in the `docs` folder of this repository.
