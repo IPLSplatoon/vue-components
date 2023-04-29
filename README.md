@@ -32,3 +32,7 @@ To run unit tests:
 
 - Run `yarn test`
 - To update snapshot files, run `yarn test:update`
+
+## Acknowledgements
+
+The `ipl-spinner` component contains code from the [Material Web](https://github.com/material-components/material-web) project, which is licensed under the [Apache License 2.0](https://github.com/material-components/material-web/blob/main/LICENSE)
