@@ -21,12 +21,16 @@ describe('IplInput', () => {
         expect(wrapper.find('.ipl-label').text()).toEqual('Label');
     });
 
-    it('shows extra text and has additional classes if given', () => {
+    it('shows extra text if given', () => {
         const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', extra: 'extra' } });
 
         expect(wrapper.get('.extra').text()).toEqual('extra');
-        const wrapperClasses = wrapper.get('.ipl-input__text-input-wrapper').element.classList;
-        expect(wrapperClasses).toContain('with-extra');
+    });
+
+    it('contains spinner if loading', () => {
+        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', loading: true } });
+
+        expect(wrapper.find('[data-test="loading-spinner"]').exists()).toEqual(true);
     });
 
     it('gives class to input if set as centered', () => {
@@ -39,7 +43,7 @@ describe('IplInput', () => {
     it('has class if type is color', () => {
         const wrapper = mount(IplInput, { props: { name: 'input', type: 'color' } });
 
-        const textInputWrapper = wrapper.get('.ipl-input__text-input-wrapper');
+        const textInputWrapper = wrapper.get('.ipl-input__input-and-extras');
         expect(textInputWrapper.element.classList).toContain('is-color');
     });
 
@@ -146,7 +150,7 @@ describe('IplInput', () => {
         });
 
         expect(wrapper.find('.error').text()).toEqual('very bad!!!');
-        expect(wrapper.find('.ipl-input__text-input-wrapper').classes()).toContain('has-error');
+        expect(wrapper.find('.ipl-input__input-and-extras').classes()).toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).toContain('has-error');
     });
 
@@ -170,7 +174,7 @@ describe('IplInput', () => {
         });
 
         expect(wrapper.find('.error').isVisible()).toEqual(false);
-        expect(wrapper.find('.ipl-input__text-input-wrapper').classes()).not.toContain('has-error');
+        expect(wrapper.find('.ipl-input__input-and-extras').classes()).not.toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).not.toContain('has-error');
     });
 
@@ -192,7 +196,7 @@ describe('IplInput', () => {
         });
 
         expect(wrapper.find('.error').isVisible()).toEqual(false);
-        expect(wrapper.find('.ipl-input__text-input-wrapper').classes()).not.toContain('has-error');
+        expect(wrapper.find('.ipl-input__input-and-extras').classes()).not.toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).not.toContain('has-error');
     });
 

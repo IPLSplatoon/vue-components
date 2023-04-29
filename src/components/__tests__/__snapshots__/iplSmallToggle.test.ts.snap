@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IplSmallToggle matches snapshot when toggle is disabled 1`] = `
-"<div class=\\"ipl-small-toggle__wrapper disabled active\\">Toggle! <div class=\\"value-display\\">
-    <div class=\\"circle\\"></div>
+"<div class="ipl-small-toggle__wrapper disabled active">Toggle! <div class="value-display">
+    <div class="circle"></div>
   </div>
 </div>"
 `;
 
 exports[`IplSmallToggle matches snapshot when toggle value is false 1`] = `
-"<div class=\\"ipl-small-toggle__wrapper\\">Toggle! <div class=\\"value-display\\">
-    <div class=\\"circle\\"></div>
+"<div class="ipl-small-toggle__wrapper">Toggle! <div class="value-display">
+    <div class="circle"></div>
   </div>
 </div>"
 `;
 
 exports[`IplSmallToggle matches snapshot when toggle value is true 1`] = `
-"<div class=\\"ipl-small-toggle__wrapper active\\">Toggle! <div class=\\"value-display\\">
-    <div class=\\"circle\\"></div>
+"<div class="ipl-small-toggle__wrapper active">Toggle! <div class="value-display">
+    <div class="circle"></div>
   </div>
 </div>"
 `;

@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent } from 'vue';
 import IplLabel from './iplLabel.vue';
 import { computed, PropType } from 'vue';
 import { SelectOptions, Option } from '../types/select';

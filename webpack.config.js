@@ -5,6 +5,30 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+function removeAttributesDuringBuild(node) {
+    const attributesToRemove = [
+        'data-test',
+        ':data-test',
+        'v-bind:data-test'
+    ];
+    const nodeIsElement = node.type === 1 // ELEMENT;
+    if (nodeIsElement) {
+        node.props = node.props.filter(function (prop) {
+            const propIsAttribute = prop.type === 6 // ATTRIBUTE;
+            const propIsDynamicAttribute = prop.name === 'bind';
+            if (propIsAttribute) {
+                const attributeName = prop.name;
+                return !attributesToRemove.includes(attributeName);
+            }
+            if (propIsDynamicAttribute) {
+                const attributeName = prop.arg?.content;
+                return !attributesToRemove.includes(attributeName);
+            }
+            return true;
+        });
+    }
+}
+
 function config() {
     return {
         mode: isProd ? 'production' : 'development',
@@ -34,7 +58,12 @@ function config() {
             rules: [
                 {
                     test: /\.vue$/,
-                    loader: 'vue-loader'
+                    loader: 'vue-loader',
+                    options: {
+                        compilerOptions: {
+                            nodeTransforms: [removeAttributesDuringBuild]
+                        }
+                    }
                 },
                 {
                     test: /\.css$/,

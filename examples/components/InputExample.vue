@@ -23,6 +23,21 @@
             type="number"
         />
         <br>
+        <ipl-input
+            v-model="loadingInputValue"
+            name="with-loading"
+            label="Loading state"
+            extra="seconds"
+            loading
+        />
+        <br>
+        <ipl-input
+            v-model="loadingInputValue"
+            name="with-loading"
+            label="Loading state"
+            loading
+        />
+        <br>
         input is valid: {{ validatedInputValidator.isValid }}
         <ipl-input
             v-model="validatedInputValue"
@@ -33,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent } from 'vue';
 import IplSpace from '../../src/components/iplSpace.vue';
 import IplInput from '../../src/components/iplInput.vue';
 import { ref } from 'vue';
@@ -59,6 +74,7 @@ export default defineComponent({
                 return value.substring(0, 10);
             },
             extraInputValue: ref(0),
+            loadingInputValue: ref(''),
             validatedInputValue,
             validatedInputValidator
         };

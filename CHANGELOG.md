@@ -1,3 +1,8 @@
+# 2.9.0
+
+- Add ipl-spinner component
+- Add `loading` prop to ipl-input
+
 # 2.8.0
 
 - Allow close action in ipl-dialog-title to be disabled
