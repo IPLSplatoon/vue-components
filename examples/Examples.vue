@@ -26,11 +26,13 @@
         <input-example />
         <h2 id="progress-bar-example">ipl-progress-bar</h2>
         <progress-bar-example />
+        <h2 id="spinner-example">ipl-spinner</h2>
+        <spinner-example />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent } from 'vue';
 import ExpandingSpaceExample from './components/ExpandingSpaceExample.vue';
 import ExpandingSpaceGroupExample from './components/ExpandingSpaceGroupExample.vue';
 import PageIndex from './components/PageIndex.vue';
@@ -44,9 +46,11 @@ import RadioExample from './components/RadioExample.vue';
 import UploadExample from './components/UploadExample.vue';
 import InputExample from './components/InputExample.vue';
 import ProgressBarExample from './components/ProgressBarExample.vue';
+import SpinnerExample from './components/SpinnerExample.vue';
 
 export default defineComponent({
     components: {
+        SpinnerExample,
         ProgressBarExample,
         InputExample,
         UploadExample,

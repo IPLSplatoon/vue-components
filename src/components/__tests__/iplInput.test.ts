@@ -21,10 +21,16 @@ describe('IplInput', () => {
         expect(wrapper.find('.ipl-label').text()).toEqual('Label');
     });
 
-    it('shows extra text and has additional classes if given', () => {
+    it('shows extra text if given', () => {
         const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', extra: 'extra' } });
 
         expect(wrapper.get('.extra').text()).toEqual('extra');
+    });
+
+    it('contains spinner if loading', () => {
+        const wrapper = mount(IplInput, { props: { label: 'Label', name: 'input', loading: true } });
+
+        expect(wrapper.find('[data-test="loading-spinner"]').exists()).toEqual(true);
     });
 
     it('gives class to input if set as centered', () => {

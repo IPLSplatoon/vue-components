@@ -1,10 +1,10 @@
 <template>
     <div class="ipl-input__wrapper">
         <div
-            class="ipl-input__text-input-wrapper"
-            :class="{ 'has-error': !isValid, 'is-color': type === 'color', 'with-extra': !!extra }"
+            class="ipl-input__input-and-extras"
+            :class="{ 'has-error': !isValid, 'is-color': type === 'color' }"
         >
-            <div>
+            <div class="ipl-input__input-wrapper">
                 <ipl-label :class="{ 'has-error': !isValid }">
                     {{ label }}
                     <input
@@ -20,13 +20,20 @@
                     >
                 </ipl-label>
             </div>
-            <span
-                v-if="extra"
+            <div
                 class="extra"
-                @click="focus"
+                @mousedown.prevent="focus"
             >
                 {{ extra }}
-            </span>
+
+                <ipl-spinner
+                    v-if="loading"
+                    size="2px"
+                    width="24px"
+                    color="#FFFFFF"
+                    data-test="loading-spinner"
+                />
+            </div>
         </div>
         <span
             v-if="!!validator"
@@ -42,11 +49,12 @@
 import { computed, defineComponent, inject, PropType, Ref, ref } from 'vue';
 import { ValidatorResult } from '../validation/validator';
 import IplLabel from './iplLabel.vue';
+import IplSpinner from './iplSpinner.vue';
 
 export default defineComponent({
     name: 'IplInput',
 
-    components: { IplLabel },
+    components: { IplSpinner, IplLabel },
 
     props: {
         label: {
@@ -83,6 +91,10 @@ export default defineComponent({
         extra: {
             type: String,
             default: null
+        },
+        loading: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -132,10 +144,16 @@ export default defineComponent({
 @import './src/styles/colors';
 @import './src/styles/constants';
 
-.ipl-input__text-input-wrapper {
+.ipl-input__input-and-extras {
     border-bottom: 1px solid $input-color;
     transition-duration: $transition-duration-low;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    > .ipl-input__input-wrapper {
+        flex-grow: 1;
+    }
 
     &:focus-within {
         border-color: $input-color-active;
@@ -151,15 +169,6 @@ export default defineComponent({
 
     &.is-color {
         border-bottom: unset !important;
-    }
-
-    &.with-extra {
-        display: flex;
-        flex-direction: row;
-
-        > div {
-            flex-grow: 1;
-        }
     }
 }
 
@@ -247,11 +256,11 @@ input {
 }
 
 .extra {
-    align-self: flex-end;
-    margin-bottom: 2px;
-    margin-left: 4px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+    padding-left: 4px;
     user-select: none;
     cursor: text;
-    float: right;
 }
 </style>
