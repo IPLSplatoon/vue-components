@@ -1,12 +1,5 @@
 <template>
-    <div
-        class="ipl-spinner"
-        :style="{
-            '--ipl-spinner-size': props.size,
-            '--ipl-spinner-width': props.width,
-            '--ipl-spinner-color': props.color
-        }"
-    >
+    <div class="ipl-spinner">
         <div class="spinner-wrapper">
             <div class="spinner">
                 <div class="left">
@@ -43,6 +36,10 @@ $linear-rotate-duration: calc($arc-duration * 360 / 306);
 $indeterminate-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
 .ipl-spinner {
+    --ipl-spinner-size: v-bind('props.size');
+    --ipl-spinner-width: v-bind('props.width');
+    --ipl-spinner-color: v-bind('props.color');
+
     width: var(--ipl-spinner-width);
     height: var(--ipl-spinner-width);
     display: inline-flex;
