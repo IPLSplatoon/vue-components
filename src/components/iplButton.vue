@@ -99,7 +99,7 @@ export default defineComponent({
 
     setup(props, { emit }) {
         if (isEmpty(props.icon) && isEmpty(props.label)) {
-            throw new Error('ipl-button requires an icon or label to be provided.');
+            console.warn('ipl-button requires an icon or label to be provided.');
         }
 
         const instance = getCurrentInstance();

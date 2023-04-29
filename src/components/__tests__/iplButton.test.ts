@@ -43,11 +43,6 @@ describe('iplButton', () => {
         expect(wrapper.find('font-awesome-icon-stub.icon').exists()).toEqual(true);
     });
 
-    it('throws error if icon and label are both missing', () => {
-        expect(() => shallowMount(IplButton, { props: { icon: undefined, label: '' } }))
-            .toThrow('ipl-button requires an icon or label to be provided.');
-    });
-
     it('applies appropriate style according to color prop', () => {
         const redWrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'red' } });
         const greenWrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'green' } });
