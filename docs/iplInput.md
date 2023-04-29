@@ -34,6 +34,10 @@ Forbids changing of the input value if true.
 
 Additional text after the input.
 
+### loading
+
+If true, a loading spinner is added to the spinner to indicate an action in progress.
+
 ## Events
 
 ### update:modelValue
