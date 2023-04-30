@@ -115,6 +115,7 @@ export default defineComponent({
         cursor: pointer;
         user-select: none;
         display: flex;
+        align-items: center;
         padding: 8px;
         transition-duration: $transition-duration-low;
         border-radius: $border-radius-outer;
