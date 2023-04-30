@@ -1,3 +1,8 @@
+# 2.9.1
+
+- Fix the content in the header of ipl-expanding-space not being centered correctly
+- Add some horizontal padding to ipl-button
+
 # 2.9.0
 
 - Add ipl-spinner component

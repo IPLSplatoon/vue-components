@@ -3,6 +3,15 @@
         <ipl-expanding-space title="Expanding Space">
             Hello!
         </ipl-expanding-space>
+        <ipl-expanding-space
+            title="Expanding Space with extra header content"
+            class="top-margin"
+        >
+            <template #header-extra>
+                <ipl-button label="Button" />
+            </template>
+            Hello!
+        </ipl-expanding-space>
         <ipl-expanding-space class="top-margin">
             <template #title>
                 <i>Title from Props</i>
@@ -25,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/runtime-core';
+import { defineComponent } from 'vue';
 import { IplExpandingSpace, IplButton } from '../../src/';
 import { ref } from 'vue';
 
