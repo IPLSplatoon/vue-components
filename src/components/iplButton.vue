@@ -220,8 +220,7 @@ export default defineComponent({
     border-radius: $border-radius-inner;
     cursor: pointer;
     display: block;
-    width: 100%;
-    padding: 10px 0;
+    padding: 10px 8px;
     position: relative;
     outline-width: 0;
 
@@ -246,7 +245,7 @@ export default defineComponent({
 
     &.small {
         font-size: 0.75em;
-        padding: 7px 0;
+        padding: 7px 4px;
     }
 
     .label, .icon {
