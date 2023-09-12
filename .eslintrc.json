@@ -56,9 +56,7 @@
             { "blankLine": "never", "prev": "block-like", "next": "default" }
         ],
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["error", {
-            "varsIgnorePattern": "NodeCGBrowser"
-        }],
+        "@typescript-eslint/no-unused-vars": "error",
         "no-empty": ["error", { "allowEmptyCatch":  true }],
         "@typescript-eslint/ban-ts-comment": ["error", {
             "ts-ignore": "allow-with-description"
