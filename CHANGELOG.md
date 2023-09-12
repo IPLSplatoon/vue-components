@@ -1,3 +1,7 @@
+# 2.10.0
+
+- ipl-select emits the full option object on update as an additional parameter
+
 # 2.9.2
 
 - Revert changes to ipl-button

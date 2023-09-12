@@ -67,9 +67,10 @@ describe('IplSelect', () => {
     it('emits update message on change', async () => {
         const wrapper = mount(IplSelect, {
             props: {
-                modelValue: '', options: [
+                modelValue: '',
+                options: [
                     { name: 'Option', value: 'opt' },
-                    { name: 'Option the Second', value: 'opt2' },
+                    { name: 'Option the Second', value: 'opt2', testAdditionalAttribute: true },
                     { name: 'Opt 3', value: 'optthree' }
                 ]
             }
@@ -79,6 +80,38 @@ describe('IplSelect', () => {
 
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted?.length).toEqual(1);
-        expect(emitted?.[0]).toEqual([ 'opt2' ]);
+        expect(emitted?.[0]).toEqual([ 'opt2', { name: 'Option the Second', value: 'opt2', testAdditionalAttribute: true } ]);
+    });
+
+    it('emits update message on change for a grouped select', async () => {
+        const wrapper = mount(IplSelect, {
+            props: {
+                modelValue: '',
+                optionGroups: [
+                    {
+                        name: 'Group A',
+                        options: [
+                            { name: 'Option', value: 'opt' },
+                            { name: 'Option the Second', value: 'opt2', disabled: false },
+                            { name: 'Opt 3', value: 'optthree' }
+                        ]
+                    },
+                    {
+                        name: 'Group B',
+                        options: [
+                            { name: 'Another Option', value: 'opt4', testAdditionalAttribute: 999 },
+                            { name: 'Option the Fifth', value: 'opt5' },
+                            { name: 'Opt 6', value: 'opt6', disabled: true }
+                        ]
+                    }
+                ]
+            }
+        });
+
+        await wrapper.get('select').setValue('opt4');
+
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted?.length).toEqual(1);
+        expect(emitted?.[0]).toEqual([ 'opt4', { name: 'Another Option', value: 'opt4', testAdditionalAttribute: 999 } ]);
     });
 });

@@ -28,6 +28,8 @@
         <progress-bar-example />
         <h2 id="spinner-example">ipl-spinner</h2>
         <spinner-example />
+        <h2 id="select-example">ipl-select</h2>
+        <select-example />
     </div>
 </template>
 
@@ -47,9 +49,11 @@ import UploadExample from './components/UploadExample.vue';
 import InputExample from './components/InputExample.vue';
 import ProgressBarExample from './components/ProgressBarExample.vue';
 import SpinnerExample from './components/SpinnerExample.vue';
+import SelectExample from './components/SelectExample.vue';
 
 export default defineComponent({
     components: {
+        SelectExample,
         SpinnerExample,
         ProgressBarExample,
         InputExample,
