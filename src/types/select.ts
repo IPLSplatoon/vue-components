@@ -1,4 +1,4 @@
-export type Option = { name: string, value: string, disabled?: boolean };
+export type Option = { name: string, value: string, disabled?: boolean, [key: string]: unknown };
 
 export type SelectOptions = Option[];
 

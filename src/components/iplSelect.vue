@@ -6,6 +6,7 @@
         <ipl-label>
             {{ label }}
             <select
+                ref="select"
                 v-model="model"
                 :disabled="disabled"
             >
@@ -19,7 +20,7 @@
                         {{ option.name }}
                     </option>
                 </template>
-                <template v-else>
+                <template v-else-if="!!optionGroups">
                     <optgroup
                         v-for="(group, groupIndex) in optionGroups"
                         :key="`optgroup_${groupIndex}`"
@@ -41,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import IplLabel from './iplLabel.vue';
 import { SelectOptionGroups, SelectOptions } from '../types/select';
 
@@ -56,11 +57,11 @@ export default defineComponent({
             default: null
         },
         options: {
-            type: Array as PropType<SelectOptions>,
+            type: Array as PropType<SelectOptions | null>,
             default: null
         },
         optionGroups: {
-            type: Array as PropType<SelectOptionGroups>,
+            type: Array as PropType<SelectOptionGroups | null>,
             default: null
         },
         modelValue: {
@@ -80,13 +81,32 @@ export default defineComponent({
             throw new Error('ipl-select requires either options or option groups to be set.');
         }
 
+        const select = ref<HTMLSelectElement | null>(null);
+
+        const flatOptionGroups = computed(() => {
+            if (props.optionGroups == null) {
+                return null;
+            }
+
+            return props.optionGroups.flatMap(group => group.options);
+        });
+
         return {
+            select,
             model: computed({
                 get() {
                     return props.modelValue;
                 },
                 set(value) {
-                    emit('update:modelValue', value);
+                    if (!select.value) {
+                        emit('update:modelValue', value);
+                    } else {
+                        if (props.options) {
+                            emit('update:modelValue', value, props.options[select.value.selectedIndex]);
+                        } else {
+                            emit('update:modelValue', value, flatOptionGroups.value?.[select.value.selectedIndex]);
+                        }
+                    }
                 }
             })
         };
