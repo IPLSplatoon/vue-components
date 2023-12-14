@@ -24,6 +24,16 @@ html.dark .demo-preview > *:first-child {
     --line-color: #37445C;
 }
 
+.demo-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > * {
+        width: 100%;
+    }
+}
+
 .demo-preview > *:first-child {
     $grid-size: 8px;
     $grid-width: 1px;
@@ -39,6 +49,13 @@ html.dark .demo-preview > *:first-child {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     padding: 24px;
+
+    &.resizable {
+        resize: horizontal;
+        overflow: hidden;
+        max-width: 100%;
+        min-width: 150px;
+    }
 }
 
 .width-capped-content > * {
