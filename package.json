@@ -11,7 +11,7 @@
         "test:ci": "jest --json --outputFile=result.json --testLocationInResults",
         "lint": "eslint --ext .js,.vue,.ts src",
         "serve": "webpack serve -c ./webpack.config.example-page.js --open",
-        "docs:dev": "vitepress dev docs-new",
+        "docs:dev": "vitepress dev docs-new --host 0.0.0.0",
         "docs:build": "vitepress build docs-new",
         "docs:preview": "vitepress preview docs-new"
     },
