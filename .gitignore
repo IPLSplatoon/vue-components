@@ -5,3 +5,6 @@ result.json
 
 # Files from packaging for local testing
 /*.tgz
+
+docs-new/.vitepress/dist
+docs-new/.vitepress/cache
