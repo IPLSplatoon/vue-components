@@ -205,16 +205,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import './src/styles/colors';
-@import './src/styles/constants';
+@import 'src/styles/colors';
+@import 'src/styles/constants';
 
-.ipl-button {
+a.ipl-button {
     text-decoration: none !important;
     text-transform: uppercase;
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: 700;
+    line-height: normal;
     color: white;
     text-align: center;
+    box-sizing: border-box;
 
     border: none;
     border-radius: $border-radius-inner;
@@ -232,7 +234,7 @@ export default defineComponent({
         font-size: 26px;
         width: 40px;
         min-width: 40px;
-        height: 35px;
+        height: 40px;
         padding: 5px 0 0;
 
         &.small {
@@ -245,7 +247,7 @@ export default defineComponent({
     }
 
     &.small {
-        font-size: 0.75em;
+        font-size: 0.75rem;
         padding: 7px 0;
     }
 
