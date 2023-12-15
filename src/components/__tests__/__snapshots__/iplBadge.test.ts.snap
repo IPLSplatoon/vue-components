@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`iplBadge matches snapshot 1`] = `"<span class="ipl-badge" style="background-color: rgb(97, 85, 189); color: white;">test badge</span>"`;
