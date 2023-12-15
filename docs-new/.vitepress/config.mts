@@ -27,6 +27,7 @@ export default defineConfig({
                     { text: 'Message', link: '/ipl-message' },
                     { text: 'Input', link: '/ipl-input' },
                     { text: 'Radio', link: '/ipl-radio' },
+                    { text: 'Select', link: '/ipl-select' },
                     { text: 'Progress Bar', link: '/ipl-progress-bar' }
                 ]
             }
