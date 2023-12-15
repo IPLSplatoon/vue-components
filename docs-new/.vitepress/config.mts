@@ -19,6 +19,7 @@ export default defineConfig({
                 text: 'Components',
                 items: [
                     { text: 'Button', link: '/ipl-button' },
+                    { text: 'Data Row', link: '/ipl-data-row' },
                     { text: 'Dialog Title', link: '/ipl-dialog-title' }
                 ]
             }
