@@ -23,7 +23,8 @@ export default defineConfig({
                     { text: 'Dialog Title', link: '/ipl-dialog-title' },
                     { text: 'Space', link: '/ipl-space' },
                     { text: 'Expanding Space', link: '/ipl-expanding-space' },
-                    { text: 'Expanding Space Group', link: '/ipl-expanding-space-group' }
+                    { text: 'Expanding Space Group', link: '/ipl-expanding-space-group' },
+                    { text: 'Input', link: '/ipl-input' }
                 ]
             }
         ],
