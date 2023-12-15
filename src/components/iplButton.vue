@@ -223,7 +223,8 @@ a.ipl-button {
     cursor: pointer;
     display: block;
     width: 100%;
-    padding: 10px 0;
+    height: max-content;
+    padding: 10px;
     position: relative;
     outline-width: 0;
 
@@ -248,7 +249,7 @@ a.ipl-button {
 
     &.small {
         font-size: 0.75rem;
-        padding: 7px 0;
+        padding: 7px;
     }
 
     .label, .icon {

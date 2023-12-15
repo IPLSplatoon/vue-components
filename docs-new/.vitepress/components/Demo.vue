@@ -58,6 +58,15 @@ html.dark .demo-preview > *:first-child {
     }
 }
 
+.demo-preview > *.alt-background:first-child {
+    background-color: var(--vp-c-bg-alt);
+}
+
+.demo-preview > *.gray-background:first-child {
+    background-color: #bbb;
+    --line-color: #999 !important;
+}
+
 .width-capped-content > * {
     max-width: 400px;
     margin: 0 auto;

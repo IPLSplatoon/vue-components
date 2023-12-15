@@ -1,6 +1,6 @@
 <template>
     <event-log>
-        <div class="resizable">
+        <div class="resizable alt-background">
             <!-- #region example -->
             <ipl-dialog-title
                 title="Dialog Title"

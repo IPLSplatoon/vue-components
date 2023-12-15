@@ -79,8 +79,12 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    > *:not(:last-child) {
-        margin-right: 12px;
+    > * {
+        width: auto !important;
+
+        &:not(:last-child) {
+            margin-right: 12px;
+        }
     }
 }
 
