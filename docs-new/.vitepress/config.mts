@@ -26,6 +26,7 @@ export default defineConfig({
                     { text: 'Expanding Space Group', link: '/ipl-expanding-space-group' },
                     { text: 'Message', link: '/ipl-message' },
                     { text: 'Input', link: '/ipl-input' },
+                    { text: 'Radio', link: '/ipl-radio' },
                     { text: 'Progress Bar', link: '/ipl-progress-bar' }
                 ]
             }
