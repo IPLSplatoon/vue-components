@@ -63,10 +63,13 @@ html.dark .demo-preview > *:first-child {
     margin: 0 auto;
 }
 
-.demo-preview > *:not(:first-child) {
-    margin-top: 8px;
+.demo-preview > *:not(:first-child, .ipl-expansion-panel__content) {
     background-color: var(--vp-c-bg);
     border-radius: 8px;
     padding: 8px;
+}
+
+.demo-preview > *:not(:first-child) {
+    margin-top: 8px;
 }
 </style>

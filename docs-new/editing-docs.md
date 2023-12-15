@@ -35,4 +35,26 @@ To embed the demo component into a markdown document, use the `demo` container -
 ::: demo ExampleFileName
 ```
 
-Examples saved under subdirectories (e.g. `docs-new/examples/new-component/NewComponentExample.vue`) will **not** function. 
+Examples saved under subdirectories (e.g. `docs-new/examples/new-component/NewComponentExample.vue`) will **not** function.
+
+## Event Log
+
+To add a log of every event emitted by your component example to an example, refer to the following example:
+
+```vue
+<template>
+    <event-log>
+        <div>
+            Elements placed in the default slot of the event-log 
+            component will have their custom events (defined by 
+            "emits" within the component source) captured and logged.
+        </div>
+        <template #extra>
+            <div>
+                Content in the "extra" slot will be placed between 
+                the event log and component example.
+            </div>
+        </template>
+    </event-log>
+</template>
+```
