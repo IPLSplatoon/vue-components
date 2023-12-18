@@ -30,7 +30,8 @@ export default defineConfig({
                     { text: 'Select', link: '/ipl-select' },
                     { text: 'File Upload', link: '/ipl-upload' },
                     { text: 'Progress Bar', link: '/ipl-progress-bar' },
-                    { text: 'Loading Spinner', link: '/ipl-spinner' }
+                    { text: 'Loading Spinner', link: '/ipl-spinner' },
+                    { text: 'Sidebar', link: '/ipl-sidebar' }
                 ]
             }
         ],
