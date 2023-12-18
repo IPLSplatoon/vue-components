@@ -28,7 +28,8 @@ export default defineConfig({
                     { text: 'Input', link: '/ipl-input' },
                     { text: 'Radio', link: '/ipl-radio' },
                     { text: 'Select', link: '/ipl-select' },
-                    { text: 'Progress Bar', link: '/ipl-progress-bar' }
+                    { text: 'Progress Bar', link: '/ipl-progress-bar' },
+                    { text: 'Loading Spinner', link: '/ipl-spinner' }
                 ]
             }
         ],
