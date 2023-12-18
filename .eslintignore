@@ -1,4 +1,3 @@
 webpack.config.js
-webpack.config.example-page.js
 node_modules/**/*
 dist/**/*
