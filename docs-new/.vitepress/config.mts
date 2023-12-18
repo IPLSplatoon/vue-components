@@ -28,6 +28,7 @@ export default defineConfig({
                     { text: 'Input', link: '/ipl-input' },
                     { text: 'Radio', link: '/ipl-radio' },
                     { text: 'Select', link: '/ipl-select' },
+                    { text: 'File Upload', link: '/ipl-upload' },
                     { text: 'Progress Bar', link: '/ipl-progress-bar' },
                     { text: 'Loading Spinner', link: '/ipl-spinner' }
                 ]
@@ -37,6 +38,19 @@ export default defineConfig({
             { icon: 'github', link: 'https://github.com/IPLSplatoon/vue-components' }
         ]
     },
+
+    head: [
+        [
+            'script',
+            { },
+            `window.addEventListener('drop', e => {
+                e.preventDefault();
+            });
+            window.addEventListener('dragover', e => {
+                e.preventDefault();
+            });`
+        ]
+    ],
 
     markdown: {
         config: md => {
