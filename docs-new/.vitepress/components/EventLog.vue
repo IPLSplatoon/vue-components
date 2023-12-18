@@ -20,7 +20,11 @@ export default defineComponent({
                         events.forEach(event => {
                             if (event.length === 0) return;
                             const normalizedName = 'on' + event[0].toUpperCase() + event.substring(1);
+                            const existingHandler = node.props[normalizedName];
                             node.props[normalizedName] = (...args) => {
+                                if (existingHandler) {
+                                    existingHandler(...args);
+                                }
                                 eventLog.value.push({ name: event, details: args });
                             };
                         });
