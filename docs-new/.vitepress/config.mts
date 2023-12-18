@@ -28,6 +28,7 @@ export default defineConfig({
                     { text: 'Input', link: '/ipl-input' },
                     { text: 'Radio', link: '/ipl-radio' },
                     { text: 'Select', link: '/ipl-select' },
+                    { text: 'Multi-Select', link: '/ipl-multi-select' },
                     { text: 'File Upload', link: '/ipl-upload' },
                     { text: 'Progress Bar', link: '/ipl-progress-bar' },
                     { text: 'Toggles', link: '/toggles' },
