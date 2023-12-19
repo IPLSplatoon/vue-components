@@ -6,11 +6,11 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/docs-new/.vitepress/cache" />
-      <excludeFolder url="file://$MODULE_DIR$/docs-new/.vitepress/cache/deps" />
       <excludeFolder url="file://$MODULE_DIR$/.histoire/dist" />
       <excludeFolder url="file://$MODULE_DIR$/.vitepress/cache" />
-      <excludeFolder url="file://$MODULE_DIR$/docs-new/.vitepress/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/.vitepress/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/.vitepress/cache/deps" />
+      <excludeFolder url="file://$MODULE_DIR$/docs/.vitepress/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

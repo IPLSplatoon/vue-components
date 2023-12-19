@@ -10,9 +10,9 @@
         "test:update": "jest -u",
         "test:ci": "jest --json --outputFile=result.json --testLocationInResults",
         "lint": "eslint --ext .js,.vue,.ts src",
-        "docs:dev": "vitepress dev docs-new --host 0.0.0.0",
-        "docs:build": "vitepress build docs-new",
-        "docs:preview": "vitepress preview docs-new"
+        "docs:dev": "vitepress dev docs --host 0.0.0.0",
+        "docs:build": "vitepress build docs",
+        "docs:preview": "vitepress preview docs"
     },
     "main": "dist/index.js",
     "module": "dist/index.js",
