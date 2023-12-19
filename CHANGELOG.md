@@ -1,3 +1,7 @@
+# 2.10.1
+
+- Move docs to a vitepress-powered concoction, combining the previously separate plain-text docs and locally built examples into a single site
+
 # 2.10.0
 
 - ipl-select emits the full option object on update as an additional parameter
