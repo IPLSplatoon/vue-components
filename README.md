@@ -1,7 +1,5 @@
 # @iplsplatoon/vue-components
 
-[Docs](https://ipl-vue-components.readthedocs.io)
-
 Vue components for internal Inkling Performance Labs utilities, most notably [ipl-overlay-controls.](https://github.com/inkfarer/ipl-overlay-controls)
 
 ## Install

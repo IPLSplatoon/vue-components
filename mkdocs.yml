@@ -1,4 +1,0 @@
-site_name: IPL Vue components
-theme:
-  name: readthedocs
-extra_css: [docs.css]
