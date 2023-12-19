@@ -54,6 +54,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     z-index: 100;
+    overflow: hidden;
 
     .background {
         width: 100%;
@@ -67,7 +68,7 @@ export default defineComponent({
 
     .content {
         width: 85%;
-        height: calc(100% - 16px);
+        height: 100%;
         position: absolute;
         //noinspection CssRedundantUnit; Fixes issues on iOS Safari
         left: 0%;
@@ -76,6 +77,7 @@ export default defineComponent({
         background-color: $background-primary;
         padding: 8px;
         overflow-y: auto;
+        box-sizing: border-box;
     }
 }
 

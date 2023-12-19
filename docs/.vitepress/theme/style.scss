@@ -1,0 +1,123 @@
+@use '../../../src/styles/colors';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+/**
+ * Customize default theme styling by overriding CSS variables:
+ * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ */
+
+:root {
+    --vp-c-default-1: var(--vp-c-gray-1);
+    --vp-c-default-2: var(--vp-c-gray-2);
+    --vp-c-default-3: var(--vp-c-gray-3);
+    --vp-c-default-soft: var(--vp-c-gray-soft);
+
+    --vp-c-brand-1: #0090FF;
+    --vp-c-brand-2: var(--vp-c-indigo-2);
+    --vp-c-brand-3: var(--vp-c-indigo-3);
+    --vp-c-brand-soft: var(--vp-c-indigo-soft);
+
+    --vp-c-tip-1: var(--vp-c-brand-1);
+    --vp-c-tip-2: var(--vp-c-brand-2);
+    --vp-c-tip-3: var(--vp-c-brand-3);
+    --vp-c-tip-soft: var(--vp-c-brand-soft);
+
+    --vp-c-warning-1: #{colors.$warning-color};
+    --vp-c-warning-2: #{colors.$warning-color};
+    --vp-c-warning-3: #{colors.$warning-color};
+    --vp-c-warning-soft: #{colors.$warning-background-color};
+
+    --vp-c-danger-1: #{colors.$error-color};
+    --vp-c-danger-2: #{colors.$error-color};
+    --vp-c-danger-3: #{colors.$error-color};
+    --vp-c-danger-soft: #{colors.$error-background-color};
+}
+
+.dark {
+    --vp-c-bg: #{colors.$background-primary};
+    --vp-c-bg-alt: #{colors.$background-secondary};
+    --vp-c-bg-soft: #{colors.$background-secondary};
+    --vp-c-bg-elv: #{colors.$background-secondary};
+    --vp-c-divider: #606770;
+}
+
+:root {
+    --vp-font-family-base: 'Roboto', sans-serif;
+    --vp-font-family-mono: 'Roboto Mono', monospace;
+    --vp-code-color: var(--vp-c-text-1);
+}
+
+.source-example {
+    margin-top: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-synthesis: none;
+
+    [class*='language-'] {
+        margin: 4px 0 0 0 !important;
+        background-color: transparent !important;
+
+        pre {
+            padding: 15px 0;
+        }
+
+        code {
+            padding: 0 12px;
+        }
+    }
+}
+
+.demo-section {
+    padding: 8px;
+    background-color: var(--vp-c-bg-alt);
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+.horizontal-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    > * {
+        width: auto !important;
+
+        &:not(:last-child) {
+            margin-right: 12px;
+        }
+    }
+}
+
+.vertical-layout > *:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+// TODO: actually integrate these into the library
+.ipl-expansion-panel__content {
+    background-color: var(--vp-c-bg) !important;
+}
+
+html:not(.dark) .ipl-expansion-panel__header-background:hover {
+    background-color: #FBFBFB !important;
+}
+
+html:not(.dark) .ipl-expansion-panel__header-background:active {
+    background-color: #F8F8F8 !important;
+}
+
+html {
+    line-height: normal;
+}
+
+body {
+    line-height: unset;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.VPFeature .title {
+    font-size: 24px;
+}

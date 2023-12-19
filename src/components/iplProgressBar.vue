@@ -57,11 +57,12 @@ export default defineComponent({
 @import './src/styles/constants';
 
 .ipl-progress-bar__wrapper {
-    height: 10px;
+    height: 16px;
     border-radius: 8px;
     padding: 3px;
     display: block;
     transition-duration: $transition-duration-low;
+    box-sizing: border-box;
 
     .progress-bar {
         height: 100%;

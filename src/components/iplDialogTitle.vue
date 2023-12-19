@@ -57,13 +57,13 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: calc(100% - 16px);
     height: 40px;
     font-weight: 500;
     font-size: 1.25em;
     background-color: $background-primary;
     padding: 0 8px;
     border-radius: $border-radius-outer;
+    color: $text-color;
 
     .ipl-dialog-title__title-text {
         flex-grow: 1;

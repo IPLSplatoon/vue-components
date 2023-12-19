@@ -135,6 +135,7 @@ export default defineComponent({
         }
 
         .ipl-expansion-panel__title {
+            font-size: 1rem;
             font-weight: 500;
             flex-grow: 1;
             z-index: 1;

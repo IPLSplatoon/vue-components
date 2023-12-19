@@ -17,6 +17,8 @@ export { default as IplToggleButton } from './components/iplToggleButton.vue';
 export { default as IplUpload } from './components/iplUpload.vue';
 export { default as IplSmallToggle } from './components/iplSmallToggle.vue';
 export { default as IplRadio } from './components/iplRadio.vue';
+export { default as IplBadge } from './components/iplBadge.vue';
+export { default as IplSpinner } from './components/iplSpinner.vue';
 export * from './helpers/stringHelper';
 export * from './helpers/colorHelper';
 export * from './validation/validator';
