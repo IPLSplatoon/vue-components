@@ -167,10 +167,11 @@ export default defineComponent({
                         if (props.async) {
                             buttonState.value = 'loading';
                         }
-                        if (!instance || !instance.vnode.props) {
-                            throw new Error('ipl-button instance is missing click handler');
+
+                        if (instance && instance.vnode.props && instance.vnode.props.onClick) {
+                            await instance.vnode.props.onClick();
                         }
-                        await instance.vnode.props.onClick();
+
                         setState('success');
                     } catch (e) {
                         setState('error');
