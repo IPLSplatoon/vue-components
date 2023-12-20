@@ -1,13 +1,14 @@
 <template>
     <a
         class="ipl-button"
-        :href="isBlank(href) ? 'javascript:void(0);' : href"
+        :href="!hasLink ? 'javascript:void(0);' : href"
         :style="buttonStyle"
         :class="{
             disabled: disabledInternal,
             'has-icon': isIconButton,
             'small': small,
-            'is-loading': buttonState === 'loading'
+            'is-loading': buttonState === 'loading',
+            'has-link': hasLink
         }"
         @click="handleClick"
         @contextmenu="$emit('rightClick', $event)"
@@ -90,8 +91,8 @@ export default defineComponent({
             default: false
         },
         href: {
-            type: String,
-            default: ''
+            type: [String, null] as PropType<string | null>,
+            default: null
         }
     },
 
@@ -199,7 +200,8 @@ export default defineComponent({
                         return props.label;
                 }
             }),
-            isBlank
+            isBlank,
+            hasLink: computed(() => !isBlank(props.href))
         };
     }
 });
@@ -221,7 +223,7 @@ a.ipl-button {
 
     border: none;
     border-radius: $border-radius-inner;
-    cursor: pointer;
+    cursor: default;
     display: block;
     width: 100%;
     height: max-content;
@@ -230,6 +232,10 @@ a.ipl-button {
     outline-width: 0;
 
     transition: background-color $transition-duration-low, color $transition-duration-low;
+
+    &.has-link {
+        cursor: pointer;
+    }
 
     &.has-icon {
         flex-grow: 0;
@@ -278,6 +284,10 @@ a.ipl-button {
         cursor: progress;
     }
 
+    &:focus {
+        outline: 2px solid white;
+    }
+
     &:not(.disabled) {
         &:hover {
             &:after {
@@ -289,10 +299,6 @@ a.ipl-button {
             &:after {
                 opacity: 0.2;
             }
-        }
-
-        &:focus {
-            outline: 2px solid white;
         }
     }
 }
