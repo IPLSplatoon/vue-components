@@ -285,7 +285,7 @@ a.ipl-button {
     }
 
     &:focus {
-        outline: 2px solid white;
+        outline: 2px solid $focus-outline-color;
     }
 
     &:not(.disabled) {
