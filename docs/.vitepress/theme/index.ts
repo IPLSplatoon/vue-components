@@ -7,7 +7,6 @@ import { IplExpandingSpace } from '../../../src';
 import Layout from './Layout.vue';
 
 import './style.scss';
-import '../../../src/styles/variables-light.scss';
 
 export default {
     extends: DefaultTheme,
