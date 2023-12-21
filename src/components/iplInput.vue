@@ -30,7 +30,7 @@
                     v-if="loading"
                     size="2px"
                     width="24px"
-                    color="#FFFFFF"
+                    :color="disabled ? 'var(--ipl-disabled-body-text-color)' : 'var(--ipl-body-text-color)'"
                     data-test="loading-spinner"
                 />
             </div>
@@ -141,12 +141,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 .ipl-input__input-and-extras {
-    border-bottom: 1px solid $input-color;
-    transition-duration: $transition-duration-low;
+    border-bottom: 1px solid var(--ipl-input-color);
+    transition-duration: constants.$transition-duration-low;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -156,15 +155,15 @@ export default defineComponent({
     }
 
     &:focus-within {
-        border-color: $input-color-active;
+        border-color: var(--ipl-input-color-active);
 
         label {
-            color: $input-color-active;
+            color: var(--ipl-input-color-active);
         }
     }
 
     &.has-error {
-        border-color: $error-color;
+        border-color: var(--ipl-input-error-color);
     }
 
     &.is-color {
@@ -173,14 +172,14 @@ export default defineComponent({
 }
 
 label.has-error {
-    color: $error-color !important;
+    color: var(--ipl-input-error-color) !important;
 }
 
 input {
     background-color: transparent;
     border: 0;
     width: 100%;
-    color: $text-color;
+    color: var(--ipl-body-text-color);
     font-size: 1.4em;
     font-family: 'Roboto', sans-serif;
     display: block;
@@ -189,7 +188,7 @@ input {
     padding: 0;
 
     &:disabled {
-        color: $text-color-disabled;
+        color: var(--ipl-disabled-body-text-color);
     }
 
     &:focus {
@@ -216,7 +215,7 @@ input {
             height: 16px;
             background-position: center;
             background-repeat: no-repeat;
-            transition-duration: $transition-duration-low;
+            transition-duration: constants.$transition-duration-low;
             cursor: pointer;
             opacity: 0;
 
@@ -235,13 +234,13 @@ input {
     }
 
     &[type='color'] {
-        background-color: $background-secondary;
+        background-color: var(--ipl-bg-secondary);
         padding: 5px;
         height: 36px;
-        border-radius: $border-radius-inner;
+        border-radius: constants.$border-radius-inner;
 
         &:disabled {
-            background-color: $background-tertiary;
+            background-color: var(--ipl-bg-tertiary);
         }
     }
 
@@ -251,7 +250,7 @@ input {
 }
 
 .error {
-    color: $error-color;
+    color: var(--ipl-input-error-color);
     font-size: 0.75em;
 }
 

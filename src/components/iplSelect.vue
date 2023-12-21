@@ -115,22 +115,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-
 .ipl-select__wrapper {
-    border-bottom: 1px solid $input-color;
+    border-bottom: 1px solid var(--ipl-input-color);
     width: 100%;
 
     &.disabled select {
-        color: $text-color-disabled;
+        color: var(--ipl-disabled-body-text-color);
         pointer-events: none;
     }
 
     &:focus-within {
-        border-color: $input-color-active;
+        border-color: var(--ipl-input-color-active);
 
         label {
-            color: $input-color-active;
+            color: var(--ipl-input-color-active);
         }
     }
 }
@@ -139,7 +137,7 @@ select {
     background-color: transparent;
     border: 0;
     width: 100%;
-    color: $text-color;
+    color: var(--ipl-body-text-color);
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     outline: 0;

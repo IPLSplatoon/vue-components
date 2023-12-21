@@ -23,8 +23,3 @@ export const progressBarColors = Object.freeze({
     pink: '#F5009B',
     yellow: '#FFC700'
 });
-
-export const progressBarBackgroundColors = Object.freeze({
-    light: themeColors.backgroundColorSecondary,
-    dark: '#262F40'
-});

@@ -79,8 +79,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 label {
     display: flex;
@@ -88,12 +87,12 @@ label {
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: $border-radius-inner;
+    border-radius: constants.$border-radius-inner;
     padding: 8px 16px;
     min-height: 50px;
     cursor: pointer;
-    transition-duration: $transition-duration-low;
-    background-color: $background-tertiary;
+    transition-duration: constants.$transition-duration-low;
+    background-color: var(--ipl-bg-tertiary);
 
     span {
         pointer-events: none;
@@ -108,7 +107,7 @@ label {
     }
 
     &.active {
-        background-color: $background-tertiary-active;
+        background-color: var(--ipl-bg-tertiary-active);
     }
 }
 

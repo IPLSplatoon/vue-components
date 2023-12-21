@@ -66,8 +66,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/colors';
+@use 'src/styles/constants';
 
 .ipl-radio__options {
     display: flex;
@@ -75,11 +75,11 @@ export default defineComponent({
     flex-wrap: wrap;
 
     > .ipl-radio__option {
-        transition-duration: $transition-duration-low;
+        transition-duration: constants.$transition-duration-low;
         font-weight: 500;
         font-size: 1em;
-        border-radius: $border-radius-inner;
-        border: 1px solid $input-color;
+        border-radius: constants.$border-radius-inner;
+        border: 1px solid var(--ipl-input-color);
         padding: 4px 8px;
         margin-right: 4px;
         margin-top: 4px;
@@ -90,38 +90,38 @@ export default defineComponent({
             margin-right: 0;
         }
 
+        &.selected {
+            border-color: colors.$blue;
+            background-color: colors.$blue;
+            color: #FFFFFF;
+
+            &:not(.disabled) {
+                &:hover {
+                    background-color: colors.$blue-hover;
+                    border-color: colors.$blue-hover;
+                }
+
+                &:active {
+                    background-color: colors.$blue-active;
+                    border-color: colors.$blue-active;
+                }
+            }
+        }
+
         &.disabled {
-            cursor: unset;
-            border-color: #6E6D6D;
-            color: $text-color-disabled;
+            cursor: not-allowed;
+            color: var(--ipl-disabled-body-text-color);
         }
 
         &:not(.disabled) {
             &:hover {
-                border-color: $input-color-hover;
-                background-color: rgba(255, 255, 255, 0.05);
+                border-color: var(--ipl-input-color-hover);
+                background-color: var(--ipl-input-color-alpha-hover);
             }
 
             &:active {
-                border-color: $input-color-active;
-                background-color: rgba(255, 255, 255, 0.2);
-            }
-        }
-
-        &.selected {
-            border-color: $blue;
-            background-color: $blue;
-
-            &:not(.disabled) {
-                &:hover {
-                    background-color: $blue-hover;
-                    border-color: $blue-hover;
-                }
-
-                &:active {
-                    background-color: $blue-active;
-                    border-color: $blue-active;
-                }
+                border-color: var(--ipl-input-color-active);
+                background-color: var(--ipl-input-color-alpha-active);
             }
         }
     }

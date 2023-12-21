@@ -1,0 +1,29 @@
+html {
+    --ipl-input-color: #737373;
+    --ipl-input-color-hover: #A1A1A1;
+    --ipl-input-color-active: #FFFFFF;
+    --ipl-input-error-color: #E74E36;
+    --ipl-input-color-alpha-hover: rgba(255, 255, 255, 0.05);
+    --ipl-input-color-alpha-active: rgba(255, 255, 255, 0.2);
+
+    --ipl-focus-outline-color: #FFFFFF;
+    --ipl-hover-overlay-color: rgba(0, 0, 0, 0.1);
+    --ipl-active-overlay-color: rgba(0, 0, 0, 0.2);
+
+    --ipl-body-text-color: #FFFFFF;
+    --ipl-disabled-body-text-color: #A9AAA9;
+
+    --ipl-bg-primary: #262F40;
+    --ipl-bg-primary-hover: #222a39;
+    --ipl-bg-primary-active: #1e2633;
+
+    --ipl-bg-secondary: #2F3A4F;
+    --ipl-bg-secondary-hover: #3C4B66;
+    --ipl-bg-secondary-active: #334057;
+
+    --ipl-bg-tertiary: #181e29;
+    --ipl-bg-tertiary-hover: #161b25;
+    --ipl-bg-tertiary-active: #131821;
+
+    --ipl-page-overlay-color: rgba(0, 0, 0, 0.5);
+}

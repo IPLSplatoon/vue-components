@@ -44,8 +44,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 .ipl-sidebar__wrapper {
     position: absolute;
@@ -63,7 +62,7 @@ export default defineComponent({
         left: 0;
         top: 0;
         z-index: 101;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: var(--ipl-page-overlay-color);
     }
 
     .content {
@@ -74,7 +73,7 @@ export default defineComponent({
         left: 0%;
         top: 0;
         z-index: 102;
-        background-color: $background-primary;
+        background-color: var(--ipl-bg-primary);
         padding: 8px;
         overflow-y: auto;
         box-sizing: border-box;
@@ -83,21 +82,21 @@ export default defineComponent({
 
 .sidebar-transition-enter-active {
     .background {
-        transition: opacity $transition-duration-med ease-out;
+        transition: opacity constants.$transition-duration-med ease-out;
     }
 
     .content {
-        transition: left $transition-duration-med ease-out;
+        transition: left constants.$transition-duration-med ease-out;
     }
 }
 
 .sidebar-transition-leave-active {
     .background {
-        transition: opacity $transition-duration-med ease-in;
+        transition: opacity constants.$transition-duration-med ease-in;
     }
 
     .content {
-        transition: left $transition-duration-med ease-in;
+        transition: left constants.$transition-duration-med ease-in;
     }
 }
 

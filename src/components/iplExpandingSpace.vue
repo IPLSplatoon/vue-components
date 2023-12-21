@@ -103,12 +103,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 .ipl-expansion-panel__content {
-    background-color: $background-primary;
-    border-radius: $border-radius-outer;
+    background-color: var(--ipl-bg-primary);
+    border-radius: constants.$border-radius-outer;
     position: relative;
 
     .ipl-expansion-panel__header {
@@ -117,12 +116,12 @@ export default defineComponent({
         display: flex;
         align-items: center;
         padding: 8px;
-        transition-duration: $transition-duration-low;
-        border-radius: $border-radius-outer;
+        transition-duration: constants.$transition-duration-low;
+        border-radius: constants.$border-radius-outer;
         position: relative;
 
         .icon {
-            transition-duration: $transition-duration-low;
+            transition-duration: constants.$transition-duration-low;
             justify-self: flex-end;
             margin: 0 5px;
             z-index: 1;
@@ -148,16 +147,16 @@ export default defineComponent({
             width: 100%;
             height: 100%;
             left: 0; top: 0;
-            border-radius: $border-radius-outer;
+            border-radius: constants.$border-radius-outer;
             z-index: 0;
-            transition-duration: $transition-duration-low;
+            transition-duration: constants.$transition-duration-low;
 
             &:hover {
-                background-color: $background-primary-hover;
+                background-color: var(--ipl-bg-primary-hover);
             }
 
             &:active {
-                background-color: $background-primary-active;
+                background-color: var(--ipl-bg-primary-active);
             }
         }
     }

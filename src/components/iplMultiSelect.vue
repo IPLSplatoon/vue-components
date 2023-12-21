@@ -94,21 +94,20 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 .ipl-multi-select {
     position: relative;
     cursor: pointer;
-    transition-duration: $transition-duration-low;
+    transition-duration: constants.$transition-duration-low;
 
     &:focus-within {
         .elem-display {
-            border-color: $input-color-active;
+            border-color: var(--ipl-input-color-active);
         }
 
         label {
-            color: $input-color-active;
+            color: var(--ipl-input-color-active);
         }
     }
 
@@ -125,7 +124,7 @@ export default defineComponent({
     }
 
     .elem-display {
-        border-bottom: 1px solid $input-color;
+        border-bottom: 1px solid var(--ipl-input-color);
         min-height: 26px;
         display: flex;
         flex-wrap: wrap;
@@ -140,7 +139,7 @@ export default defineComponent({
         background-position: right 3px bottom 5px;
 
         .option {
-            background-color: $background-secondary;
+            background-color: var(--ipl-bg-secondary);
             border-radius: 8px;
             font-size: 14px;
             padding: 2px 19px 2px 4px;
@@ -150,16 +149,16 @@ export default defineComponent({
             background-size: 14px 14px;
             background-repeat: no-repeat;
             background-position: right 3px center;
-            transition-duration: $transition-duration-low;
+            transition-duration: constants.$transition-duration-low;
             user-select: none;
             overflow-wrap: anywhere;
 
             &:hover {
-                background-color: $background-secondary-hover;
+                background-color: var(--ipl-bg-secondary-hover);
             }
 
             &:active {
-                background-color: $background-secondary-active;
+                background-color: var(--ipl-bg-secondary-active);
             }
         }
     }

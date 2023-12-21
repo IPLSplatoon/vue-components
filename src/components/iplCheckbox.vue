@@ -53,7 +53,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use 'src/styles/constants';
-@use 'src/styles/colors';
 
 label {
     display: flex;
@@ -80,7 +79,7 @@ label {
     }
 
     &.disabled {
-        color: colors.$text-color-disabled;
+        color: var(--ipl-disabled-body-text-color);
 
         > input:checked:before {
             opacity: 75%;
@@ -89,18 +88,18 @@ label {
 
     &:not(.disabled) {
         &:hover {
-            background-color: colors.$transparent-hover;
+            background-color: var(--ipl-hover-overlay-color);
 
             > input {
-                background-color: colors.$background-tertiary-hover;
+                background-color: var(--ipl-bg-tertiary-hover);
             }
         }
 
         &:active {
-            background-color: colors.$transparent-active;
+            background-color: var(--ipl-active-overlay-color);
 
             > input {
-                background-color: colors.$background-tertiary-active;
+                background-color: var(--ipl-bg-tertiary-active);
             }
         }
     }
@@ -108,7 +107,7 @@ label {
     > input {
         appearance: none;
         border-radius: constants.$border-radius-inner;
-        background-color: colors.$background-tertiary;
+        background-color: var(--ipl-bg-tertiary);
         width: 22px;
         height: 22px;
         transition: background-color constants.$transition-duration-low;
@@ -128,7 +127,7 @@ label {
         }
 
         &:focus {
-            outline: colors.$focus-outline-color solid 2px;
+            outline: var(--ipl-focus-outline-color) solid 2px;
         }
     }
 }

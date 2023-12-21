@@ -26,12 +26,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-
 .ipl-data-row {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid $input-color;
+    border-bottom: 1px solid var(--ipl-input-color);
     width: 100%;
     padding: 2px 0;
     margin-top: 6px;

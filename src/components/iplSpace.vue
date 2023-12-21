@@ -30,55 +30,55 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
+@use 'src/styles/colors';
 
 .ipl-space {
-    border-radius: $border-radius-outer;
+    border-radius: constants.$border-radius-outer;
     padding: 8px;
 
     &.color-light {
-        background-color: $background-secondary;
+        background-color: var(--ipl-bg-secondary);
     }
 
     &.color-dark {
-        background-color: $background-primary;
+        background-color: var(--ipl-bg-primary);
     }
 
     &.color-blue {
-        background-color: $blue;
+        background-color: colors.$blue;
     }
 
     &.clickable {
         user-select: none;
         cursor: pointer;
-        transition-duration: $transition-duration-low;
+        transition-duration: constants.$transition-duration-low;
 
         &:hover {
             &.color-light {
-                background-color: $background-secondary-hover;
+                background-color: var(--ipl-bg-secondary-hover);
             }
 
             &.color-dark {
-                background-color: $background-primary-hover;
+                background-color: var(--ipl-bg-primary-hover);
             }
 
             &.color-blue {
-                background-color: $blue-hover;
+                background-color: colors.$blue-hover;
             }
         }
 
         &:active {
             &.color-light {
-                background-color: $background-secondary-active;
+                background-color: var(--ipl-bg-secondary-active);
             }
 
             &.color-dark {
-                background-color: $background-primary-active;
+                background-color: var(--ipl-bg-primary-active);
             }
 
             &.color-blue {
-                background-color: $blue-active;
+                background-color: colors.$blue-active;
             }
         }
     }

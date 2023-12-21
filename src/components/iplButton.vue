@@ -1,7 +1,7 @@
 <template>
     <a
         class="ipl-button"
-        :href="!hasLink ? 'javascript:void(0);' : href"
+        :href="!hasLink ? 'javascript:void(0);' : (href as string)"
         :style="buttonStyle"
         :class="{
             disabled: disabledInternal,
@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, PropType, Ref, ref } from 'vue';
-import { buttonColors, themeColors } from '../styles/colors';
+import { buttonColors } from '../styles/colors';
 import isEmpty from 'lodash/isEmpty';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getContrastingTextColor } from '../helpers/colorHelper';
@@ -53,10 +53,7 @@ export default defineComponent({
         },
         color: {
             type: String as PropType<string>,
-            default: 'blue',
-            validator: (value: string) => {
-                return value.startsWith('#') || Object.keys(buttonColors).includes(value);
-            }
+            default: 'blue'
         },
         disabled: {
             type: Boolean,
@@ -139,8 +136,8 @@ export default defineComponent({
             buttonStyle: computed(() => {
                 const buttonColor = buttonColors[colorInternal.value] ?? colorInternal.value;
                 return ({
-                    backgroundColor: disabledInternal.value ? themeColors.backgroundColorTertiary : buttonColor,
-                    color: disabledInternal.value ? themeColors.disabledText : getContrastingTextColor(buttonColor)
+                    backgroundColor: disabledInternal.value ? undefined : buttonColor,
+                    color: disabledInternal.value ? undefined : getContrastingTextColor(buttonColor)
                 });
             }),
             async handleClick() {
@@ -208,8 +205,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import 'src/styles/colors';
-@import 'src/styles/constants';
+@use 'src/styles/constants';
 
 a.ipl-button {
     text-decoration: none !important;
@@ -222,7 +218,7 @@ a.ipl-button {
     box-sizing: border-box;
 
     border: none;
-    border-radius: $border-radius-inner;
+    border-radius: constants.$border-radius-inner;
     cursor: default;
     display: block;
     width: 100%;
@@ -231,7 +227,7 @@ a.ipl-button {
     position: relative;
     outline-width: 0;
 
-    transition: background-color $transition-duration-low, color $transition-duration-low;
+    transition: background-color constants.$transition-duration-low, color constants.$transition-duration-low;
 
     &.has-link {
         cursor: pointer;
@@ -267,6 +263,8 @@ a.ipl-button {
 
     &.disabled {
         cursor: default;
+        color: var(--ipl-disabled-body-text-color);
+        background-color: var(--ipl-bg-tertiary);
     }
 
     &:after {
@@ -276,7 +274,7 @@ a.ipl-button {
         width: 100%; height: 100%;
         background-color: #000;
         opacity: 0;
-        transition-duration: $transition-duration-low;
+        transition-duration: constants.$transition-duration-low;
         pointer-events: none;
     }
 
@@ -285,7 +283,7 @@ a.ipl-button {
     }
 
     &:focus {
-        outline: 2px solid $focus-outline-color;
+        outline: 2px solid var(--ipl-focus-outline-color);
     }
 
     &:not(.disabled) {

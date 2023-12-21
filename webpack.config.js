@@ -117,7 +117,7 @@ function config() {
             }),
             new CopyPlugin({
                 patterns: [
-                    { from: 'src/styles/**/*.scss', to: 'scss/[name][ext]' }
+                    { from: 'src/styles/(colors|constants).scss', to: 'scss/[name][ext]' }
                 ]
             })
         ],

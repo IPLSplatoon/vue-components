@@ -56,43 +56,53 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/colors';
+@use 'src/styles/constants';
+
+html.light .ipl-small-toggle__wrapper {
+    --ipl-toggle-button-color: #fff;
+    --ipl-toggle-box-shadow-color: rgba(22, 22, 22, 0.1)
+}
 
 .ipl-small-toggle__wrapper {
+    --ipl-toggle-button-color: #eee;
+    --ipl-toggle-box-shadow-color: rgba(22, 22, 22, 0.5);
+
     display: flex;
     align-items: center;
     justify-content: space-between;
     user-select: none;
     overflow-wrap: anywhere;
     word-break: break-all;
+    color: var(--ipl-body-text-color);
 
     &:not(.disabled) {
         cursor: pointer;
 
         &.active > .value-display {
-            background-color: $green;
+            background-color: colors.$green;
         }
 
         &.active:hover > .value-display {
-            background-color: $green-hover;
+            background-color: colors.$green-hover;
         }
 
         &.active:active > .value-display {
-            background-color: $green-active;
+            background-color: colors.$green-active;
         }
 
         &:hover > .value-display {
-            background-color: $background-tertiary-hover;
+            background-color: var(--ipl-bg-tertiary-hover);
         }
 
         &:active > .value-display {
-            background-color: $background-tertiary-active;
+            background-color: var(--ipl-bg-tertiary-active);
         }
     }
 
     &.disabled {
         filter: brightness(0.75) contrast(0.9);
+        color: var(--ipl-disabled-body-text-color);
     }
 
     &.active > .value-display > .circle {
@@ -102,19 +112,19 @@ export default defineComponent({
     > .value-display {
         min-width: 50px;
         height: 28px;
-        background-color: $background-tertiary;
+        background-color: var(--ipl-bg-tertiary);
         border-radius: 9999px;
-        transition-duration: $transition-duration-med;
+        transition-duration: constants.$transition-duration-med;
         margin-left: 8px;
-        box-shadow: inset 1px 1px 2px rgba(22, 22, 22, 0.5);
+        box-shadow: inset 1px 1px 2px var(--ipl-toggle-box-shadow-color);
 
         > .circle {
             height: 22px;
             width: 22px;
-            background-color: #eee;
+            background-color: var(--ipl-toggle-button-color);
             border-radius: 9999px;
             margin: 3px;
-            transition-duration: $transition-duration-med;
+            transition-duration: constants.$transition-duration-med;
             filter: drop-shadow(0 0 1px rgba(22, 22, 22, 0.5));
         }
     }

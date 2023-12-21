@@ -1,0 +1,29 @@
+html.light {
+    --ipl-input-color: #737373;
+    --ipl-input-color-hover: #A1A1A1;
+    --ipl-input-color-active: #111111;
+    --ipl-input-error-color: #E74E36;
+    --ipl-input-color-alpha-hover: rgba(255, 255, 255, 0.05);
+    --ipl-input-color-alpha-active: rgba(255, 255, 255, 0.2);
+
+    --ipl-focus-outline-color: #111111;
+    --ipl-hover-overlay-color: rgba(0, 0, 0, 0.04);
+    --ipl-active-overlay-color: rgba(0, 0, 0, 0.08);
+
+    --ipl-body-text-color: #3C3C43;
+    --ipl-disabled-body-text-color: #9494A0;
+
+    --ipl-bg-primary: #FFFFFF;
+    --ipl-bg-primary-hover: #F2F2F2;
+    --ipl-bg-primary-active: #E6E5E5;
+
+    --ipl-bg-secondary: #F6F6F7;
+    --ipl-bg-secondary-hover: #E9E9EC;
+    --ipl-bg-secondary-active: #DBDBE0;
+
+    --ipl-bg-tertiary: #E5E5E8;
+    --ipl-bg-tertiary-hover: #D6D6DB;
+    --ipl-bg-tertiary-active: #C9C9CF;
+
+    --ipl-page-overlay-color: rgba(0, 0, 0, 0.5);
+}

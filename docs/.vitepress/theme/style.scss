@@ -1,6 +1,5 @@
 @use '../../../src/styles/colors';
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
 /**
@@ -33,13 +32,14 @@
     --vp-c-danger-2: #{colors.$error-color};
     --vp-c-danger-3: #{colors.$error-color};
     --vp-c-danger-soft: #{colors.$error-background-color};
+
+    --vp-c-bg: var(--ipl-bg-primary);
+    --vp-c-bg-alt: var(--ipl-bg-secondary);
+    --vp-c-bg-soft: var(--ipl-bg-secondary);
+    --vp-c-bg-elv: var(--ipl-bg-secondary);
 }
 
 .dark {
-    --vp-c-bg: #{colors.$background-primary};
-    --vp-c-bg-alt: #{colors.$background-secondary};
-    --vp-c-bg-soft: #{colors.$background-secondary};
-    --vp-c-bg-elv: #{colors.$background-secondary};
     --vp-c-divider: #606770;
 }
 

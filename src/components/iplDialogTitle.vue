@@ -50,8 +50,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 .ipl-dialog-title {
     display: flex;
@@ -60,10 +59,10 @@ export default defineComponent({
     height: 40px;
     font-weight: 500;
     font-size: 1.25em;
-    background-color: $background-primary;
+    background-color: var(--ipl-bg-primary);
     padding: 0 8px;
-    border-radius: $border-radius-outer;
-    color: $text-color;
+    border-radius: constants.$border-radius-outer;
+    color: var(--ipl-body-text-color);
 
     .ipl-dialog-title__title-text {
         flex-grow: 1;
@@ -73,22 +72,22 @@ export default defineComponent({
         cursor: pointer;
         margin-right: 2px;
         padding: 4px 7px;
-        border-radius: $border-radius-inner;
-        transition-duration: $transition-duration-med;
-        color: $text-color;
+        border-radius: constants.$border-radius-inner;
+        transition-duration: constants.$transition-duration-med;
+        color: var(--ipl-body-text-color);
 
         &.closing-disabled {
-            color: $text-color-disabled;
+            color: var(--ipl-disabled-body-text-color);
             cursor: default;
         }
 
         &:not(.closing-disabled) {
             &:hover {
-                background-color: $background-primary-hover;
+                background-color: var(--ipl-bg-primary-hover);
             }
 
             &:active {
-                background-color: $background-primary-active;
+                background-color: var(--ipl-bg-primary-active);
             }
         }
     }
