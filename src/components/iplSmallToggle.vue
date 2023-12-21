@@ -1,14 +1,16 @@
 <template>
-    <div
+    <label
         class="ipl-small-toggle__wrapper"
         :class="{ disabled: disabled, active: modelValue }"
-        @click="toggleValue"
     >
         {{ label }}
-        <div class="value-display">
-            <div class="circle" />
-        </div>
-    </div>
+        <input
+            v-model="model"
+            type="checkbox"
+            role="switch"
+            :disabled="disabled"
+        >
+    </label>
 </template>
 
 <script lang="ts">
@@ -75,28 +77,37 @@ html.light .ipl-small-toggle__wrapper {
     overflow-wrap: anywhere;
     word-break: break-all;
     color: var(--ipl-body-text-color);
+    border-radius: constants.$border-radius-inner;
+    padding: 2px 4px;
+    transition: background-color constants.$transition-duration-low;
 
     &:not(.disabled) {
-        cursor: pointer;
-
-        &.active > .value-display {
+        &.active > input {
             background-color: colors.$green;
         }
 
-        &.active:hover > .value-display {
+        &.active:hover > input {
             background-color: colors.$green-hover;
         }
 
-        &.active:active > .value-display {
+        &.active:active > input {
             background-color: colors.$green-active;
         }
 
-        &:hover > .value-display {
-            background-color: var(--ipl-bg-tertiary-hover);
+        &:hover {
+            background-color: var(--ipl-hover-overlay-color);
+
+            > input {
+                background-color: var(--ipl-bg-tertiary-hover);
+            }
         }
 
-        &:active > .value-display {
-            background-color: var(--ipl-bg-tertiary-active);
+        &:active {
+            background-color: var(--ipl-active-overlay-color);
+
+            > input {
+                background-color: var(--ipl-bg-tertiary-active);
+            }
         }
     }
 
@@ -105,27 +116,37 @@ html.light .ipl-small-toggle__wrapper {
         color: var(--ipl-disabled-body-text-color);
     }
 
-    &.active > .value-display > .circle {
-        transform: translateX(100%);
-    }
-
-    > .value-display {
+    > input {
+        appearance: none;
         min-width: 50px;
         height: 28px;
         background-color: var(--ipl-bg-tertiary);
         border-radius: 9999px;
+        transition-property: background-color;
         transition-duration: constants.$transition-duration-med;
-        margin-left: 8px;
+        margin: 0 0 0 8px;
         box-shadow: inset 1px 1px 2px var(--ipl-toggle-box-shadow-color);
 
-        > .circle {
+        &:checked:before {
+            transform: translateX(100%);
+        }
+
+        &:before {
+            content: '';
+            display: block;
             height: 22px;
             width: 22px;
             background-color: var(--ipl-toggle-button-color);
             border-radius: 9999px;
             margin: 3px;
+            transition-property: transform;
             transition-duration: constants.$transition-duration-med;
             filter: drop-shadow(0 0 1px rgba(22, 22, 22, 0.5));
+        }
+
+        &:focus-visible {
+            outline-offset: 0;
+            outline: var(--ipl-focus-outline-color) solid 2px;
         }
     }
 }
