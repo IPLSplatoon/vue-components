@@ -126,7 +126,8 @@ label {
             background-position: center center;
         }
 
-        &:focus {
+        &:focus-visible {
+            outline-offset: 0;
             outline: var(--ipl-focus-outline-color) solid 2px;
         }
     }
