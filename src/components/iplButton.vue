@@ -248,7 +248,7 @@ a.ipl-button {
             font-size: 20px;
             width: 30px;
             min-width: 30px;
-            height: 27px;
+            height: 30px;
             padding: 3px 0 0;
         }
     }
