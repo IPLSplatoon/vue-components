@@ -18,12 +18,6 @@ describe('iplButton', () => {
         expect(wrapper.find('span.label').text()).toEqual('Button');
     });
 
-    it('applies default href to button if one is not given', () => {
-        const wrapper = shallowMount(IplButton, { props: { label: 'Button' } });
-
-        expect(wrapper.find('a').element.href).toEqual('javascript:void(0);');
-    });
-
     it('applies given href to button if present', () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', href: 'https://google.com/' } });
 
@@ -47,20 +41,20 @@ describe('iplButton', () => {
         const redWrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'red' } });
         const greenWrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'green' } });
 
-        expect(redWrapper.find('a').element.style.backgroundColor).toEqual('rgb(231, 78, 54)');
-        expect(greenWrapper.find('a').element.style.backgroundColor).toEqual('rgb(0, 166, 81)');
+        expect(redWrapper.find('button').element.style.backgroundColor).toEqual('rgb(231, 78, 54)');
+        expect(greenWrapper.find('button').element.style.backgroundColor).toEqual('rgb(0, 166, 81)');
     });
 
     it('applies hex color from props', () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', color: '#FFF' } });
 
-        expect(wrapper.find('a').element.style.backgroundColor).toEqual('rgb(255, 255, 255)');
+        expect(wrapper.find('button').element.style.backgroundColor).toEqual('rgb(255, 255, 255)');
     });
 
     it('emits event on click', async () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button' } });
 
-        await wrapper.find('a').trigger('click');
+        await wrapper.find('button').trigger('click');
 
         expect(wrapper.emitted().click.length).toEqual(1);
     });
@@ -68,7 +62,7 @@ describe('iplButton', () => {
     it('emits event on right click', async () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button' } });
 
-        await wrapper.find('a').trigger('contextmenu');
+        await wrapper.find('button').trigger('contextmenu');
 
         expect(wrapper.emitted().rightClick.length).toEqual(1);
     });
@@ -76,7 +70,7 @@ describe('iplButton', () => {
     it('does not emit event if disabled', async () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', disabled: true } });
 
-        await wrapper.find('a').trigger('click');
+        await wrapper.find('button').trigger('click');
 
         expect(wrapper.emitted().click).toBeUndefined();
     });
@@ -84,19 +78,19 @@ describe('iplButton', () => {
     it('gives class to link button element if disabled', () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', disabled: true } });
 
-        expect(wrapper.find('a').classes()).toContain('disabled');
+        expect(wrapper.find('button').classes()).toContain('disabled');
     });
 
     it('gives class to link button element if small', () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', small: true } });
 
-        expect(wrapper.find('a').classes()).toContain('small');
+        expect(wrapper.find('button').classes()).toContain('small');
     });
 
     it('gives class to link button element if element has icon', () => {
         const wrapper = shallowMount(IplButton, { props: { icon: 'dope-icon' } });
 
-        expect(wrapper.find('a').classes()).toContain('has-icon');
+        expect(wrapper.find('button').classes()).toContain('has-icon');
     });
 
     describe('validator: color', () => {
@@ -120,7 +114,7 @@ describe('iplButton', () => {
     describe('requires-confirmation', () => {
         it('must be pressed twice to emit click event', async () => {
             const wrapper = shallowMount(IplButton, { props: { label: 'Button', requiresConfirmation: true } });
-            const button = wrapper.get('a');
+            const button = wrapper.get('button');
 
             await button.trigger('click');
             await button.trigger('click');
@@ -130,7 +124,7 @@ describe('iplButton', () => {
 
         it('has expected label and color when clicked once', async () => {
             const wrapper = shallowMount(IplButton, { props: { label: 'Button', requiresConfirmation: true } });
-            const button = wrapper.get('a');
+            const button = wrapper.get('button');
 
             await button.trigger('click');
 
@@ -146,7 +140,7 @@ describe('iplButton', () => {
                     shortConfirmationMessage: true
                 }
             });
-            const button = wrapper.get('a');
+            const button = wrapper.get('button');
 
             await button.trigger('click');
 
@@ -162,7 +156,7 @@ describe('iplButton', () => {
                     color: 'red'
                 }
             });
-            const button = wrapper.get('a');
+            const button = wrapper.get('button');
 
             await button.trigger('click');
 
@@ -182,7 +176,7 @@ describe('iplButton', () => {
                     color: 'green'
                 }
             });
-            const button = wrapper.get('a');
+            const button = wrapper.get('button');
 
             await button.trigger('click');
 
@@ -208,7 +202,7 @@ describe('iplButton', () => {
             // eslint-disable-next-line @typescript-eslint/no-empty-function
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockReturnValue(new Promise(() => {
             }));
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             await button.trigger('click');
 
@@ -231,7 +225,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockResolvedValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             await button.trigger('click');
             await wrapper.vm.$nextTick();
@@ -255,7 +249,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockResolvedValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             await button.trigger('click');
             await wrapper.vm.$nextTick();
@@ -283,7 +277,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockResolvedValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             await button.trigger('click');
             await wrapper.vm.$nextTick();
@@ -306,7 +300,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockRejectedValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             try {
                 // button.trigger('click') fails here, as the click handler rejects.
@@ -332,7 +326,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockRejectedValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             try {
                 // button.trigger('click') fails here, as the click handler rejects.
@@ -362,7 +356,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockRejectedValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             try {
                 // button.trigger('click') fails here, as the click handler rejects.
@@ -391,7 +385,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockReturnValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             await button.trigger('click');
             await wrapper.vm.$nextTick();
@@ -418,7 +412,7 @@ describe('iplButton', () => {
                 return fail('vnode is missing props');
             }
             wrapper.vm.$.vnode.props.onClick = jest.fn().mockReturnValue({});
-            const button = wrapper.find('a');
+            const button = wrapper.find('button');
 
             await button.trigger('click');
             await wrapper.vm.$nextTick();

@@ -1,7 +1,9 @@
 <template>
-    <a
+    <component
+        :is="hasLink ? 'a' : 'button'"
+        :href="disabledInternal ? undefined : href"
+        :target="hasLink ? '_blank' : undefined"
         class="ipl-button"
-        :href="!hasLink ? 'javascript:void(0);' : (href as string)"
         :style="buttonStyle"
         :class="{
             disabled: disabledInternal,
@@ -10,6 +12,7 @@
             'is-loading': buttonState === 'loading',
             'has-link': hasLink
         }"
+        :disabled="hasLink ? undefined : disabledInternal"
         @click="handleClick"
         @contextmenu="$emit('rightClick', $event)"
     >
@@ -24,7 +27,7 @@
             :icon="icon"
             class="icon"
         />
-    </a>
+    </component>
 </template>
 
 <script lang="ts">
@@ -134,6 +137,7 @@ export default defineComponent({
             }
         });
         const isClicked = ref(false);
+        const hasLink = computed(() => !isBlank(props.href));
 
         return {
             buttonStyle: computed(() => {
@@ -143,12 +147,15 @@ export default defineComponent({
                     color: disabledInternal.value ? undefined : getContrastingTextColor(buttonColor)
                 });
             }),
-            async handleClick() {
+            async handleClick(event: Event) {
                 if (disabledInternal.value) {
                     return;
                 }
 
                 if (props.requiresConfirmation && !isClicked.value) {
+                    if (hasLink.value) {
+                        event.preventDefault();
+                    }
                     isClicked.value = true;
                     confirmationResetTimeout = window.setTimeout(() => {
                         isClicked.value = false;
@@ -201,20 +208,37 @@ export default defineComponent({
                 }
             }),
             isBlank,
-            hasLink: computed(() => !isBlank(props.href))
+            hasLink
         };
     }
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use 'src/styles/constants';
 
-a.ipl-button {
+button.ipl-button.has-icon {
+    padding: 2px 0 0;
+
+    &.small {
+        padding: 2px 0 0;
+    }
+}
+
+a.ipl-button.has-icon {
+    padding: 5px 0 0;
+
+    &.small {
+        padding: 3px 0 0;
+    }
+}
+
+.ipl-button {
     text-decoration: none !important;
     text-transform: uppercase;
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: 700;
+    font-family: constants.$body-font;
     line-height: normal;
     color: white;
     text-align: center;
@@ -242,14 +266,12 @@ a.ipl-button {
         width: 40px;
         min-width: 40px;
         height: 40px;
-        padding: 5px 0 0;
 
         &.small {
             font-size: 20px;
             width: 30px;
             min-width: 30px;
             height: 30px;
-            padding: 3px 0 0;
         }
     }
 
@@ -285,7 +307,7 @@ a.ipl-button {
         cursor: progress;
     }
 
-    &:focus {
+    &:focus-visible {
         outline: 2px solid var(--ipl-focus-outline-color);
     }
 
