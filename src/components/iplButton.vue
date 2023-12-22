@@ -53,7 +53,10 @@ export default defineComponent({
         },
         color: {
             type: String as PropType<string>,
-            default: 'blue'
+            default: 'blue',
+            validator: (value: string) => {
+                return value.startsWith('#') || Object.keys(buttonColors).includes(value);
+            }
         },
         disabled: {
             type: Boolean,
