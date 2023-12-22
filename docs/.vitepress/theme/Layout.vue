@@ -1,9 +1,9 @@
 <template>
-    <DefaultTheme.Layout />
+    <DefaultLayout />
 </template>
 
 <script setup lang="ts">
-import DefaultTheme from 'vitepress/theme-without-fonts';
+import DefaultLayout from 'vitepress/dist/client/theme-default/Layout.vue';
 import { useData } from 'vitepress';
 import { onMounted, watch } from 'vue';
 
