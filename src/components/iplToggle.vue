@@ -1,7 +1,11 @@
 <template>
     <div
         class="ipl-toggle__container"
+        role="switch"
+        tabindex="0"
         @click="toggleValue"
+        @keydown.space.prevent
+        @keyup.space="toggleValue"
     >
         <div class="ipl-toggle__text">
             <span
@@ -84,6 +88,10 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+    &:focus-visible {
+        outline: var(--ipl-focus-outline-color) solid 2px;
+    }
 
     &:hover {
         background-color: var(--ipl-bg-tertiary-hover);
