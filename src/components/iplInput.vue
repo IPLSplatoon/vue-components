@@ -181,7 +181,7 @@ input {
     width: 100%;
     color: var(--ipl-body-text-color);
     font-size: 1.4em;
-    font-family: 'Roboto', sans-serif;
+    font-family: constants.$body-font;
     display: block;
     box-sizing: border-box;
     margin: 2px 0;

@@ -19,6 +19,7 @@ import(`../../examples/${props.sourceFile}.vue`).then(result => {
 
 <style lang="scss">
 @use 'src/styles/colors';
+@use 'src/styles/constants';
 
 html.dark .demo-preview > *:first-child {
     --line-color: #37445C;
@@ -46,7 +47,7 @@ html.dark .demo-preview > *:first-child {
         linear-gradient(to right, var(--line-color) $grid-width, transparent $grid-width),
         linear-gradient(to bottom, var(--line-color) $grid-width, transparent $grid-width);
 
-    font-family: 'Roboto', sans-serif;
+    font-family: constants.$body-font;
     font-weight: 400;
     padding: 24px;
 

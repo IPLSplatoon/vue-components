@@ -115,6 +115,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use 'src/styles/constants';
+
 .ipl-select__wrapper {
     border-bottom: 1px solid var(--ipl-input-color);
     width: 100%;
@@ -139,7 +141,7 @@ select {
     width: 100%;
     color: var(--ipl-body-text-color);
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
+    font-family: constants.$body-font;
     outline: 0;
     padding-right: 20px;
     margin: 2px 0;
