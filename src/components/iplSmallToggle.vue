@@ -1,7 +1,7 @@
 <template>
     <label
         class="ipl-small-toggle__wrapper"
-        :class="{ disabled: disabled, active: modelValue }"
+        :class="{ disabled: disabled }"
     >
         {{ label }}
         <input
@@ -82,32 +82,12 @@ html.light .ipl-small-toggle__wrapper {
     transition: background-color constants.$transition-duration-low;
 
     &:not(.disabled) {
-        &.active > input {
-            background-color: colors.$green;
-        }
-
-        &.active:hover > input {
-            background-color: colors.$green-hover;
-        }
-
-        &.active:active > input {
-            background-color: colors.$green-active;
-        }
-
         &:hover {
             background-color: var(--ipl-hover-overlay-color);
-
-            > input {
-                background-color: var(--ipl-bg-tertiary-hover);
-            }
         }
 
         &:active {
             background-color: var(--ipl-active-overlay-color);
-
-            > input {
-                background-color: var(--ipl-bg-tertiary-active);
-            }
         }
     }
 
@@ -127,8 +107,30 @@ html.light .ipl-small-toggle__wrapper {
         margin: 0 0 0 8px;
         box-shadow: inset 1px 1px 2px var(--ipl-toggle-box-shadow-color);
 
-        &:checked:before {
-            transform: translateX(100%);
+        &:not(:disabled) {
+            &:hover {
+                background-color: var(--ipl-bg-tertiary-hover);
+            }
+
+            &:active {
+                background-color: var(--ipl-bg-tertiary-active);
+            }
+        }
+
+        &:checked {
+            background-color: colors.$green;
+
+            &:hover {
+                background-color: colors.$green-hover;
+            }
+
+            &:active {
+                background-color: colors.$green-active;
+            }
+
+            &:before {
+                transform: translateX(100%);
+            }
         }
 
         &:before {
