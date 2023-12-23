@@ -3,6 +3,9 @@
         <div class="ipl-expansion-panel__header">
             <div
                 class="ipl-expansion-panel__header-background"
+                tabindex="0"
+                @keydown.space.prevent
+                @keyup.space.enter="handleHeaderClick"
                 @click.self="handleHeaderClick"
             />
             <div class="ipl-expansion-panel__title">
@@ -133,6 +136,10 @@ export default defineComponent({
             }
         }
 
+        > .header-extra:not(:empty) {
+            margin-left: 8px;
+        }
+
         .ipl-expansion-panel__title {
             font-size: 1rem;
             font-weight: 500;
@@ -158,13 +165,17 @@ export default defineComponent({
             &:active {
                 background-color: var(--ipl-bg-primary-active);
             }
+
+            &:focus-visible {
+                outline: var(--ipl-focus-outline-color) solid 2px;
+            }
         }
     }
 
     .content {
         overflow: hidden;
         height: 100%;
-        padding: 0 8px 8px;
+        padding: 4px 8px 8px;
     }
 }
 </style>
