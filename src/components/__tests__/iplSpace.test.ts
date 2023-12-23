@@ -2,24 +2,22 @@ import IplSpace from '../iplSpace.vue';
 import { shallowMount } from '@vue/test-utils';
 
 describe('IplSpace', () => {
-    it('has expected class when color is light', () => {
-        const wrapper = shallowMount(IplSpace, { props: { color: 'light' } });
+    it.each(['light', 'dark', 'blue'] as const)('has expected class when colors is %s', color => {
+        const wrapper = shallowMount(IplSpace, { props: { color } });
 
-        expect(wrapper.get('.ipl-space').classes()).toContain('color-light');
+        expect(wrapper.get('.ipl-space').classes()).toContain(`color-${color}`);
     });
 
-    it('has expected class when color is dark', () => {
-        const wrapper = shallowMount(IplSpace, { props: { color: 'dark' } });
+    it('is a div by default', () => {
+        const wrapper = shallowMount(IplSpace, { props: { clickable: false } });
 
-        expect(wrapper.get('.ipl-space').classes()).toContain('color-dark');
+        expect(wrapper.element.tagName).toEqual('DIV');
     });
 
-    it('has expected class when clickable', () => {
-        const wrapper = shallowMount(IplSpace, { props: { color: 'blue', clickable: true } });
+    it('becomes a button when clickable', () => {
+        const wrapper = shallowMount(IplSpace, { props: { clickable: true } });
 
-        const classes = wrapper.get('.ipl-space').classes();
-        expect(classes).toContain('color-blue');
-        expect(classes).toContain('clickable');
+        expect(wrapper.element.tagName).toEqual('BUTTON');
     });
 
     describe('validator: color', () => {
