@@ -27,3 +27,8 @@ html.light {
 
     --ipl-page-overlay-color: rgba(0, 0, 0, 0.5);
 }
+
+::backdrop {
+    // also here due to bugs in chromium and webkit
+    --ipl-page-overlay-color: rgba(0, 0, 0, 0.5);
+}

@@ -1,25 +1,22 @@
 <template>
-    <transition
-        name="sidebar-transition"
-        :duration="250"
+    <dialog
+        ref="dialog"
+        @close="onClose"
+        @cancel.prevent="onCancel"
+        @click.self="onClick"
     >
-        <div
-            v-if="isOpen"
-            class="ipl-sidebar__wrapper"
-        >
-            <div
-                class="background"
-                @click="close"
-            />
-            <div class="content">
-                <slot />
-            </div>
+        <div class="content">
+            <slot />
         </div>
-    </transition>
+    </dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref, watch } from 'vue';
+
+async function animationsComplete(element: HTMLElement): Promise<unknown> {
+    return Promise.allSettled(element.getAnimations().map(animation => animation.finished));
+}
 
 export default defineComponent({
     name: 'IplSidebar',
@@ -34,9 +31,42 @@ export default defineComponent({
     emits: ['update:isOpen'],
 
     setup(props, { emit }) {
+        const dialog = ref<HTMLDialogElement | null>(null);
+
+        async function onClose() {
+            if (!dialog.value) return;
+            dialog.value.setAttribute('inert', '');
+            await animationsComplete(dialog.value);
+            dialog.value.close();
+        }
+
+        onMounted(() => {
+            if (!props.isOpen) {
+                dialog.value?.setAttribute('inert', '');
+            } else {
+                dialog.value?.showModal();
+            }
+
+            watch(() => props.isOpen, newValue => {
+                if (newValue) {
+                    dialog.value?.removeAttribute('inert');
+                    dialog.value?.showModal();
+                } else {
+                    onClose();
+                }
+            });
+        });
+
         return {
-            close() {
+            dialog,
+            onClose() {
                 emit('update:isOpen', false);
+            },
+            onCancel() {
+                onClose();
+            },
+            onClick() {
+                onClose();
             }
         };
     }
@@ -46,68 +76,90 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use 'src/styles/constants';
 
-.ipl-sidebar__wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+dialog {
+    border: none;
+    background-color: var(--ipl-bg-primary);
+    color: var(--ipl-body-text-color);
+    width: 85%;
     height: 100%;
-    z-index: 100;
-    overflow: hidden;
+    max-height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    inset: 0;
+    display: block;
+    position: fixed;
+    // Unfortunately, if you want animation, you'll have to put up with this.
+    z-index: 999999;
+    transform: translateX(-85vw);
 
-    .background {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 101;
-        background-color: var(--ipl-page-overlay-color);
+    &:not([open]) {
+        pointer-events: none;
     }
 
-    .content {
-        width: 85%;
-        height: 100%;
-        position: absolute;
-        //noinspection CssRedundantUnit; Fixes issues on iOS Safari
-        left: 0%;
-        top: 0;
-        z-index: 102;
-        background-color: var(--ipl-bg-primary);
+    &[open] {
+        animation: slide-in constants.$transition-duration-med ease-out forwards;
+
+        &::backdrop {
+            animation: backdrop-fade-in constants.$transition-duration-med ease-out forwards;
+        }
+
+        &[inert] {
+            animation: slide-out constants.$transition-duration-med ease-in forwards;
+
+            &::backdrop {
+                animation: backdrop-fade-out constants.$transition-duration-med ease-out forwards;
+            }
+        }
+    }
+
+    &::backdrop {
+        background: var(--ipl-page-overlay-color);
+    }
+
+    > .content {
         padding: 8px;
-        overflow-y: auto;
-        box-sizing: border-box;
+        height: 100%;
+    }
+
+    &:focus-visible {
+        outline: var(--ipl-focus-outline-color) solid 2px;
     }
 }
 
-.sidebar-transition-enter-active {
-    .background {
-        transition: opacity constants.$transition-duration-med ease-out;
-    }
-
-    .content {
-        transition: left constants.$transition-duration-med ease-out;
+@keyframes slide-in {
+    to {
+        transform: translateX(0vw);
     }
 }
 
-.sidebar-transition-leave-active {
-    .background {
-        transition: opacity constants.$transition-duration-med ease-in;
+@keyframes slide-out {
+    0% {
+        transform: translateX(0vw);
     }
 
-    .content {
-        transition: left constants.$transition-duration-med ease-in;
+    100% {
+        transform: translateX(-85vw);
     }
 }
 
-.sidebar-transition-enter-from,
-.sidebar-transition-leave-to {
-    .background {
+@keyframes backdrop-fade-in {
+    0% {
         opacity: 0;
     }
 
-    .content {
-        left: -85%;
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes backdrop-fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }
 </style>

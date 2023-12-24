@@ -5,7 +5,22 @@
     >
         <!-- #region example -->
         <ipl-sidebar v-model:is-open="sidebarOpen">
-            Hello!
+            <div class="width-capped-content">
+                <ipl-space
+                    color="light"
+                    class="vertical-layout"
+                >
+                    <div>Hello!</div>
+                    <ipl-button
+                        label="Button!"
+                    />
+                    <ipl-button
+                        label="Close sidebar"
+                        color="red"
+                        @click="sidebarOpen = false"
+                    />
+                </ipl-space>
+            </div>
         </ipl-sidebar>
         <ipl-button
             label="Open sidebar"
@@ -16,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { IplSidebar, IplButton } from '../../src';
+import { IplSidebar, IplButton, IplSpace } from '../../src';
 import { ref } from 'vue';
 
 const sidebarOpen = ref(false);
