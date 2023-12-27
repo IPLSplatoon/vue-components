@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUpdated, PropType, Ref, ref, watch } from 'vue';
+import { defineComponent, onMounted, PropType, Ref, ref, watch } from 'vue';
 import { SelectOptions } from '../types/select';
 import IplLabel from './iplLabel.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -78,13 +78,8 @@ export default defineComponent({
             }
         });
 
-        onUpdated(() => {
-            if (select.value) {
-                select.value.selectedIndex = -1;
-            }
-        });
-
-        watch(() => props.options, newValue => {
+        watch(() => props.options, (newValue, oldValue) => {
+            if (oldValue.length === newValue.length) return;
             emit('update:modelValue', props.modelValue.filter(selectedOption =>
                 newValue.some(option => option.value === selectedOption.value)));
         });
