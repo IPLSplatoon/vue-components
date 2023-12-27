@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, Ref, ref, watch } from 'vue';
+import { defineComponent, onMounted, PropType, Ref, ref, watch } from 'vue';
 import { SelectOptions } from '../types/select';
 import IplLabel from './iplLabel.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -77,6 +77,12 @@ export default defineComponent({
         const select: Ref<HTMLSelectElement | null> = ref(null);
         const elemDisplay = ref<HTMLDivElement | null>(null);
 
+        onMounted(() => {
+            if (select.value) {
+                select.value.selectedIndex = -1;
+            }
+        });
+
         watch(() => props.options, (newValue, oldValue) => {
             if (oldValue.length === newValue.length) return;
             emit('update:modelValue', props.modelValue.filter(selectedOption =>
@@ -92,6 +98,10 @@ export default defineComponent({
                         ...(props.modelValue ?? []),
                         selectedOption
                     ]);
+                }
+
+                if (select.value) {
+                    select.value.selectedIndex = -1;
                 }
             },
             deselectOption(index: number) {
@@ -149,6 +159,7 @@ export default defineComponent({
         z-index: 2;
         pointer-events: none;
         padding-bottom: 4px;
+        box-sizing: border-box;
 
         > .icon-container {
             flex-grow: 1;
@@ -170,6 +181,9 @@ export default defineComponent({
             background-color: var(--ipl-bg-secondary);
             border-radius: 8px;
             font-size: 14px;
+            font-weight: 400;
+            font-family: inherit;
+            line-height: inherit;
             padding: 2px 4px;
             margin: 2px;
             pointer-events: auto;
@@ -178,6 +192,9 @@ export default defineComponent({
             user-select: none;
             overflow-wrap: anywhere;
             cursor: default;
+            border: 0;
+            color: inherit;
+            height: fit-content;
 
             > .remove-icon {
                 font-size: 1em;
