@@ -1,6 +1,5 @@
 import IplMessage from '../iplMessage.vue';
 import { config, mount } from '@vue/test-utils';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 describe('IplMessage', () => {
     config.global.stubs = {
@@ -19,10 +18,10 @@ describe('IplMessage', () => {
         expect(wrapper.html()).toMatchSnapshot();
     });
 
-    it('emits event on close button click', () => {
+    it('emits event on close button click', async () => {
         const wrapper = mount(IplMessage, { props: { type: 'info', closeable: true } });
 
-        wrapper.getComponent<typeof FontAwesomeIcon>('.close-button').vm.$emit('click');
+        await wrapper.get('.close-button').trigger('click');
 
         expect(wrapper.emitted('close')?.length).toEqual(1);
     });

@@ -8,12 +8,13 @@
             :icon="icon"
         />
         <div class="message-content">
-            <font-awesome-icon
+            <button
                 v-if="closeable"
-                icon="times"
                 class="close-button"
                 @click="close"
-            />
+            >
+                <font-awesome-icon icon="times" />
+            </button>
             <slot />
         </div>
     </div>
@@ -98,7 +99,27 @@ export default defineComponent({
 
         > .close-button {
             float: right;
-            cursor: pointer;
+            font-size: 0.9em;
+            width: 1.1em;
+            height: 1.1em;
+            border: 0;
+            background-color: transparent;
+            color: var(--ipl-body-text-color);
+            cursor: default;
+            border-radius: constants.$border-radius-inner;
+            text-align: center;
+
+            &:hover {
+                background-color: var(--ipl-hover-overlay-color);
+            }
+
+            &:active {
+                background-color: var(--ipl-active-overlay-color);
+            }
+
+            &:focus-visible {
+                outline: var(--ipl-focus-outline-color) solid 2px;
+            }
         }
     }
 

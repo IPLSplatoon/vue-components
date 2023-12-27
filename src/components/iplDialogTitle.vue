@@ -1,13 +1,14 @@
 <template>
     <div class="ipl-dialog-title">
         <span class="ipl-dialog-title__title-text">{{ title }}</span>
-        <font-awesome-icon
-            icon="times"
-            class="close-icon"
-            :class="{ 'closing-disabled': closingDisabled }"
+        <button
             data-test="close-button"
+            class="close-icon"
+            :disabled="closingDisabled"
             @click="close"
-        />
+        >
+            <font-awesome-icon icon="times" />
+        </button>
     </div>
 </template>
 
@@ -40,9 +41,7 @@ export default defineComponent({
     setup(props, { emit }) {
         return {
             close() {
-                if (!props.closingDisabled) {
-                    emit('close');
-                }
+                emit('close');
             }
         };
     }
@@ -69,19 +68,27 @@ export default defineComponent({
     }
 
     .close-icon {
-        cursor: pointer;
         margin-right: 2px;
         padding: 4px 7px;
         border-radius: constants.$border-radius-inner;
+        transition-property: background-color;
         transition-duration: constants.$transition-duration-med;
         color: var(--ipl-body-text-color);
+        border: 0;
+        background-color: transparent;
+        font-size: 1em;
+        line-height: 1em;
+        cursor: default;
 
-        &.closing-disabled {
-            color: var(--ipl-disabled-body-text-color);
-            cursor: default;
+        &:focus-visible {
+            outline: var(--ipl-focus-outline-color) solid 2px;
         }
 
-        &:not(.closing-disabled) {
+        &:disabled {
+            color: var(--ipl-disabled-body-text-color);
+        }
+
+        &:not(:disabled) {
             &:hover {
                 background-color: var(--ipl-bg-primary-hover);
             }
