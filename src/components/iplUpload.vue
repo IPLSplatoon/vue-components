@@ -90,9 +90,10 @@ label {
     border-radius: constants.$border-radius-inner;
     padding: 8px 16px;
     min-height: 50px;
-    cursor: pointer;
+    transition-property: background-color;
     transition-duration: constants.$transition-duration-low;
     background-color: var(--ipl-bg-tertiary);
+    position: relative;
 
     span {
         pointer-events: none;
@@ -109,9 +110,30 @@ label {
     &.active {
         background-color: var(--ipl-bg-tertiary-active);
     }
+
+    &:hover {
+        background-color: var(--ipl-bg-tertiary-hover);
+    }
+
+    &:active {
+        background-color: var(--ipl-bg-tertiary-active);
+    }
 }
 
 input {
-    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    border-radius: constants.$border-radius-inner;
+    pointer-events: none;
+
+    &::file-selector-button {
+        display: none;
+    }
+
+    &:focus-visible {
+        outline: var(--ipl-focus-outline-color) solid 2px;
+    }
 }
 </style>
