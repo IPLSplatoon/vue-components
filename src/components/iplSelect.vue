@@ -161,7 +161,7 @@ select {
     font-size: 1.33em;
     font-family: constants.$body-font;
     outline: 0;
-    padding-right: 20px;
+    padding: 0 20px 0 0;
     margin: 2px 0;
     -webkit-appearance: none;
     -moz-appearance: none;
