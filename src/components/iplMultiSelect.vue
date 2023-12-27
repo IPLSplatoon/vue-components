@@ -13,12 +13,15 @@
                 {{ option.name }}
             </option>
         </select>
-        <div class="elem-display">
+        <div
+            ref="elemDisplay"
+            class="elem-display"
+        >
             <button
-                v-for="option in modelValue"
+                v-for="(option, index) in modelValue"
                 :key="option.value"
                 class="option"
-                @click="deselectOption(option.value)"
+                @click="deselectOption(index)"
             >
                 {{ option.name }}
                 <font-awesome-icon
@@ -37,13 +40,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, Ref, ref, watch } from 'vue';
+import { defineComponent, PropType, Ref, ref, watch } from 'vue';
 import { SelectOptions } from '../types/select';
 import IplLabel from './iplLabel.vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
 import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
+import clone from 'lodash/clone';
 
 library.add(faChevronDown, faXmark);
 
@@ -71,12 +75,7 @@ export default defineComponent({
 
     setup(props, { emit }) {
         const select: Ref<HTMLSelectElement | null> = ref(null);
-
-        onMounted(() => {
-            if (select.value) {
-                select.value.selectedIndex = -1;
-            }
-        });
+        const elemDisplay = ref<HTMLDivElement | null>(null);
 
         watch(() => props.options, (newValue, oldValue) => {
             if (oldValue.length === newValue.length) return;
@@ -87,18 +86,27 @@ export default defineComponent({
         return {
             handleSelectChange(event: Event) {
                 const target = event.target as HTMLSelectElement;
-                const selectedOption = target.options[target.selectedIndex];
+                const selectedOption = props.options[target.selectedIndex];
                 if (!props.modelValue?.some(option => option.value === selectedOption.value)) {
                     emit('update:modelValue', [
                         ...(props.modelValue ?? []),
-                        { value: selectedOption.value, name: selectedOption.text }
+                        selectedOption
                     ]);
                 }
             },
-            deselectOption(value: string) {
-                emit('update:modelValue', props.modelValue.filter(option => option.value !== value));
+            deselectOption(index: number) {
+                const options = elemDisplay.value?.querySelectorAll('.option');
+                if (options !== undefined && options.length > 1) {
+                    const previousOption = options[index === options.length - 1 ? index - 1 : index + 1] as HTMLElement;
+                    previousOption.focus();
+                }
+
+                const result = clone(props.modelValue);
+                result.splice(index, 1);
+                emit('update:modelValue', result);
             },
-            select
+            select,
+            elemDisplay
         };
     }
 });
