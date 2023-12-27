@@ -6,7 +6,7 @@
             <ipl-select
                 v-model="selectedOption"
                 :options="[
-                    { name: 'Option 1', value: 'opt1' },
+                    { name: 'Option 1 Option 1 Option 1 Option 1 Option 1 Option 1 Option 1 Option 1 Option 1 Option 1 ', value: 'opt1' },
                     { name: 'Option 2', value: 'opt2', additionalData: 'test-additional-data' },
                     { name: 'Option 3', value: 'opt3' },
                     { name: 'Option 4', value: 'opt4' }

@@ -37,6 +37,10 @@
                     </optgroup>
                 </template>
             </select>
+            <font-awesome-icon
+                icon="chevron-down"
+                class="icon"
+            />
         </ipl-label>
     </div>
 </template>
@@ -45,11 +49,16 @@
 import { computed, defineComponent, PropType, ref } from 'vue';
 import IplLabel from './iplLabel.vue';
 import { SelectOptionGroups, SelectOptions } from '../types/select';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faChevronDown);
 
 export default defineComponent({
     name: 'IplSelect',
 
-    components: { IplLabel },
+    components: { FontAwesomeIcon, IplLabel },
 
     props: {
         label: {
@@ -120,6 +129,7 @@ export default defineComponent({
 .ipl-select__wrapper {
     border-bottom: 1px solid var(--ipl-input-color);
     width: 100%;
+    position: relative;
 
     &.disabled select {
         color: var(--ipl-disabled-body-text-color);
@@ -133,6 +143,14 @@ export default defineComponent({
             color: var(--ipl-input-color-active);
         }
     }
+
+    .icon {
+        position: absolute;
+        right: 5px;
+        bottom: 7px;
+        font-size: 1em;
+        color: var(--ipl-input-color-active);
+    }
 }
 
 select {
@@ -140,16 +158,11 @@ select {
     border: 0;
     width: 100%;
     color: var(--ipl-body-text-color);
-    font-size: 16px;
+    font-size: 1.33em;
     font-family: constants.$body-font;
     outline: 0;
     padding-right: 20px;
     margin: 2px 0;
-    // chevron-down from font-awesome: https://fontawesome.com/v5.15/icons/chevron-down
-    background-image: url("data:image/svg+xml,%3Csvg%20%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20448%20512%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M207.029%20381.476L12.686%20187.132c-9.373-9.373-9.373-24.569%200-33.941l22.667-22.667c9.357-9.357%2024.522-9.375%2033.901-.04L224%20284.505l154.745-154.021c9.379-9.335%2024.544-9.317%2033.901.04l22.667%2022.667c9.373%209.373%209.373%2024.569%200%2033.941L240.971%20381.476c-9.373%209.372-24.569%209.372-33.942%200z%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E");
-    background-size: 16px 12px;
-    background-repeat: no-repeat;
-    background-position: right 3px center;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
