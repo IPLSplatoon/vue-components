@@ -214,11 +214,41 @@ input {
     &[type='color'] {
         background-color: var(--ipl-bg-secondary);
         padding: 5px;
-        height: 36px;
         border-radius: constants.$border-radius-inner;
+        transition-property: background-color;
+        transition-duration: constants.$transition-duration-low;
+        height: 32px;
 
         &:disabled {
             background-color: var(--ipl-bg-tertiary);
+        }
+
+        &:not(:disabled) {
+            &:hover {
+                background-color: var(--ipl-bg-secondary-hover);
+            }
+
+            &:active {
+                background-color: var(--ipl-bg-secondary-active);
+            }
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--ipl-focus-outline-color);
+        }
+
+        &::-moz-color-swatch {
+            border-width: 0;
+            border-radius: 2px;
+        }
+
+        &::-webkit-color-swatch {
+            border-width: 0;
+            border-radius: 2px;
+        }
+
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
         }
     }
 
