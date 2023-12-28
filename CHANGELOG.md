@@ -1,3 +1,21 @@
+# 3.0.0
+
+## Breaking
+
+- ipl-radio requires a `name` prop
+- Some style changes may require dependent styles to use `!important` when it wasn't before. Some examples:
+  - `text-align` or `display` on ipl-button when the `clickable` prop is set
+
+## Other Changes
+
+- Most components can be controlled by keyboard input when expected
+- Some components have been refactored:
+  - Clickable ipl-space components use the <button> element
+  - Buttons use <button> instead of <a> unless they are links
+  - ipl-sidebar uses the built-in <dialog> element
+  - ipl-small-toggle uses the <input> element instead of a bunch of divs
+- Buttons acting as links act as expected when they are disabled or require confirmation (#23)
+
 # 2.10.1
 
 - Move docs to a vitepress-powered concoction, combining the previously separate plain-text docs and locally built examples into a single site
