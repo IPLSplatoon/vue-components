@@ -1,5 +1,6 @@
 import IplInput from '../iplInput.vue';
 import { mount } from '@vue/test-utils';
+import { ValidatorInjectionKey } from '../../validation/useValidator';
 
 describe('IplInput', () => {
     it('provides props to inner elements', () => {
@@ -138,11 +139,18 @@ describe('IplInput', () => {
             },
             global: {
                 provide: {
-                    validators: {
-                        otherInput: {},
-                        input: {
-                            isValid: false,
-                            message: 'very bad!!!'
+                    [ValidatorInjectionKey as symbol]: {
+                        state: {
+                            otherInput: {},
+                            input: {
+                                definition: {
+                                    immediate: false
+                                },
+                                result: {
+                                    isValid: false,
+                                    message: 'very bad!!!'
+                                }
+                            }
                         }
                     }
                 }
@@ -162,10 +170,17 @@ describe('IplInput', () => {
             },
             global: {
                 provide: {
-                    validators: {
-                        input: {
-                            isValid: true,
-                            message: 'ok'
+                    [ValidatorInjectionKey as symbol]: {
+                        state: {
+                            input: {
+                                definition: {
+                                    immediate: false
+                                },
+                                result: {
+                                    isValid: true,
+                                    message: 'ok'
+                                }
+                            }
                         }
                     }
                 }
@@ -173,7 +188,7 @@ describe('IplInput', () => {
             }
         });
 
-        expect(wrapper.find('.error').isVisible()).toEqual(false);
+        expect(wrapper.find('.error').exists()).toEqual(false);
         expect(wrapper.find('.ipl-input__input-and-extras').classes()).not.toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).not.toContain('has-error');
     });
@@ -186,16 +201,23 @@ describe('IplInput', () => {
             },
             global: {
                 provide: {
-                    validators: {
-                        'input-name': {
-                            isValid: null
+                    [ValidatorInjectionKey as symbol]: {
+                        state: {
+                            'input-name': {
+                                definition: {
+                                    immediate: false
+                                },
+                                result: {
+                                    isValid: null
+                                }
+                            }
                         }
                     }
                 }
             }
         });
 
-        expect(wrapper.find('.error').isVisible()).toEqual(false);
+        expect(wrapper.find('.error').exists()).toEqual(false);
         expect(wrapper.find('.ipl-input__input-and-extras').classes()).not.toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).not.toContain('has-error');
     });

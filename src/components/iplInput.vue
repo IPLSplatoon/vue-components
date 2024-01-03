@@ -2,10 +2,10 @@
     <div class="ipl-input__wrapper">
         <div
             class="ipl-input__input-and-extras"
-            :class="{ 'has-error': !isValid, 'is-color': type === 'color' }"
+            :class="{ 'has-error': validator?.isValid === false, 'is-color': type === 'color' }"
         >
             <div class="ipl-input__input-wrapper">
-                <ipl-label :class="{ 'has-error': !isValid }">
+                <ipl-label :class="{ 'has-error': validator?.isValid === false }">
                     {{ label }}
                     <input
                         ref="input"
@@ -36,20 +36,19 @@
             </div>
         </div>
         <span
-            v-if="!!validator"
-            v-show="!isValid"
+            v-if="validator?.isValid === false"
             class="error"
         >
-            {{ validator.message }}
+            {{ validator?.message }}
         </span>
     </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType, Ref, ref } from 'vue';
-import { ValidatorResult } from '../validation/validator';
+import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import IplLabel from './iplLabel.vue';
 import IplSpinner from './iplSpinner.vue';
+import { useValidator } from '../validation/useValidator';
 
 export default defineComponent({
     name: 'IplInput',
@@ -102,8 +101,7 @@ export default defineComponent({
 
     setup(props, { emit }) {
         const input: Ref<HTMLInputElement | null> = ref(null);
-        const validators = inject<Record<string, ValidatorResult> | null>('validators', null);
-        const validator = computed(() => validators?.[props.name]);
+        const validator = useValidator(() => props.name, () => props.modelValue);
 
         return {
             model: computed({
@@ -113,9 +111,6 @@ export default defineComponent({
                 set(value: string) {
                     emit('update:modelValue', props.formatter ? props.formatter(value) : value);
                 }
-            }),
-            isValid: computed(() => {
-                return !validator.value ? true : validator.value?.isValid ?? true;
             }),
             validator,
             handleFocusEvent(e: Event) {

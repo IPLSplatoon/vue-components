@@ -5,15 +5,120 @@
 - ipl-radio requires a `name` prop
 - Some style changes may require dependent styles to use `!important` when it wasn't before. Some examples:
   - `text-align` or `display` on ipl-button when the `clickable` prop is set
+- Input validation logic has been overhauled - the value to validate is no longer required when declaring field validators.
+  - <details>
+    <summary>Old implementation</summary>
+
+    ```vue
+    <template>
+      <ipl-input
+        v-model="firstValue"
+        name="firstValue"
+        label="First Value"
+      />
+      <ipl-input
+        v-model="secondValue"
+        name="secondValue"
+        label="Second Value"
+      />
+    </template>
+
+    <script lang="ts">
+    import { computed, defineComponent, ref } from 'vue';
+    import {
+      allValid,
+      IplInput,
+      notBlank,
+      provideValidators,
+      validator
+    } from '@iplsplatoon/vue-components';
+  
+    export default defineComponent({
+      components: { IplInput },
+  
+      setup() {
+        const firstValue = ref('');
+        const secondValue = ref('');
+  
+        const firstValueValidator = validator(firstValue, false, notBlank);
+        const validators = {
+          firstValue: firstValueValidator,
+          secondValue: validator(secondValue, false, notBlank)
+        };
+        provideValidators(validators);
+  
+        return {
+          allValid: computed(() => allValid(validators)),
+          firstValueValid: computed(() => firstValueValidator.isValid),
+          firstValue,
+          secondValue
+        };
+      }
+    });
+    </script>
+    ```
+    </details>
+  - <details>
+    <summary>New implementation</summary>
+
+    ```vue
+    <template>
+      <ipl-input
+        v-model="firstValue"
+        name="firstValue"
+        label="First Value"
+      />
+      <ipl-input
+        v-model="secondValue"
+        name="secondValue"
+        label="Second Value"
+      />
+    </template>
+
+    <script lang="ts">
+    import { computed, defineComponent, ref } from 'vue';
+    import {
+      // allValid is no longer an export - use the return value of provideValidators.
+      IplInput,
+      notBlank,
+      provideValidators,
+      validator
+    } from '@iplsplatoon/vue-components';
+  
+    export default defineComponent({
+      components: { IplInput },
+  
+      setup() {
+        const firstValue = ref('');
+        const secondValue = ref('');
+  
+        const { allValid, fieldIsValid } = provideValidators({
+          // The first parameter is no longer present.
+          firstValue: validator(false, notBlank),
+          secondValue: validator(false, notBlank)
+        });
+  
+        return {
+          allValid,
+          firstValueValid: computed(() => fieldIsValid('firstValue')),
+          firstValue,
+          secondValue
+        };
+      }
+    });
+    </script>
+    ```
+
+  </details>
 
 ## Other Changes
 
 - Most components can be controlled by keyboard input when expected
 - Some components have been refactored:
-  - Clickable ipl-space components use the <button> element
-  - Buttons use <button> instead of <a> unless they are links
-  - ipl-sidebar uses the built-in <dialog> element
-  - ipl-small-toggle uses the <input> element instead of a bunch of divs
+  - Clickable ipl-space components use the `<button>` element
+  - Buttons use `<button>` instead of `<a>` unless they are links
+  - ipl-sidebar uses the built-in `<dialog>` element
+  - ipl-small-toggle uses the `<input>` element instead of a bunch of divs
 - Buttons acting as links act as expected when they are disabled or require confirmation (#23)
 
 # 2.10.1

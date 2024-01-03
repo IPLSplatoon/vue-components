@@ -17,17 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import { IplInput, allValid, maxLength, numeric, provideValidators, validator } from '../../src';
-import { computed, ref } from 'vue';
+import { IplInput, maxLength, numeric, provideValidators, validator } from '../../src';
+import { ref } from 'vue';
 
 const firstInputValue = ref('999');
 const secondInputValue = ref('Test Value');
 
-const validators = {
-    firstInput: validator(firstInputValue, true, numeric),
-    secondInput: validator(secondInputValue, true, maxLength(10)),
-};
-
-provideValidators(validators);
-const valid = computed(() => allValid(validators));
+const { allValid: valid } = provideValidators({
+    firstInput: validator(true, numeric),
+    secondInput: validator(true, maxLength(10)),
+});
 </script>

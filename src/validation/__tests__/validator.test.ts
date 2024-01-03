@@ -1,78 +1,191 @@
 import * as Vue from 'vue';
-import { allValid, validator } from '../validator';
-import Mock = jest.Mock;
+import { provideValidators, validator, ValidatorResult } from '../validator';
+import { minLength, notBlank } from '../stringValidators';
+import { useValidator, ValidatorInjectionKey } from '../useValidator';
+import { defineComponent, ref } from 'vue';
+import { mount } from '@vue/test-utils';
 
-describe('validator.ts', () => {
-    describe('validator', () => {
-        jest.spyOn(Vue, 'watch');
+describe('validator', () => {
+    const testValidator = (value: string): ValidatorResult => {
+        if (value === 'valid') {
+            return { isValid: true };
+        }
 
-        it('watches given value', () => {
-            const value = () => 'test';
+        return {
+            isValid: false,
+            message: 'Value is invalid'
+        };
+    };
 
-            validator(value, true);
+    const TestInputComponent = defineComponent({
+        props: {
+            name: {
+                type: String,
+                required: true
+            },
+            value: {
+                type: String,
+                required: true
+            }
+        },
+        setup(props) {
+            return {
+                validator: useValidator(() => props.name, () => props.value)
+            };
+        },
+        template: `
+            <div class="test-input-component">
+                <div>isValid: {{ validator?.isValid }}</div>
+                <div v-if="validator != null && !validator.isValid">validation message: {{ validator.message }}</div>
+            </div>
+        `
+    });
+        
+    const TestFormComponent = (initialValue: string, initialImmediateValue: string) => defineComponent({
+        components: { TestInputComponent },
+        setup() {
+            const { allValid } = provideValidators({
+                value: validator(false, testValidator),
+                immediateValue: validator(true, testValidator)
+            });
 
-            expect(Vue.watch).toHaveBeenCalledWith(value, expect.any(Function), { immediate: true });
-        });
+            const value = ref(initialValue);
+            const immediateValue = ref(initialImmediateValue);
 
-        it('watches given value if immediate is false', () => {
-            const value = () => 'test';
-
-            validator(value, false);
-
-            expect(Vue.watch).toHaveBeenCalledWith(value, expect.any(Function), { immediate: false });
-        });
-
-        it('validates given value when watcher is triggered with a valid value', () => {
-            const validatorFn = jest.fn().mockReturnValue({ isValid: true, message: 'mock message' });
-            const result = validator(() => 'test', false, validatorFn);
-            const watchCallback = (Vue.watch as Mock).mock.calls[0][1];
-
-            watchCallback('new value');
-
-            expect(validatorFn).toHaveBeenCalledWith('new value');
-            expect(result).toEqual({ isValid: true, message: null });
-        });
-
-        it('validates given value when watcher is triggered with an invalid value', () => {
-            const validatorFn = jest.fn().mockReturnValue({ isValid: false, message: 'mock message' });
-            const result = validator(() => 'test', false, validatorFn);
-            const watchCallback = (Vue.watch as Mock).mock.calls[0][1];
-
-            watchCallback('new value');
-
-            expect(validatorFn).toHaveBeenCalledWith('new value');
-            expect(result).toEqual({ isValid: false, message: 'mock message' });
-        });
-
-        it('uses every given validator', () => {
-            const validatorFn1 = jest.fn().mockReturnValue({ isValid: true, message: 'mock message 1' });
-            const validatorFn2 = jest.fn().mockReturnValue({ isValid: false, message: 'mock message 2' });
-            const result = validator(() => 'test', false, validatorFn1, validatorFn2);
-            const watchCallback = (Vue.watch as Mock).mock.calls[0][1];
-
-            watchCallback('test validator value');
-
-            expect(validatorFn1).toHaveBeenCalledWith('test validator value');
-            expect(validatorFn2).toHaveBeenCalledWith('test validator value');
-            expect(result).toEqual({ isValid: false, message: 'mock message 2' });
-        });
+            return {
+                value,
+                immediateValue,
+                allValid
+            };
+        },
+        template: `
+            <test-input-component name="value" :value="value" />
+            <test-input-component name="immediateValue" :value="immediateValue" />
+        `
     });
 
-    describe('allValid', () => {
-        it('is true if all values are valid', () => {
-            expect(allValid({ a: { isValid: true }, b: { isValid: true } })).toEqual(true);
-        });
+    it('handles valid initial values as expected', () => {
+        const wrapper = mount(TestFormComponent('valid', 'valid'));
 
-        it('is false if some values are invalid', () => {
-            expect(allValid({ c: { isValid: false }, d: { isValid: true } })).toEqual(false);
+        const inputs = wrapper.findAllComponents<typeof TestInputComponent>('.test-input-component');
+        expect(inputs.length).toEqual(2);
+        expect(inputs.at(0)?.vm.validator).toEqual({
+            isValid: null,
+            message: null
         });
-
-        it('is false if all values are invalid', () => {
-            expect(allValid({ a: { isValid: false }, b: { isValid: false } })).toEqual(false);
+        expect(inputs.at(1)?.vm.validator).toEqual({
+            isValid: true,
+            message: null
         });
+        expect(wrapper.vm.allValid).toEqual(false);
+    });
 
-        it('is false if validation has not been done', () => {
-            expect(allValid({ a: { isValid: null }, b: { isValid: null } })).toEqual(false);
+    it('handles invalid initial values as expected', () => {
+        const wrapper = mount(TestFormComponent('invalid', 'invalid'));
+
+        const inputs = wrapper.findAllComponents<typeof TestInputComponent>('.test-input-component');
+        expect(inputs.length).toEqual(2);
+        expect(inputs.at(0)?.vm.validator).toEqual({
+            isValid: null,
+            message: null
+        });
+        expect(inputs.at(1)?.vm.validator).toEqual({
+            isValid: false,
+            message: 'Value is invalid'
+        });
+        expect(wrapper.vm.allValid).toEqual(false);
+    });
+
+    it('handles values changing to become valid', async () => {
+        const wrapper = mount(TestFormComponent('invalid', 'invalid'));
+        const inputs = wrapper.findAllComponents<typeof TestInputComponent>('.test-input-component');
+
+        wrapper.vm.value = 'valid';
+        await wrapper.vm.$nextTick();
+        expect(inputs.at(0)?.vm.validator).toEqual({
+            isValid: true,
+            message: null
+        });
+        expect(inputs.at(1)?.vm.validator).toEqual({
+            isValid: false,
+            message: 'Value is invalid'
+        });
+        expect(wrapper.vm.allValid).toEqual(false);
+
+        wrapper.vm.immediateValue = 'valid';
+        await wrapper.vm.$nextTick();
+        expect(inputs.at(0)?.vm.validator).toEqual({
+            isValid: true,
+            message: null
+        });
+        expect(inputs.at(1)?.vm.validator).toEqual({
+            isValid: true,
+            message: null
+        });
+        expect(wrapper.vm.allValid).toEqual(true);
+    });
+
+    it('handles values changing to become invalid', async () => {
+        const wrapper = mount(TestFormComponent('valid', 'valid'));
+        const inputs = wrapper.findAllComponents<typeof TestInputComponent>('.test-input-component');
+
+        wrapper.vm.value = 'invalid';
+        await wrapper.vm.$nextTick();
+        expect(inputs.at(0)?.vm.validator).toEqual({
+            isValid: false,
+            message: 'Value is invalid'
+        });
+        expect(inputs.at(1)?.vm.validator).toEqual({
+            isValid: true,
+            message: null
+        });
+        expect(wrapper.vm.allValid).toEqual(false);
+
+        wrapper.vm.immediateValue = 'invalid';
+        await wrapper.vm.$nextTick();
+        expect(inputs.at(0)?.vm.validator).toEqual({
+            isValid: false,
+            message: 'Value is invalid'
+        });
+        expect(inputs.at(1)?.vm.validator).toEqual({
+            isValid: false,
+            message: 'Value is invalid'
+        });
+        expect(wrapper.vm.allValid).toEqual(false);
+    });
+
+    it('provides validators in the expected format', () => {
+        jest.spyOn(Vue, 'provide').mockReturnValue(undefined);
+            
+        provideValidators({
+            name: validator(false, notBlank),
+            email: validator(true, minLength(2))
+        });
+            
+        expect(Vue.provide).toHaveBeenCalledWith(ValidatorInjectionKey, {
+            state: {
+                name: {
+                    definition: {
+                        immediate: false,
+                        validators: [notBlank]
+                    },
+                    result: {
+                        isValid: null,
+                        message: null
+                    }
+                },
+                email: {
+                    definition: {
+                        immediate: true,
+                        validators: [expect.any(Function)]
+                    },
+                    result: {
+                        isValid: null,
+                        message: null
+                    }
+                }
+            },
+            update: expect.any(Function)
         });
     });
 });
