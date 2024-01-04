@@ -121,6 +121,10 @@
   - ipl-small-toggle uses the `<input>` element instead of a bunch of divs
 - Buttons acting as links act as expected when they are disabled or require confirmation (#23)
 
+## Additions
+
+- Added ipl-textarea
+
 # 2.10.1
 
 - Move docs to a vitepress-powered concoction, combining the previously separate plain-text docs and locally built examples into a single site
