@@ -4,6 +4,7 @@
         <ipl-input
             v-model="inputValue"
             label="Input"
+            placeholder="Placeholder"
             name="input-example"
             :disabled="disabled"
             :loading="loading"

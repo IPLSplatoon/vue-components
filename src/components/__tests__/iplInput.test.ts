@@ -7,6 +7,7 @@ describe('IplInput', () => {
         const wrapper = mount(IplInput, {
             props: {
                 label: 'Label',
+                placeholder: 'test-placeholder',
                 name: 'input',
                 type: 'number',
                 disabled: true,
@@ -17,6 +18,7 @@ describe('IplInput', () => {
         const input = wrapper.get('input');
         expect(input.element.name).toEqual('input');
         expect(input.element.type).toEqual('number');
+        expect(input.element.placeholder).toEqual('test-placeholder');
         expect(input.element.disabled).toEqual(true);
         expect(input.element.classList).not.toContain('centered');
         expect(wrapper.find('.ipl-label').text()).toEqual('Label');

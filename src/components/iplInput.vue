@@ -14,6 +14,7 @@
                         :type="type"
                         :class="{ centered: centered }"
                         :disabled="disabled"
+                        :placeholder="placeholder"
                         @focus="handleFocusEvent"
                         @blur="handleFocusEvent"
                         @input="handleFocusEvent($event), handleInputEvent()"
@@ -57,6 +58,10 @@ export default defineComponent({
 
     props: {
         label: {
+            type: String,
+            default: null
+        },
+        placeholder: {
             type: String,
             default: null
         },
@@ -245,6 +250,11 @@ input {
         &::-webkit-color-swatch-wrapper {
             padding: 0;
         }
+    }
+
+    &::placeholder {
+        color: var(--ipl-input-color-placeholder);
+        opacity: 100%;
     }
 
     &.centered {

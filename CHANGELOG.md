@@ -124,6 +124,7 @@
 ## Additions
 
 - Added ipl-textarea
+- ipl-input supports adding a placeholder
 
 # 2.10.1
 
