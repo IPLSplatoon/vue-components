@@ -13,10 +13,6 @@
         "import/resolver": {
             "typescript": {
                 "project": "tsconfig.json"
-            },
-            "webpack": {
-                "config": "webpack.config.js",
-                "config-index": 0
             }
         },
         "import/extensions": [".js", ".ts"]

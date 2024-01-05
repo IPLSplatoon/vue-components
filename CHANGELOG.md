@@ -2,6 +2,7 @@
 
 ## Breaking
 
+- Library stylesheets must be manually imported 
 - ipl-radio requires a `name` prop
 - Some style changes may require dependent styles to use `!important` when it wasn't before. Some examples:
   - `text-align` or `display` on ipl-button when the `clickable` prop is set
@@ -126,6 +127,8 @@
 - Added ipl-textarea
 - ipl-input supports adding a placeholder
 - Added a larger theme for ipl-input
+- SSR support
+- Provide separate ESM and UMD builds
 
 # 2.10.1
 
