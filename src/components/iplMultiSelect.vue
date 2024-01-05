@@ -131,11 +131,11 @@ export default defineComponent({
 
     &:focus-within {
         .elem-display {
-            border-color: var(--ipl-input-color-active);
+            border-color: var(--ipl-input-color-focus);
         }
 
         label {
-            color: var(--ipl-input-color-active);
+            color: var(--ipl-input-color-focus);
         }
     }
 
@@ -170,7 +170,7 @@ export default defineComponent({
 
             > .icon {
                 font-size: 0.75em;
-                color: var(--ipl-input-color-active);
+                color: var(--ipl-input-color-focus);
                 float: right;
                 display: inline-block;
                 text-align: right;

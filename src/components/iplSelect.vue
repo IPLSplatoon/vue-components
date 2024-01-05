@@ -137,10 +137,10 @@ export default defineComponent({
     }
 
     &:focus-within {
-        border-color: var(--ipl-input-color-active);
+        border-color: var(--ipl-input-color-focus);
 
         label {
-            color: var(--ipl-input-color-active);
+            color: var(--ipl-input-color-focus);
         }
     }
 
@@ -149,7 +149,7 @@ export default defineComponent({
         right: 5px;
         bottom: 7px;
         font-size: 1em;
-        color: var(--ipl-input-color-active);
+        color: var(--ipl-input-color-focus);
     }
 }
 

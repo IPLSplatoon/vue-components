@@ -61,7 +61,7 @@ const validator = useValidator(() => props.name, model);
     transition: border-color constants.$transition-duration-low;
 
     &:focus-within {
-        border-color: var(--ipl-input-color-active);
+        border-color: var(--ipl-input-color-focus);
     }
 
     &.has-error {
@@ -79,7 +79,7 @@ label {
     transition: color constants.$transition-duration-low;
 
     &:focus-within {
-        color: var(--ipl-input-color-active);
+        color: var(--ipl-input-color-focus);
     }
 }
 

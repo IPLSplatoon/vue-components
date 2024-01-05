@@ -125,11 +125,11 @@ legend {
         &:not(:disabled) {
             + span:hover {
                 border-color: var(--ipl-input-color-hover);
-                background-color: var(--ipl-input-color-alpha-hover);
+                background-color: var(--ipl-input-color-alpha-focus);
             }
 
             + span:active {
-                border-color: var(--ipl-input-color-active);
+                border-color: var(--ipl-input-color-focus);
                 background-color: var(--ipl-input-color-alpha-active);
             }
         }

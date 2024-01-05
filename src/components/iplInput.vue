@@ -165,7 +165,7 @@ export default defineComponent({
         border-radius: constants.$border-radius-inner constants.$border-radius-inner 0 0;
 
         &:not(.disabled):focus-within {
-            background-color: var(--ipl-input-color-alpha-hover);
+            background-color: var(--ipl-input-color-alpha-focus);
         }
     }
 
@@ -199,10 +199,10 @@ export default defineComponent({
     }
 
     &:focus-within {
-        border-color: var(--ipl-input-color-active);
+        border-color: var(--ipl-input-color-focus);
 
         label {
-            color: var(--ipl-input-color-active);
+            color: var(--ipl-input-color-focus);
         }
     }
 
