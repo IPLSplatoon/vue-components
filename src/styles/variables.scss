@@ -4,6 +4,9 @@ html {
     --ipl-input-color-active: #FFFFFF;
     --ipl-input-color-placeholder: rgba(255, 255, 255, 0.5);
     --ipl-input-error-color: #E74E36;
+
+    --ipl-input-color-alpha: rgba(255, 255, 255, 0.03);
+    --ipl-input-color-alpha-disabled: rgba(178, 178, 178, 0.03);
     --ipl-input-color-alpha-hover: rgba(255, 255, 255, 0.05);
     --ipl-input-color-alpha-active: rgba(255, 255, 255, 0.2);
 

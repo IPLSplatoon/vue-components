@@ -11,10 +11,12 @@ describe('IplInput', () => {
                 name: 'input',
                 type: 'number',
                 disabled: true,
-                modelValue: 'value!!'
+                modelValue: 'value!!',
+                theme: 'default'
             }
         });
 
+        expect(wrapper.element.classList).toContain('theme-default');
         const input = wrapper.get('input');
         expect(input.element.name).toEqual('input');
         expect(input.element.type).toEqual('number');

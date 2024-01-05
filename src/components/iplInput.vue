@@ -1,5 +1,8 @@
 <template>
-    <div class="ipl-input__wrapper">
+    <div
+        class="ipl-input__wrapper"
+        :class="{ [`theme-${theme}`]: true, 'disabled': disabled }"
+    >
         <div
             class="ipl-input__input-and-extras"
             :class="{ 'has-error': validator?.isValid === false, 'is-color': type === 'color' }"
@@ -22,15 +25,16 @@
                 </ipl-label>
             </div>
             <div
+                v-if="!isBlank(extra) || loading"
                 class="extra"
                 @mousedown.prevent="focus"
             >
-                {{ extra }}
+                <span class="extra-text">{{ extra }}</span>
 
                 <ipl-spinner
                     v-if="loading"
-                    size="2px"
-                    width="24px"
+                    :size="theme === 'large' ? '3px' : '2px'"
+                    :width="theme === 'large' ? '28px' : '24px'"
                     :color="disabled ? 'var(--ipl-disabled-body-text-color)' : 'var(--ipl-body-text-color)'"
                     data-test="loading-spinner"
                 />
@@ -50,6 +54,7 @@ import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import IplLabel from './iplLabel.vue';
 import IplSpinner from './iplSpinner.vue';
 import { useValidator } from '../validation/useValidator';
+import { isBlank } from '../helpers/stringHelper';
 
 export default defineComponent({
     name: 'IplInput',
@@ -99,6 +104,10 @@ export default defineComponent({
         loading: {
             type: Boolean,
             default: false
+        },
+        theme: {
+            type: String as PropType<'large' | 'default'>,
+            default: 'default'
         }
     },
 
@@ -134,7 +143,8 @@ export default defineComponent({
                     input.value.focus();
                 }
             },
-            input
+            input,
+            isBlank
         };
     }
 });
@@ -142,6 +152,40 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use 'src/styles/constants';
+
+.ipl-input__wrapper.theme-large {
+    &.disabled {
+        .ipl-input__input-and-extras {
+            background-color: var(--ipl-input-color-alpha-disabled);
+        }
+    }
+
+    .ipl-input__input-and-extras {
+        background-color: var(--ipl-input-color-alpha);
+        border-radius: constants.$border-radius-inner constants.$border-radius-inner 0 0;
+
+        &:not(.disabled):focus-within {
+            background-color: var(--ipl-input-color-alpha-hover);
+        }
+    }
+
+    .extra {
+        padding: 0 12px 8px 0;
+
+        .extra-text:not(:empty, :last-child) {
+            margin-right: 4px;
+        }
+    }
+
+    label {
+        display: block;
+        padding: 8px 12px;
+    }
+
+    input {
+        font-size: 1.75em;
+    }
+}
 
 .ipl-input__input-and-extras {
     border-bottom: 1px solid var(--ipl-input-color);
@@ -189,6 +233,10 @@ input {
 
     &:disabled {
         color: var(--ipl-disabled-body-text-color);
+
+        &::placeholder {
+            opacity: 75%;
+        }
     }
 
     &:focus {

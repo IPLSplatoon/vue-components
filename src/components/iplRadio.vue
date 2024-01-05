@@ -110,6 +110,10 @@ legend {
         position: absolute;
         opacity: 0;
 
+        + span {
+            background-color: var(--ipl-input-color-alpha);
+        }
+
         &:focus-visible {
             outline: none;
 
@@ -153,6 +157,7 @@ legend {
         &:disabled + span {
             cursor: not-allowed;
             color: var(--ipl-disabled-body-text-color);
+            background-color: var(--ipl-input-color-alpha-disabled);
         }
     }
 }

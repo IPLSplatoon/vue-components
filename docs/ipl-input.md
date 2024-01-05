@@ -6,6 +6,10 @@ title: ipl-input
 
 ::: demo InputExample
 
+## Large theme
+
+::: demo InputLargeExample
+
 ## Extra text
 
 ::: demo InputExtraExample

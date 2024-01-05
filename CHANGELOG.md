@@ -125,6 +125,7 @@
 
 - Added ipl-textarea
 - ipl-input supports adding a placeholder
+- Added a larger theme for ipl-input
 
 # 2.10.1
 
