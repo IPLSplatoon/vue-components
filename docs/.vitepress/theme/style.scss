@@ -95,19 +95,6 @@
     margin-bottom: 8px;
 }
 
-// TODO: actually integrate these into the library
-.ipl-expansion-panel__content {
-    background-color: var(--vp-c-bg) !important;
-}
-
-html:not(.dark) .ipl-expansion-panel__header-background:hover {
-    background-color: #FBFBFB !important;
-}
-
-html:not(.dark) .ipl-expansion-panel__header-background:active {
-    background-color: #F8F8F8 !important;
-}
-
 html {
     line-height: normal;
 }

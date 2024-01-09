@@ -10,16 +10,17 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import { isValidSpaceColor, type SpaceColor } from '../helpers/spaceColorHelper';
 
 export default defineComponent({
     name: 'IplSpace',
 
     props: {
         color: {
-            type: String as PropType<'dark' | 'light' | 'blue'>,
+            type: String as PropType<SpaceColor>,
             default: 'dark',
             validator: (value: string): boolean => {
-                return ['dark', 'light', 'blue'].includes(value);
+                return isValidSpaceColor(value);
             }
         },
         clickable: {
@@ -33,8 +34,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use 'src/styles/constants';
 @use 'src/styles/colors';
+@use 'src/styles/space';
 
 button.ipl-space {
+    @include space.space-colors-hover();
+    @include space.space-colors-active();
+
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
@@ -50,53 +55,15 @@ button.ipl-space {
     transition-property: background-color;
     transition-duration: constants.$transition-duration-low;
 
-    &:hover {
-        &.color-light {
-            background-color: var(--ipl-bg-secondary-hover);
-        }
-
-        &.color-dark {
-            background-color: var(--ipl-bg-primary-hover);
-        }
-
-        &.color-blue {
-            background-color: colors.$blue-hover;
-        }
-    }
-
-    &:active {
-        &.color-light {
-            background-color: var(--ipl-bg-secondary-active);
-        }
-
-        &.color-dark {
-            background-color: var(--ipl-bg-primary-active);
-        }
-
-        &.color-blue {
-            background-color: colors.$blue-active;
-        }
-    }
-
     &:focus-visible {
         outline: var(--ipl-focus-outline-color) solid 2px;
     }
 }
 
 .ipl-space {
+    @include space.space-colors();
+
     border-radius: constants.$border-radius-outer;
     padding: 8px;
-
-    &.color-light {
-        background-color: var(--ipl-bg-secondary);
-    }
-
-    &.color-dark {
-        background-color: var(--ipl-bg-primary);
-    }
-
-    &.color-blue {
-        background-color: colors.$blue;
-    }
 }
 </style>

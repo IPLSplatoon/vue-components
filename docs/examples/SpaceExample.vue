@@ -1,18 +1,24 @@
 <template>
-    <div class="horizontal-layout space-layout gray-background">
+    <div class="space-layout gray-background">
         <!-- #region example -->
         <ipl-space
-            color="dark"
+            color="primary"
             :clickable="clickable"
-        />
+        >
+            Primary Space
+        </ipl-space>
         <ipl-space
-            color="light"
+            color="secondary"
             :clickable="clickable"
-        />
+        >
+            Secondary Space
+        </ipl-space>
         <ipl-space
             color="blue"
             :clickable="clickable"
-        />
+        >
+            Blue Space
+        </ipl-space>
         <!-- #endregion example -->
     </div>
     <div class="horizontal-layout">
@@ -32,8 +38,16 @@ const clickable = ref(false);
 </script>
 
 <style lang="scss">
-.space-layout > * {
-    flex-grow: 1;
-    height: 36px;
+.space-layout {
+    display: flex;
+
+    > * {
+        width: 100%;
+        height: 36px;
+
+        &:not(:last-child) {
+            margin-right: 12px;
+        }
+    }
 }
 </style>
