@@ -9,7 +9,7 @@ describe('IplExpandingSpace', () => {
 
     it('toggles content and sets appropriate classes and updates props on header click', async () => {
         const wrapper = shallowMount(IplExpandingSpace);
-        const header = wrapper.get('.ipl-expansion-panel__header-background');
+        const header = wrapper.get('.ipl-expanding-space__header-background');
         const content = wrapper.get('.content');
         const icon = wrapper.get('.icon');
 
@@ -50,7 +50,7 @@ describe('IplExpandingSpace', () => {
             global: { provide: { activeSpace } },
             props: { key: 'coolkey' }
         });
-        const header = wrapper.get('.ipl-expansion-panel__header-background');
+        const header = wrapper.get('.ipl-expanding-space__header-background');
         const content = wrapper.get('.content');
         const icon = wrapper.get('.icon');
 
@@ -113,7 +113,7 @@ describe('IplExpandingSpace', () => {
     it('gets title from props', () => {
         const wrapper = shallowMount(IplExpandingSpace, { props: { title: 'Title' } });
 
-        expect(wrapper.get('.ipl-expansion-panel__title').text()).toEqual('Title');
+        expect(wrapper.get('.ipl-expanding-space__title').text()).toEqual('Title');
     });
 
     it('gets title from slot if given', () => {
@@ -122,7 +122,7 @@ describe('IplExpandingSpace', () => {
             slots: { title: 'Title from Slots' }
         });
 
-        expect(wrapper.get('.ipl-expansion-panel__title').text()).toEqual('Title from Slots');
+        expect(wrapper.get('.ipl-expanding-space__title').text()).toEqual('Title from Slots');
     });
 
     it('gets content from default slot', () => {

@@ -129,6 +129,7 @@
 - Added a larger theme for ipl-input
 - SSR support
 - Provide separate ESM and UMD builds
+- `color` and `without-content-background` props to ipl-expanding-space
 
 # 2.10.1
 

@@ -4,6 +4,12 @@
         <ipl-expanding-space title="Expanding Space">
             Space content!
         </ipl-expanding-space>
+        <ipl-expanding-space title="No content background" without-content-background>
+            Space content!
+        </ipl-expanding-space>
+        <ipl-expanding-space title="Secondary background color" color="secondary">
+            Space content!
+        </ipl-expanding-space>
         <ipl-expanding-space title="Extra content in header">
             <template #header-extra>
                 <ipl-button label="button" />

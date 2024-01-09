@@ -1,14 +1,17 @@
 <template>
-    <div class="ipl-expansion-panel__content">
-        <div class="ipl-expansion-panel__header">
+    <div
+        class="ipl-expanding-space"
+        :class="{ 'without-background': withoutContentBackground, [`color-${color}`]: true }"
+    >
+        <div class="ipl-expanding-space__header">
             <div
-                class="ipl-expansion-panel__header-background"
+                class="ipl-expanding-space__header-background"
                 tabindex="0"
                 @keydown.space.prevent
                 @keyup.space.enter="handleHeaderClick"
                 @click.self="handleHeaderClick"
             />
-            <div class="ipl-expansion-panel__title">
+            <div class="ipl-expanding-space__title">
                 <slot name="title">
                     {{ title }}
                 </slot>
@@ -33,9 +36,10 @@
 
 <script lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { defineComponent, getCurrentInstance, inject, ref, watch, WritableComputedRef } from 'vue';
+import { defineComponent, getCurrentInstance, inject, PropType, ref, watch, WritableComputedRef } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
+import { isValidSpaceColor, type SpaceColor } from '../helpers/spaceColorHelper';
 
 library.add(faChevronLeft);
 
@@ -54,6 +58,17 @@ export default defineComponent({
         expanded: {
             type: Boolean,
             default: false
+        },
+        withoutContentBackground: {
+            type: Boolean,
+            default: false
+        },
+        color: {
+            type: String as PropType<SpaceColor>,
+            default: 'dark',
+            validator: (value: string): boolean => {
+                return isValidSpaceColor(value);
+            }
         }
     },
 
@@ -107,13 +122,27 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use 'src/styles/constants';
+@use 'src/styles/space';
 
-.ipl-expansion-panel__content {
+.ipl-expanding-space {
+    @include space.space-colors();
+    @include space.space-colors(" .ipl-expanding-space__header-background");
+    @include space.space-colors-hover(" .ipl-expanding-space__header-background:hover");
+    @include space.space-colors-active(" .ipl-expanding-space__header-background:active");
+
     background-color: var(--ipl-bg-primary);
     border-radius: constants.$border-radius-outer;
     position: relative;
 
-    .ipl-expansion-panel__header {
+    &.without-background {
+        background-color: transparent;
+
+        .content {
+            padding: 4px 0 0;
+        }
+    }
+
+    .ipl-expanding-space__header {
         cursor: pointer;
         user-select: none;
         display: flex;
@@ -140,7 +169,7 @@ export default defineComponent({
             margin-left: 8px;
         }
 
-        .ipl-expansion-panel__title {
+        .ipl-expanding-space__title {
             font-size: 1rem;
             font-weight: 500;
             flex-grow: 1;
@@ -149,7 +178,7 @@ export default defineComponent({
             overflow-wrap: anywhere;
         }
 
-        .ipl-expansion-panel__header-background {
+        .ipl-expanding-space__header-background {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -157,14 +186,6 @@ export default defineComponent({
             border-radius: constants.$border-radius-outer;
             z-index: 0;
             transition-duration: constants.$transition-duration-low;
-
-            &:hover {
-                background-color: var(--ipl-bg-primary-hover);
-            }
-
-            &:active {
-                background-color: var(--ipl-bg-primary-active);
-            }
 
             &:focus-visible {
                 outline: var(--ipl-focus-outline-color) solid 2px;
