@@ -143,6 +143,9 @@ export default defineComponent({
                     input.value.focus();
                 }
             },
+            blur() {
+                input.value?.blur();
+            },
             input,
             isBlank
         };
