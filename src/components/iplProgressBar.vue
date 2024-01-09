@@ -31,7 +31,7 @@ export default defineComponent({
         },
         backgroundColor: {
             type: String as PropType<'light' | 'dark' | 'primary' | 'secondary'>,
-            default: 'light',
+            default: 'secondary',
             validator: (value: string) => {
                 return value === 'dark' || value === 'light' || value === 'primary' || value === 'secondary';
             }
