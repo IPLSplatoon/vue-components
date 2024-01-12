@@ -73,7 +73,7 @@ html.dark .demo-preview > *:first-child {
     margin: 0 auto;
 }
 
-.demo-preview > *:not(:first-child, .ipl-expanding-space__content) {
+.demo-preview > *:not(:first-child, .ipl-expanding-space) {
     background-color: var(--vp-c-bg);
     border-radius: 8px;
     padding: 8px;
