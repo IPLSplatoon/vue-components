@@ -2,7 +2,9 @@
     <div class="ipl-data-row">
         <ipl-label>{{ label }}</ipl-label>
         <div class="value">
-            {{ isBlank(value) ? '―' : value }}
+            <slot>
+                {{ isBlank(value) ? '―' : value }}
+            </slot>
             <button
                 v-if="copiable"
                 class="copy-button"
