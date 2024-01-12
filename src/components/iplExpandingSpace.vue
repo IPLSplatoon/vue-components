@@ -138,7 +138,7 @@ export default defineComponent({
         background-color: transparent;
 
         .content {
-            padding: 4px 0 0;
+            padding: 0;
         }
     }
 
