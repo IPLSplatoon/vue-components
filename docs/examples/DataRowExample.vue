@@ -4,6 +4,7 @@
         <ipl-data-row
             :label="label"
             :value="value"
+            :copiable="copiable"
         />
         <!-- #endregion example -->
     </div>
@@ -18,6 +19,10 @@
             name="value"
             label="Value"
         />
+        <ipl-checkbox
+            v-model="copiable"
+            label="Copiable"
+        />
     </div>
 </template>
 
@@ -25,7 +30,9 @@
 import IplDataRow from '../../src/components/iplDataRow.vue';
 import { ref } from 'vue';
 import IplInput from '../../src/components/iplInput.vue';
+import IplCheckbox from '../../src/components/iplCheckbox.vue';
 
 const label = ref('Data Row');
 const value = ref('text content');
+const copiable = ref(false);
 </script>

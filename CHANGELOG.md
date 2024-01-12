@@ -130,6 +130,7 @@
 - SSR support
 - Provide separate ESM and UMD builds
 - `color` and `without-content-background` props to ipl-expanding-space
+- Added `copiable` to ipl-data-row
 
 # 2.10.1
 

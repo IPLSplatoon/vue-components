@@ -18,5 +18,5 @@ export function formatNumber(value: number): string {
 }
 
 export function isBlank(value?: string | null): boolean {
-    return value === null || value === undefined || value.trim() === '';
+    return value === null || value === undefined || String(value).trim() === '';
 }

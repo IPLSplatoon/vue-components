@@ -104,16 +104,20 @@ export default defineComponent({
             height: 1.1em;
             border: 0;
             background-color: transparent;
-            color: var(--ipl-body-text-color);
+            color: var(--ipl-text-button-color);
             cursor: default;
             border-radius: constants.$border-radius-inner;
             text-align: center;
+            transition-property: color, background-color;
+            transition-duration: constants.$transition-duration-low;
 
             &:hover {
+                color: var(--ipl-text-button-color-hover);
                 background-color: var(--ipl-hover-overlay-color);
             }
 
             &:active {
+                color: var(--ipl-text-button-color-active);
                 background-color: var(--ipl-active-overlay-color);
             }
 
