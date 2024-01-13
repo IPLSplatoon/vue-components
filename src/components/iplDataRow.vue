@@ -37,7 +37,7 @@ export default defineComponent({
             required: true
         },
         value: {
-            type: [String, null] as PropType<string | undefined | null>,
+            type: [String, Number, null] as PropType<string | number | undefined | null>,
             default: null
         },
         copiable: {
@@ -49,7 +49,7 @@ export default defineComponent({
     setup(props) {
         return {
             onCopy() {
-                navigator.clipboard.writeText(props.value ?? '').catch(e => {
+                navigator.clipboard.writeText(String(props.value ?? '')).catch(e => {
                     console.error('Failed to copy value', e);
                 });
             },
