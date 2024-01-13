@@ -122,7 +122,7 @@ export default defineComponent({
             }
 
             &:focus-visible {
-                outline: var(--ipl-focus-outline-color) solid 2px;
+                outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
             }
         }
     }

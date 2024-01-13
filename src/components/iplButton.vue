@@ -308,7 +308,7 @@ a.ipl-button.has-icon {
     }
 
     &:focus-visible {
-        outline: 2px solid var(--ipl-focus-outline-color);
+        outline: var(--ipl-focus-outline-width) solid var(--ipl-focus-outline-color);
     }
 
     &:not(.disabled) {
