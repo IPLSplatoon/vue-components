@@ -1,5 +1,5 @@
 <template>
-    <div class="width-capped-content vertical-layout">
+    <div class="horizontal-layout no-wrap">
         <!-- #region example -->
         <ipl-button
             label="Link"

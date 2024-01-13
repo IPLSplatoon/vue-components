@@ -10,7 +10,9 @@
             'has-icon': isIconButton,
             'small': small,
             'is-loading': buttonState === 'loading',
-            'has-link': hasLink
+            'has-link': hasLink,
+            'is-transparent': color === 'transparent',
+            'inline': inline
         }"
         :disabled="hasLink ? undefined : disabledInternal"
         @click="handleClick"
@@ -26,6 +28,7 @@
             v-else
             :icon="icon"
             class="icon"
+            fixed-width
         />
     </component>
 </template>
@@ -96,6 +99,10 @@ export default defineComponent({
         href: {
             type: [String, null] as PropType<string | null>,
             default: null
+        },
+        inline: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -144,7 +151,7 @@ export default defineComponent({
             if (disabledInternal.value) {
                 return 'var(--ipl-disabled-body-text-color)';
             } else if (props.color === 'transparent') {
-                return buttonState.value === 'idle' ? 'var(--ipl-body-text-color)' : colorInternal.value;
+                return buttonState.value === 'idle' ? undefined : colorInternal.value;
             } else {
                 return getContrastingTextColor(colorInternal.value);
             }
@@ -229,29 +236,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use 'src/styles/constants';
 
-button.ipl-button.has-icon {
-    padding: 2px 0 0;
-
-    &.small {
-        padding: 2px 0 0;
-    }
-}
-
-a.ipl-button.has-icon {
-    padding: 5px 0 0;
-
-    &.small {
-        padding: 3px 0 0;
-    }
-}
-
 .ipl-button {
     text-decoration: none !important;
     text-transform: uppercase;
     font-size: 1em;
     font-weight: 700;
     font-family: constants.$body-font;
-    line-height: normal;
+    line-height: 1.2;
     color: white;
     text-align: center;
     box-sizing: border-box;
@@ -261,12 +252,16 @@ a.ipl-button.has-icon {
     cursor: default;
     display: block;
     width: 100%;
-    height: max-content;
-    padding: 10px;
+    padding: 0.6em;
     position: relative;
     outline-width: 0;
 
     transition: background-color constants.$transition-duration-low, color constants.$transition-duration-low;
+
+    &.inline {
+        width: auto;
+        display: inline;
+    }
 
     &.has-link {
         cursor: pointer;
@@ -274,28 +269,25 @@ a.ipl-button.has-icon {
 
     &.has-icon {
         flex-grow: 0;
-        font-size: 26px;
-        width: 40px;
-        min-width: 40px;
-        height: 40px;
-
-        &.small {
-            font-size: 20px;
-            width: 30px;
-            min-width: 30px;
-            height: 30px;
-        }
+        height: 2.4em;
+        width: 2.4em;
+        min-width: 2.4em;
+        padding: 0.4em;
     }
 
     &.small {
-        font-size: 0.75rem;
-        padding: 7px;
+        font-size: 0.75em;
     }
 
     .label, .icon {
         z-index: 3;
         position: relative;
         user-select: none;
+    }
+
+    .icon {
+        height: 100%;
+        width: 100%;
     }
 
     &.disabled {
@@ -306,7 +298,8 @@ a.ipl-button.has-icon {
         content: '';
         position: absolute;
         left: 0; top: 0;
-        width: 100%; height: 100%;
+        width: 100%;
+        height: 100%;
         background-color: #000;
         opacity: 0;
         transition-duration: constants.$transition-duration-low;
@@ -322,17 +315,27 @@ a.ipl-button.has-icon {
         outline: var(--ipl-focus-outline-width) solid var(--ipl-focus-outline-color);
     }
 
+    &.is-transparent {
+        color: var(--ipl-text-button-color);
+    }
+
     &:not(.disabled) {
-        &:hover {
-            &:after {
-                opacity: 0.1;
+        &.is-transparent {
+            &:hover {
+                color: var(--ipl-text-button-color-hover);
+            }
+
+            &:active {
+                color: var(--ipl-text-button-color-active);
             }
         }
 
-        &:active {
-            &:after {
-                opacity: 0.2;
-            }
+        &:hover:after {
+            opacity: 0.1;
+        }
+
+        &:active:after {
+            opacity: 0.2;
         }
     }
 }

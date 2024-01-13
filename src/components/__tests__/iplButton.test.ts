@@ -52,7 +52,7 @@ describe('iplButton', () => {
     it('has expected button style when transparent', () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'transparent' } });
 
-        expect(wrapper.vm.buttonStyle).toEqual({ backgroundColor: 'transparent', color: 'var(--ipl-body-text-color)' });
+        expect(wrapper.vm.buttonStyle).toEqual({ backgroundColor: 'transparent', color: undefined });
     });
 
     it('has expected button style when disabled', () => {
