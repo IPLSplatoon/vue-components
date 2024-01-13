@@ -186,6 +186,7 @@ export default defineComponent({
             border-radius: constants.$border-radius-outer;
             z-index: 0;
             transition-duration: constants.$transition-duration-low;
+            transition-property: background-color;
 
             &:focus-visible {
                 outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
