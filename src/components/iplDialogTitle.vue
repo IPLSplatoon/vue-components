@@ -1,14 +1,16 @@
 <template>
     <div class="ipl-dialog-title">
         <span class="ipl-dialog-title__title-text">{{ title }}</span>
-        <button
+        <ipl-button
             data-test="close-button"
-            class="close-icon"
+            class="close-button"
             :disabled="closingDisabled"
+            icon="times"
+            color="transparent"
+            inline
+            small
             @click="close"
-        >
-            <font-awesome-icon icon="times" />
-        </button>
+        />
     </div>
 </template>
 
@@ -16,14 +18,14 @@
 import { defineComponent } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import IplButton from './iplButton.vue';
 
 library.add(faTimes);
 
 export default defineComponent({
     name: 'IplDialogTitle',
 
-    components: { FontAwesomeIcon },
+    components: { IplButton },
 
     props: {
         title: {
@@ -55,48 +57,15 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 40px;
-    font-weight: 500;
-    font-size: 1.25em;
     background-color: var(--ipl-bg-primary);
-    padding: 0 8px;
+    padding: 4px 8px;
     border-radius: constants.$border-radius-outer;
     color: var(--ipl-body-text-color);
 
     .ipl-dialog-title__title-text {
         flex-grow: 1;
-    }
-
-    .close-icon {
-        margin-right: 2px;
-        padding: 4px 7px;
-        border-radius: constants.$border-radius-inner;
-        transition-property: background-color;
-        transition-duration: constants.$transition-duration-med;
-        color: var(--ipl-body-text-color);
-        border: 0;
-        background-color: transparent;
-        font-size: 1em;
-        line-height: 1em;
-        cursor: default;
-
-        &:focus-visible {
-            outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
-        }
-
-        &:disabled {
-            color: var(--ipl-disabled-body-text-color);
-        }
-
-        &:not(:disabled) {
-            &:hover {
-                background-color: var(--ipl-bg-primary-hover);
-            }
-
-            &:active {
-                background-color: var(--ipl-bg-primary-active);
-            }
-        }
+        font-size: 1.25em;
+        font-weight: 500;
     }
 }
 </style>

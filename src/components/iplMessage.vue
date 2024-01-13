@@ -8,13 +8,14 @@
             :icon="icon"
         />
         <div class="message-content">
-            <button
+            <ipl-button
                 v-if="closeable"
                 class="close-button"
+                icon="times"
+                inline
+                color="transparent"
                 @click="close"
-            >
-                <font-awesome-icon icon="times" />
-            </button>
+            />
             <slot />
         </div>
     </div>
@@ -28,13 +29,14 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExcla
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import IplButton from './iplButton.vue';
 
 library.add(faInfoCircle, faExclamationTriangle, faExclamationCircle, faTimes);
 
 export default defineComponent({
     name: 'IplMessage',
 
-    components: { FontAwesomeIcon },
+    components: { IplButton, FontAwesomeIcon },
 
     props: {
         type: {
@@ -99,31 +101,7 @@ export default defineComponent({
 
         > .close-button {
             float: right;
-            font-size: 0.9em;
-            width: 1.1em;
-            height: 1.1em;
-            border: 0;
-            background-color: transparent;
-            color: var(--ipl-text-button-color);
-            cursor: default;
-            border-radius: constants.$border-radius-inner;
-            text-align: center;
-            transition-property: color, background-color;
-            transition-duration: constants.$transition-duration-low;
-
-            &:hover {
-                color: var(--ipl-text-button-color-hover);
-                background-color: var(--ipl-hover-overlay-color);
-            }
-
-            &:active {
-                color: var(--ipl-text-button-color-active);
-                background-color: var(--ipl-active-overlay-color);
-            }
-
-            &:focus-visible {
-                outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
-            }
+            font-size: 0.5em;
         }
     }
 

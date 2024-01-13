@@ -3,7 +3,8 @@ import { config, mount } from '@vue/test-utils';
 
 describe('IplMessage', () => {
     config.global.stubs = {
-        FontAwesomeIcon: true
+        FontAwesomeIcon: true,
+        IplButton: true
     };
 
     it('matches snapshot', () => {

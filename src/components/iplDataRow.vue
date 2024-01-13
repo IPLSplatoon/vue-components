@@ -5,13 +5,13 @@
             <slot>
                 {{ isBlank(value) ? '―' : value }}
             </slot>
-            <button
+            <ipl-button
                 v-if="copiable"
                 class="copy-button"
+                icon="copy"
+                color="transparent"
                 @click="onCopy"
-            >
-                <font-awesome-icon icon="copy" />
-            </button>
+            />
         </div>
     </div>
 </template>
@@ -19,17 +19,17 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import IplLabel from './iplLabel.vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCopy } from '@fortawesome/free-solid-svg-icons/faCopy';
 import { isBlank } from '../helpers/stringHelper';
+import IplButton from './iplButton.vue';
 
 library.add(faCopy);
 
 export default defineComponent({
     name: 'IplDataRow',
 
-    components: { IplLabel, FontAwesomeIcon },
+    components: { IplButton, IplLabel },
 
     props: {
         label: {
@@ -84,31 +84,8 @@ export default defineComponent({
     }
 
     .copy-button {
-        font-size: 0.9em;
         margin-left: 2px;
-        padding: 0 2px;
-        border: 0;
-        background-color: transparent;
-        color: var(--ipl-text-button-color);
-        cursor: default;
-        border-radius: constants.$border-radius-inner;
-        text-align: center;
-        transition-property: color, background-color;
-        transition-duration: constants.$transition-duration-low;
-
-        &:hover {
-            color: var(--ipl-text-button-color-hover);
-            background-color: var(--ipl-hover-overlay-color);
-        }
-
-        &:active {
-            color: var(--ipl-text-button-color-active);
-            background-color: var(--ipl-active-overlay-color);
-        }
-
-        &:focus-visible {
-            outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
-        }
+        font-size: 0.5em;
     }
 }
 </style>
