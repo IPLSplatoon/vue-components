@@ -39,10 +39,26 @@ describe('iplButton', () => {
 
     it('applies appropriate style according to color prop', () => {
         const redWrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'red' } });
-        const greenWrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'green' } });
+        const yellowWrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'yellow' } });
 
-        expect(redWrapper.find('button').element.style.backgroundColor).toEqual('rgb(231, 78, 54)');
-        expect(greenWrapper.find('button').element.style.backgroundColor).toEqual('rgb(0, 166, 81)');
+        const redButtonStyle = redWrapper.find('button').element.style;
+        expect(redButtonStyle.backgroundColor).toEqual('rgb(231, 78, 54)');
+        expect(redButtonStyle.color).toEqual('white');
+        const yellowButtonStyle = yellowWrapper.find('button').element.style;
+        expect(yellowButtonStyle.backgroundColor).toEqual('rgb(255, 199, 0)');
+        expect(yellowButtonStyle.color).toEqual('rgb(51, 51, 51)');
+    });
+
+    it('has expected button style when transparent', () => {
+        const wrapper = shallowMount(IplButton, { props: { label: 'Button', color: 'transparent' } });
+
+        expect(wrapper.vm.buttonStyle).toEqual({ backgroundColor: 'transparent', color: 'var(--ipl-body-text-color)' });
+    });
+
+    it('has expected button style when disabled', () => {
+        const wrapper = shallowMount(IplButton, { props: { label: 'Button', disabled: true } });
+
+        expect(wrapper.vm.buttonStyle).toEqual({ backgroundColor: 'var(--ipl-bg-tertiary)', color: 'var(--ipl-disabled-body-text-color)' });
     });
 
     it('applies hex color from props', () => {
@@ -260,6 +276,30 @@ describe('iplButton', () => {
             expect(wrapper.vm.$.vnode.props.onClick).toHaveBeenCalled();
         });
 
+        it('changes text color on success if color is transparent', async () => {
+            const wrapper = shallowMount(IplButton, {
+                props: {
+                    label: 'Button',
+                    async: true,
+                    successMessage: 'All good!',
+                    color: 'transparent'
+                }
+            });
+            if (!wrapper.vm.$.vnode.props) {
+                return fail('vnode is missing props');
+            }
+            wrapper.vm.$.vnode.props.onClick = jest.fn().mockResolvedValue({});
+            const button = wrapper.find('button');
+
+            await button.trigger('click');
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.vm.disabledInternal).toEqual(false);
+            expect(button.text()).toEqual('All good!');
+            expect(wrapper.vm.buttonStyle).toEqual({ backgroundColor: 'transparent', color: '#00A651' });
+            expect(wrapper.vm.$.vnode.props.onClick).toHaveBeenCalled();
+        });
+
         it('resets successful button state after a timeout period', async () => {
             // @ts-ignore: Fine for testing
             jest.spyOn(global.window, 'setTimeout').mockImplementation(handler => {
@@ -337,6 +377,32 @@ describe('iplButton', () => {
             expect(wrapper.vm.disabledInternal).toEqual(false);
             expect(button.text()).toEqual('Error!');
             expect((wrapper.vm.buttonStyle as { backgroundColor: string }).backgroundColor).toEqual('#FF682E');
+            expect(wrapper.vm.$.vnode.props.onClick).toHaveBeenCalled();
+        });
+
+        it('changes text color on failure if color is transparent', async () => {
+            const wrapper = shallowMount(IplButton, {
+                props: {
+                    label: 'Button',
+                    async: true,
+                    color: 'transparent'
+                }
+            });
+            if (!wrapper.vm.$.vnode.props) {
+                return fail('vnode is missing props');
+            }
+            wrapper.vm.$.vnode.props.onClick = jest.fn().mockRejectedValue({});
+            const button = wrapper.find('button');
+
+            try {
+                // button.trigger('click') fails here, as the click handler rejects.
+                await (wrapper.vm as unknown as { handleClick: () => void }).handleClick();
+                await wrapper.vm.$nextTick();
+            } catch (e) {}
+
+            expect(wrapper.vm.disabledInternal).toEqual(false);
+            expect(button.text()).toEqual('Error!');
+            expect(wrapper.vm.buttonStyle).toEqual({ backgroundColor: 'transparent', color: '#e74e36' });
             expect(wrapper.vm.$.vnode.props.onClick).toHaveBeenCalled();
         });
 

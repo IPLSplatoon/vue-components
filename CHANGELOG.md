@@ -132,6 +132,7 @@
 - `color` and `without-content-background` props to ipl-expanding-space
 - Added `copiable` to ipl-data-row
 - ipl-data-row can contain any element as the value through the default slot
+- Allow removing the background color on ipl-button
 
 # 2.10.1
 

@@ -58,7 +58,7 @@ export default defineComponent({
             type: String as PropType<string>,
             default: 'blue',
             validator: (value: string) => {
-                return value.startsWith('#') || Object.keys(buttonColors).includes(value);
+                return value === 'transparent' || value.startsWith('#') || Object.keys(buttonColors).includes(value);
             }
         },
         disabled: {
@@ -124,16 +124,29 @@ export default defineComponent({
             || (props.async && buttonState.value === 'loading')
             || (props.disableOnSuccess && buttonState.value === 'success'));
         const colorInternal = computed(() => {
-            const warningColor = props.color === 'red' ? 'orange' : 'red';
+            if (disabledInternal.value) {
+                return props.color === 'transparent' ? props.color : 'var(--ipl-bg-tertiary)';
+            }
+
+            const warningColor = props.color === 'red' ? buttonColors.orange : buttonColors.red;
             if (props.requiresConfirmation && isClicked.value) return warningColor;
 
             switch (buttonState.value) {
                 case 'error':
                     return warningColor;
                 case 'success':
-                    return props.color === 'green' ? 'green-success' : 'green';
+                    return props.color === 'green' ? buttonColors['green-success'] : buttonColors.green;
                 default:
-                    return props.color;
+                    return buttonColors[props.color] ?? props.color;
+            }
+        });
+        const textColor = computed(() => {
+            if (disabledInternal.value) {
+                return 'var(--ipl-disabled-body-text-color)';
+            } else if (props.color === 'transparent') {
+                return buttonState.value === 'idle' ? 'var(--ipl-body-text-color)' : colorInternal.value;
+            } else {
+                return getContrastingTextColor(colorInternal.value);
             }
         });
         const isClicked = ref(false);
@@ -141,10 +154,9 @@ export default defineComponent({
 
         return {
             buttonStyle: computed(() => {
-                const buttonColor = buttonColors[colorInternal.value] ?? colorInternal.value;
                 return ({
-                    backgroundColor: disabledInternal.value ? undefined : buttonColor,
-                    color: disabledInternal.value ? undefined : getContrastingTextColor(buttonColor)
+                    backgroundColor: props.color === 'transparent' ? props.color : colorInternal.value,
+                    color: textColor.value
                 });
             }),
             async handleClick(event: Event) {
@@ -288,8 +300,6 @@ a.ipl-button.has-icon {
 
     &.disabled {
         cursor: default;
-        color: var(--ipl-disabled-body-text-color);
-        background-color: var(--ipl-bg-tertiary);
     }
 
     &:after {
@@ -301,6 +311,7 @@ a.ipl-button.has-icon {
         opacity: 0;
         transition-duration: constants.$transition-duration-low;
         pointer-events: none;
+        border-radius: constants.$border-radius-inner;
     }
 
     &.is-loading {
