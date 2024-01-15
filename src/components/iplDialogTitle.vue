@@ -5,7 +5,7 @@
             data-test="close-button"
             class="close-button"
             :disabled="closingDisabled"
-            icon="times"
+            :icon="faTimes"
             color="transparent"
             inline
             small
@@ -16,11 +16,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import IplButton from './iplButton.vue';
-
-library.add(faTimes);
 
 export default defineComponent({
     name: 'IplDialogTitle',
@@ -44,7 +41,8 @@ export default defineComponent({
         return {
             close() {
                 emit('close');
-            }
+            },
+            faTimes
         };
     }
 });

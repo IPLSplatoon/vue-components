@@ -17,7 +17,7 @@
                 </slot>
             </div>
             <font-awesome-icon
-                icon="chevron-left"
+                :icon="faChevronLeft"
                 class="icon"
                 :class="{ 'content-expanded': contentVisible }"
             />
@@ -37,11 +37,8 @@
 <script lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { defineComponent, getCurrentInstance, inject, PropType, ref, watch, WritableComputedRef } from 'vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { isValidSpaceColor, type SpaceColor } from '../helpers/spaceColorHelper';
-
-library.add(faChevronLeft);
 
 export default defineComponent({
     name: 'IplExpandingSpace',
@@ -114,7 +111,8 @@ export default defineComponent({
                 if (!isInGroup) {
                     emitExpandedPropUpdate(newValue);
                 }
-            }
+            },
+            faChevronLeft
         };
     }
 });

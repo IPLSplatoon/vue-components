@@ -8,7 +8,7 @@
             <ipl-button
                 v-if="copiable"
                 class="copy-button"
-                icon="copy"
+                :icon="faCopy"
                 color="transparent"
                 inline
                 @click="onCopy"
@@ -20,12 +20,9 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import IplLabel from './iplLabel.vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCopy } from '@fortawesome/free-solid-svg-icons/faCopy';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { isBlank } from '../helpers/stringHelper';
 import IplButton from './iplButton.vue';
-
-library.add(faCopy);
 
 export default defineComponent({
     name: 'IplDataRow',
@@ -54,7 +51,8 @@ export default defineComponent({
                     console.error('Failed to copy value', e);
                 });
             },
-            isBlank
+            isBlank,
+            faCopy
         };
     }
 });

@@ -14,14 +14,14 @@
             <ipl-button
                 inline
                 color="transparent"
-                icon="chevron-left"
+                :icon="faChevronLeft"
                 :disabled="props.modelValue === 1"
                 @click="emit('update:modelValue', props.modelValue - 1)"
             />
             <ipl-button
                 inline
                 color="transparent"
-                icon="chevron-right"
+                :icon="faChevronRight"
                 :disabled="props.modelValue === props.maxPage"
                 @click="emit('update:modelValue', props.modelValue + 1)"
             />
@@ -33,14 +33,11 @@
 import IplSpace from './iplSpace.vue';
 import { computed } from 'vue';
 import IplSelect from './iplSelect.vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import IplButton from './iplButton.vue';
 import { SpaceColor } from '../helpers/spaceColorHelper';
 import { pluralize } from '../helpers/stringHelper';
-
-library.add(faChevronLeft, faChevronRight);
 
 const props = withDefaults(defineProps<{
     modelValue?: number

@@ -12,7 +12,12 @@ export default defineConfig({
             formats: ['es', 'umd']
         },
         rollupOptions: {
-            external: ['vue'],
+            external: [
+                'vue',
+                '@fortawesome/fontawesome-svg-core',
+                '@fortawesome/free-solid-svg-icons',
+                '@fortawesome/vue-fontawesome'
+            ],
             output: {
                 globals: {
                     vue: 'Vue'

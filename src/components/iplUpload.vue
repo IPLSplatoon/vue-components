@@ -12,7 +12,7 @@
         </span>
         <template v-else>
             <font-awesome-icon
-                icon="file"
+                :icon="faFile"
                 class="icon"
             />
             <span>{{ modelValue.name }}</span>
@@ -26,11 +26,8 @@
 
 <script lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { defineComponent, PropType, ref } from 'vue';
-import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
-
-library.add(faFile);
+import { faFile } from '@fortawesome/free-solid-svg-icons';
 
 export default defineComponent({
     name: 'IplUpload',
@@ -72,7 +69,8 @@ export default defineComponent({
                         break;
                     }
                 }
-            }
+            },
+            faFile
         };
     }
 });

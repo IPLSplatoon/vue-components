@@ -25,13 +25,13 @@
             >
                 {{ option.name }}
                 <font-awesome-icon
-                    icon="xmark"
+                    :icon="faXmark"
                     class="remove-icon"
                 />
             </button>
             <div class="icon-container">
                 <font-awesome-icon
-                    icon="chevron-down"
+                    :icon="faChevronDown"
                     class="icon"
                 />
             </div>
@@ -43,13 +43,10 @@
 import { defineComponent, onMounted, PropType, Ref, ref, watch } from 'vue';
 import { SelectOptions } from '../types/select';
 import IplLabel from './iplLabel.vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
-import { faXmark } from '@fortawesome/free-solid-svg-icons/faXmark';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import clone from 'lodash/clone';
-
-library.add(faChevronDown, faXmark);
 
 export default defineComponent({
     name: 'IplMultiSelect',
@@ -116,7 +113,9 @@ export default defineComponent({
                 emit('update:modelValue', result);
             },
             select,
-            elemDisplay
+            elemDisplay,
+            faChevronDown,
+            faXmark
         };
     }
 });

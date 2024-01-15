@@ -36,10 +36,10 @@
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, PropType, Ref, ref } from 'vue';
 import { buttonColors } from '../styles/colors';
-import isEmpty from 'lodash/isEmpty';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { getContrastingTextColor } from '../helpers/colorHelper';
 import { isBlank } from '../helpers/stringHelper';
+import type { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 export default defineComponent({
     name: 'IplButton',
@@ -54,7 +54,7 @@ export default defineComponent({
             default: null
         },
         icon: {
-            type: [ Array, String ] as PropType<Array<string> | string>,
+            type: [ Array, Object, String ] as PropType<Array<string> | string | IconDefinition>,
             default: null
         },
         color: {
@@ -109,7 +109,7 @@ export default defineComponent({
     emits: [ 'click', 'rightClick' ],
 
     setup(props, { emit }) {
-        if (isEmpty(props.icon) && isEmpty(props.label)) {
+        if (props.icon == null && isBlank(props.label)) {
             console.warn('ipl-button requires an icon or label to be provided.');
         }
 

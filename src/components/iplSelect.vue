@@ -38,7 +38,7 @@
                 </template>
             </select>
             <font-awesome-icon
-                icon="chevron-down"
+                :icon="faChevronDown"
                 class="icon"
             />
         </ipl-label>
@@ -49,11 +49,8 @@
 import { computed, defineComponent, PropType, ref } from 'vue';
 import IplLabel from './iplLabel.vue';
 import { SelectOptionGroups, SelectOptions } from '../types/select';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
-library.add(faChevronDown);
 
 export default defineComponent({
     name: 'IplSelect',
@@ -117,7 +114,8 @@ export default defineComponent({
                         }
                     }
                 }
-            })
+            }),
+            faChevronDown
         };
     }
 });

@@ -11,7 +11,7 @@
             <ipl-button
                 v-if="closeable"
                 class="close-button"
-                icon="times"
+                :icon="faTimes"
                 inline
                 color="transparent"
                 @click="close"
@@ -23,15 +23,12 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import IplButton from './iplButton.vue';
-
-library.add(faInfoCircle, faExclamationTriangle, faExclamationCircle, faTimes);
 
 export default defineComponent({
     name: 'IplMessage',
@@ -59,18 +56,19 @@ export default defineComponent({
             icon: computed(() => {
                 switch (props.type) {
                     case 'info':
-                        return 'info-circle';
+                        return faInfoCircle;
                     case 'error':
-                        return 'exclamation-circle';
+                        return faExclamationCircle;
                     case 'warning':
-                        return 'exclamation-triangle';
+                        return faExclamationTriangle;
                     default:
                         throw new Error(`No icon found for type '${props.type}'`);
                 }
             }),
             close() {
                 emit('close');
-            }
+            },
+            faTimes
         };
     }
 });
