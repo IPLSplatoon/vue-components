@@ -10,6 +10,7 @@
                 class="copy-button"
                 icon="copy"
                 color="transparent"
+                inline
                 @click="onCopy"
             />
         </div>
