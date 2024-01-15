@@ -11,6 +11,12 @@
             <span> of {{ pluralize('page', props.maxPage) }}</span>
         </div>
         <div class="page-buttons">
+            <ipl-spinner
+                v-if="props.loading"
+                size="2px"
+                width="24px"
+                color="var(--ipl-body-text-color)"
+            />
             <ipl-button
                 inline
                 color="transparent"
@@ -30,23 +36,26 @@
 </template>
 
 <script setup lang="ts">
-import IplSpace from './iplSpace.vue';
 import { computed } from 'vue';
-import IplSelect from './iplSelect.vue';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import IplSpace from './iplSpace.vue';
+import IplSelect from './iplSelect.vue';
 import IplButton from './iplButton.vue';
+import IplSpinner from './iplSpinner.vue';
 import { SpaceColor } from '../helpers/spaceColorHelper';
 import { pluralize } from '../helpers/stringHelper';
 
 const props = withDefaults(defineProps<{
     modelValue?: number
     maxPage?: number
-    color?: SpaceColor
+    color?: SpaceColor,
+    loading?: boolean
 }>(), {
     modelValue: 1,
     maxPage: 1,
-    color: 'primary'
+    color: 'primary',
+    loading: false
 });
 const emit = defineEmits<{
     'update:modelValue': [newValue: number]
@@ -85,10 +94,10 @@ const pageOptions = computed(() => Array.from({ length: props.maxPage }, (_, i) 
 
     > .page-buttons {
         font-size: 0.75em;
-
-        > *:first-child {
-            margin-right: 4px;
-        }
+        display: grid;
+        align-items: center;
+        grid-auto-flow: column;
+        gap: 4px;
     }
 }
 </style>
