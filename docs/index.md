@@ -36,4 +36,6 @@ features:
     link: /ipl-spinner
   - title: ipl-sidebar
     link: /ipl-sidebar
+  - title: ipl-pagination
+    link: /ipl-pagination
 ---

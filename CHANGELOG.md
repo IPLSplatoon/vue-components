@@ -125,6 +125,7 @@
 ## Additions
 
 - Added ipl-textarea
+- Added ipl-pagination
 - ipl-input supports adding a placeholder
 - Added a larger theme for ipl-input
 - SSR support

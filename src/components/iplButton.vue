@@ -292,6 +292,10 @@ export default defineComponent({
 
     &.disabled {
         cursor: default;
+
+        &.is-transparent {
+            opacity: 0.75;
+        }
     }
 
     &:after {
