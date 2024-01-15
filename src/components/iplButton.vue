@@ -15,6 +15,7 @@
             'inline': inline
         }"
         :disabled="hasLink ? undefined : disabledInternal"
+        :autocomplete="hasLink ? undefined : 'off'"
         @click="handleClick"
         @contextmenu="$emit('rightClick', $event)"
     >
