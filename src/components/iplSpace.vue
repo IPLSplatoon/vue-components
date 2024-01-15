@@ -51,7 +51,6 @@ button.ipl-space {
     box-sizing: border-box;
     width: 100%;
     user-select: none;
-    cursor: pointer;
     transition-property: background-color;
     transition-duration: constants.$transition-duration-low;
 
