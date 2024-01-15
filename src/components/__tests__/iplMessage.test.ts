@@ -1,5 +1,9 @@
 import IplMessage from '../iplMessage.vue';
 import { config, mount } from '@vue/test-utils';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 describe('IplMessage', () => {
     config.global.stubs = {
@@ -30,21 +34,21 @@ describe('IplMessage', () => {
     it('has expected wrapper class and icon if type is error', () => {
         const wrapper = mount(IplMessage, { props: { type: 'error' } });
 
-        expect(wrapper.getComponent('.icon').attributes().icon).toEqual('exclamation-circle');
+        expect(wrapper.getComponent(FontAwesomeIcon).vm.icon).toEqual(faExclamationCircle);
         expect(wrapper.get('.ipl-message__wrapper').classes()).toContain('ipl-message__type-error');
     });
 
     it('has expected wrapper class and icon if type is info', () => {
         const wrapper = mount(IplMessage, { props: { type: 'info' } });
 
-        expect(wrapper.getComponent('.icon').attributes().icon).toEqual('info-circle');
+        expect(wrapper.getComponent(FontAwesomeIcon).vm.icon).toEqual(faInfoCircle);
         expect(wrapper.get('.ipl-message__wrapper').classes()).toContain('ipl-message__type-info');
     });
 
     it('has expected wrapper class and icon if type is warning', () => {
         const wrapper = mount(IplMessage, { props: { type: 'warning' } });
 
-        expect(wrapper.getComponent('.icon').attributes().icon).toEqual('exclamation-triangle');
+        expect(wrapper.getComponent(FontAwesomeIcon).vm.icon).toEqual(faExclamationTriangle);
         expect(wrapper.get('.ipl-message__wrapper').classes()).toContain('ipl-message__type-warning');
     });
 

@@ -2,12 +2,12 @@
 
 exports[`IplDialogTitle matches snapshot 1`] = `
 "<div class="ipl-dialog-title"><span class="ipl-dialog-title__title-text">Cool Dialog</span>
-  <ipl-button-stub icon="times" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
+  <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
 </div>"
 `;
 
 exports[`IplDialogTitle matches snapshot when closing is disabled 1`] = `
 "<div class="ipl-dialog-title"><span class="ipl-dialog-title__title-text">Cool Dialog</span>
-  <ipl-button-stub icon="times" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
+  <ipl-button-stub icon="[object Object]" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
 </div>"
 `;

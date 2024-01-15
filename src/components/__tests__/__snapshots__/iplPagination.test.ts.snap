@@ -6,8 +6,8 @@ exports[`iplPagination matches snapshot 1`] = `
     <ipl-select-stub modelvalue="1" options="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" disabled="false"></ipl-select-stub><span> of 9 pages</span>
   </div>
   <div class="page-buttons">
-    <ipl-button-stub icon="chevron-left" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
-    <ipl-button-stub icon="chevron-right" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
   </div>
 </div>"
 `;
