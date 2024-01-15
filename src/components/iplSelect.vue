@@ -128,7 +128,6 @@ export default defineComponent({
 
 .ipl-select__wrapper {
     border-bottom: 1px solid var(--ipl-input-color);
-    width: 100%;
     position: relative;
 
     &.disabled select {
@@ -150,6 +149,7 @@ export default defineComponent({
         bottom: 7px;
         font-size: 1em;
         color: var(--ipl-input-color-focus);
+        pointer-events: none;
     }
 }
 
