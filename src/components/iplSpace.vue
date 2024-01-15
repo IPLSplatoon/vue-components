@@ -1,24 +1,26 @@
 <template>
-    <div
+    <component
+        :is="clickable ? 'button' : 'div'"
         class="ipl-space"
-        :class="{[`color-${color}`]: true, clickable: clickable}"
+        :class="`color-${color}`"
     >
         <slot />
-    </div>
+    </component>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import { isValidSpaceColor, type SpaceColor } from '../helpers/spaceColorHelper';
 
 export default defineComponent({
     name: 'IplSpace',
 
     props: {
         color: {
-            type: String as PropType<'dark' | 'light' | 'blue'>,
+            type: String as PropType<SpaceColor>,
             default: 'dark',
             validator: (value: string): boolean => {
-                return ['dark', 'light', 'blue'].includes(value);
+                return isValidSpaceColor(value);
             }
         },
         clickable: {
@@ -30,57 +32,37 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
+@use 'src/styles/colors';
+@use 'src/styles/space';
+
+button.ipl-space {
+    @include space.space-colors-hover();
+    @include space.space-colors-active();
+
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: left;
+    color: inherit;
+    background-image: none;
+    border: 0;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    user-select: none;
+    transition-property: background-color;
+    transition-duration: constants.$transition-duration-low;
+
+    &:focus-visible {
+        outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
+    }
+}
 
 .ipl-space {
-    border-radius: $border-radius-outer;
+    @include space.space-colors();
+
+    border-radius: constants.$border-radius-outer;
     padding: 8px;
-
-    &.color-light {
-        background-color: $background-secondary;
-    }
-
-    &.color-dark {
-        background-color: $background-primary;
-    }
-
-    &.color-blue {
-        background-color: $blue;
-    }
-
-    &.clickable {
-        user-select: none;
-        cursor: pointer;
-        transition-duration: $transition-duration-low;
-
-        &:hover {
-            &.color-light {
-                background-color: $background-secondary-hover;
-            }
-
-            &.color-dark {
-                background-color: $background-primary-hover;
-            }
-
-            &.color-blue {
-                background-color: $blue-hover;
-            }
-        }
-
-        &:active {
-            &.color-light {
-                background-color: $background-secondary-active;
-            }
-
-            &.color-dark {
-                background-color: $background-primary-active;
-            }
-
-            &.color-blue {
-                background-color: $blue-active;
-            }
-        }
-    }
 }
 </style>

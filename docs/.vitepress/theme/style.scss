@@ -1,6 +1,7 @@
 @use '../../../src/styles/colors';
+@use '../../../src/styles/constants';
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
 /**
@@ -33,25 +34,26 @@
     --vp-c-danger-2: #{colors.$error-color};
     --vp-c-danger-3: #{colors.$error-color};
     --vp-c-danger-soft: #{colors.$error-background-color};
+
+    --vp-c-bg: var(--ipl-bg-primary);
+    --vp-c-bg-alt: var(--ipl-bg-secondary);
+    --vp-c-bg-soft: var(--ipl-bg-secondary);
+    --vp-c-bg-elv: var(--ipl-bg-secondary);
 }
 
 .dark {
-    --vp-c-bg: #{colors.$background-primary};
-    --vp-c-bg-alt: #{colors.$background-secondary};
-    --vp-c-bg-soft: #{colors.$background-secondary};
-    --vp-c-bg-elv: #{colors.$background-secondary};
     --vp-c-divider: #606770;
 }
 
 :root {
-    --vp-font-family-base: 'Roboto', sans-serif;
+    --vp-font-family-base: #{constants.$body-font};
     --vp-font-family-mono: 'Roboto Mono', monospace;
     --vp-code-color: var(--vp-c-text-1);
 }
 
 .source-example {
     margin-top: 8px;
-    font-family: 'Roboto', sans-serif;
+    font-family: constants.$body-font;
     font-synthesis: none;
 
     [class*='language-'] {
@@ -80,30 +82,17 @@
     flex-wrap: wrap;
     justify-content: center;
 
-    > * {
-        width: auto !important;
+    &.no-wrap {
+        flex-wrap: nowrap;
+    }
 
-        &:not(:last-child) {
-            margin-right: 12px;
-        }
+    > *:not(:last-child) {
+        margin-right: 12px;
     }
 }
 
 .vertical-layout > *:not(:last-child) {
     margin-bottom: 8px;
-}
-
-// TODO: actually integrate these into the library
-.ipl-expansion-panel__content {
-    background-color: var(--vp-c-bg) !important;
-}
-
-html:not(.dark) .ipl-expansion-panel__header-background:hover {
-    background-color: #FBFBFB !important;
-}
-
-html:not(.dark) .ipl-expansion-panel__header-background:active {
-    background-color: #F8F8F8 !important;
 }
 
 html {

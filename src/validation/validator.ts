@@ -1,40 +1,61 @@
-import { provide, reactive, watch, WatchSource } from 'vue';
+import { computed, ComputedRef, provide, reactive } from 'vue';
+import { ValidatorInjectionKey } from './useValidator';
 
 export interface ValidatorResult {
     isValid: boolean | null
     message?: string | null
 }
 
-export function validator<T>(
-    value: WatchSource<T>,
-    immediate: boolean,
-    ...validators: ((value: T) => ValidatorResult)[]
-): ValidatorResult {
-    const result: ValidatorResult = reactive({
-        isValid: null
-    });
+export interface FieldValidatorDefinition<T> {
+    immediate: boolean
+    validators: ValidatorFunction<T>[]
+}
 
-    watch(value, newValue => {
-        for (let i = 0; i < validators.length; i++) {
-            const validatorResult = validators[i](newValue);
-            if (!validatorResult.isValid) {
-                result.isValid = false;
-                result.message = validatorResult.message;
-                break;
-            } else {
-                result.isValid = true;
-                result.message = null;
+export interface FieldValidatorState<T> {
+    definition: FieldValidatorDefinition<T>
+    result: ValidatorResult
+}
+
+export type ValidatorFunction<T> = ((value: T) => ValidatorResult)
+
+export function validator<T>(
+    immediate: boolean,
+    ...validators: ValidatorFunction<T>[]
+): FieldValidatorDefinition<T> {
+    return {
+        immediate,
+        validators
+    };
+}
+
+export function provideValidators(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    validators: Record<string, FieldValidatorDefinition<any>>
+): { allValid: ComputedRef<boolean>, fieldIsValid: (name: string) => boolean } {
+    const state = Object.entries(validators)
+        .reduce((result: Record<string, FieldValidatorState<unknown>>, [name, definition]) => {
+            result[name] = {
+                definition,
+                result: reactive({
+                    isValid: null,
+                    message: null
+                })
+            };
+            return result;
+        }, { });
+
+    provide(ValidatorInjectionKey, {
+        state,
+        update(name, isValid, message) {
+            if (state[name]) {
+                state[name].result.isValid = isValid;
+                state[name].result.message = message;
             }
         }
-    }, { immediate });
+    });
 
-    return result;
-}
-
-export function allValid(validators: Record<string, ValidatorResult>): boolean {
-    return Object.values(validators).every(validator => validator.isValid);
-}
-
-export function provideValidators(validators: Record<string, ValidatorResult>): void {
-    provide('validators', validators);
+    return {
+        allValid: computed(() => Object.values(state).every(status => status.result.isValid)),
+        fieldIsValid: name => state[name]?.result.isValid === true
+    };
 }

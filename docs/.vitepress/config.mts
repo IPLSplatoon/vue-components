@@ -26,6 +26,7 @@ export default defineConfig({
                     { text: 'Expanding Space Group', link: '/ipl-expanding-space-group' },
                     { text: 'Message', link: '/ipl-message' },
                     { text: 'Input', link: '/ipl-input' },
+                    { text: 'Textarea', link: '/ipl-textarea' },
                     { text: 'Radio', link: '/ipl-radio' },
                     { text: 'Select', link: '/ipl-select' },
                     { text: 'Multi-Select', link: '/ipl-multi-select' },
@@ -33,7 +34,8 @@ export default defineConfig({
                     { text: 'Progress Bar', link: '/ipl-progress-bar' },
                     { text: 'Toggles', link: '/toggles' },
                     { text: 'Loading Spinner', link: '/ipl-spinner' },
-                    { text: 'Sidebar', link: '/ipl-sidebar' }
+                    { text: 'Sidebar', link: '/ipl-sidebar' },
+                    { text: 'Pagination', link: '/ipl-pagination' }
                 ]
             }
         ],

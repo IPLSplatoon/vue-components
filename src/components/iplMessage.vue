@@ -8,10 +8,12 @@
             :icon="icon"
         />
         <div class="message-content">
-            <font-awesome-icon
+            <ipl-button
                 v-if="closeable"
-                icon="times"
                 class="close-button"
+                :icon="faTimes"
+                inline
+                color="transparent"
                 @click="close"
             />
             <slot />
@@ -21,19 +23,17 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons/faInfoCircle';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons/faExclamationCircle';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
-
-library.add(faInfoCircle, faExclamationTriangle, faExclamationCircle, faTimes);
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import IplButton from './iplButton.vue';
 
 export default defineComponent({
     name: 'IplMessage',
 
-    components: { FontAwesomeIcon },
+    components: { IplButton, FontAwesomeIcon },
 
     props: {
         type: {
@@ -56,35 +56,37 @@ export default defineComponent({
             icon: computed(() => {
                 switch (props.type) {
                     case 'info':
-                        return 'info-circle';
+                        return faInfoCircle;
                     case 'error':
-                        return 'exclamation-circle';
+                        return faExclamationCircle;
                     case 'warning':
-                        return 'exclamation-triangle';
+                        return faExclamationTriangle;
                     default:
                         throw new Error(`No icon found for type '${props.type}'`);
                 }
             }),
             close() {
                 emit('close');
-            }
+            },
+            faTimes
         };
     }
 });
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/colors';
+@use 'src/styles/constants';
 
 .ipl-message__wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
-    border-radius: $border-radius-outer;
+    border-radius: constants.$border-radius-outer;
     border-width: 2px;
     border-style: solid;
     padding: 8px;
+    color: var(--ipl-body-text-color);
 
     > .icon {
         font-size: 25px;
@@ -97,23 +99,23 @@ export default defineComponent({
 
         > .close-button {
             float: right;
-            cursor: pointer;
+            font-size: 0.5em;
         }
     }
 
     &.ipl-message__type-info {
-        border-color: $info-color;
-        background-color: $info-background-color;
+        border-color: colors.$info-color;
+        background-color: colors.$info-background-color;
     }
 
     &.ipl-message__type-warning {
-        border-color: $warning-color;
-        background-color: $warning-background-color;
+        border-color: colors.$warning-color;
+        background-color: colors.$warning-background-color;
     }
 
     &.ipl-message__type-error {
-        border-color: $error-color;
-        background-color: $error-background-color;
+        border-color: colors.$error-color;
+        background-color: colors.$error-background-color;
     }
 }
 </style>

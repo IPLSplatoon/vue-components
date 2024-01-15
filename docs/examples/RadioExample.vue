@@ -11,6 +11,7 @@
                 { name: 'Option 4', value: 'opt4', disabled: disableFinalOption }
             ]"
             label="Radio"
+            name="example-radio"
         />
         <!-- #endregion example -->
     </div>

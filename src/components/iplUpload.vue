@@ -12,7 +12,7 @@
         </span>
         <template v-else>
             <font-awesome-icon
-                icon="file"
+                :icon="faFile"
                 class="icon"
             />
             <span>{{ modelValue.name }}</span>
@@ -26,11 +26,8 @@
 
 <script lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { defineComponent, PropType, ref } from 'vue';
-import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
-
-library.add(faFile);
+import { faFile } from '@fortawesome/free-solid-svg-icons';
 
 export default defineComponent({
     name: 'IplUpload',
@@ -72,15 +69,15 @@ export default defineComponent({
                         break;
                     }
                 }
-            }
+            },
+            faFile
         };
     }
 });
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 label {
     display: flex;
@@ -88,12 +85,13 @@ label {
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: $border-radius-inner;
+    border-radius: constants.$border-radius-inner;
     padding: 8px 16px;
     min-height: 50px;
-    cursor: pointer;
-    transition-duration: $transition-duration-low;
-    background-color: $background-tertiary;
+    transition-property: background-color;
+    transition-duration: constants.$transition-duration-low;
+    background-color: var(--ipl-bg-tertiary);
+    position: relative;
 
     span {
         pointer-events: none;
@@ -108,11 +106,32 @@ label {
     }
 
     &.active {
-        background-color: $background-tertiary-active;
+        background-color: var(--ipl-bg-tertiary-active);
+    }
+
+    &:hover {
+        background-color: var(--ipl-bg-tertiary-hover);
+    }
+
+    &:active {
+        background-color: var(--ipl-bg-tertiary-active);
     }
 }
 
 input {
-    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+    border-radius: constants.$border-radius-inner;
+    pointer-events: none;
+
+    &::file-selector-button {
+        display: none;
+    }
+
+    &:focus-visible {
+        outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
+    }
 }
 </style>

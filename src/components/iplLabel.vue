@@ -13,15 +13,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 label {
-    color: $input-color;
+    color: var(--ipl-input-color);
     font-size: 0.75em;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
-    transition-duration: $transition-duration-low;
+    transition-duration: constants.$transition-duration-low;
 }
 </style>

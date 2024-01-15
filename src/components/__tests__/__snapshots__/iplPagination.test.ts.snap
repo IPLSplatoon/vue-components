@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`iplPagination matches snapshot 1`] = `
+"<div class="ipl-space color-primary ipl-pagination">
+  <div class="page-select">
+    <ipl-select-stub modelvalue="1" options="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" disabled="false"></ipl-select-stub><span> of 9 pages</span>
+  </div>
+  <div class="page-buttons">
+    <!--v-if-->
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
+  </div>
+</div>"
+`;

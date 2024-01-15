@@ -29,3 +29,7 @@ title: ipl-button
 ## Link
 
 ::: demo ButtonLinkExample
+
+## Transparent
+
+::: demo ButtonTransparentExample

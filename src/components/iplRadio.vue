@@ -1,31 +1,31 @@
 <template>
-    <div class="ipl-radio__wrapper">
-        <ipl-label>{{ label }}</ipl-label>
+    <fieldset>
+        <legend>{{ label }}</legend>
         <div class="ipl-radio__options">
-            <div
+            <label
                 v-for="option in options"
                 :key="option.value"
-                class="ipl-radio__option wrap-anywhere"
-                :class="{ selected: option.value === modelValue, disabled: option.disabled }"
-                :data-test="`option_${option.value}`"
-                @click="selectOption(option)"
             >
-                {{ option.name }}
-            </div>
+                <input
+                    type="radio"
+                    :checked="option.value === modelValue"
+                    :disabled="option.disabled"
+                    :name="name"
+                    @change="selectOption(option)"
+                >
+                <span>{{ option.name }}</span>
+            </label>
         </div>
-    </div>
+    </fieldset>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import IplLabel from './iplLabel.vue';
 import { computed, PropType } from 'vue';
 import { SelectOptions, Option } from '../types/select';
 
 export default defineComponent({
     name: 'IplRadio',
-
-    components: { IplLabel },
 
     props: {
         modelValue: {
@@ -38,6 +38,10 @@ export default defineComponent({
         },
         options: {
             type: Array as PropType<SelectOptions>,
+            required: true
+        },
+        name: {
+            type: String,
             required: true
         }
     },
@@ -66,63 +70,94 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/colors';
+@use 'src/styles/constants';
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin-inline: 0;
+}
+
+legend {
+    color: var(--ipl-input-color);
+    font-size: 0.75em;
+    user-select: none;
+    padding-inline: 0;
+    transition-duration: constants.$transition-duration-low;
+    margin: 2px 0;
+}
 
 .ipl-radio__options {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-    > .ipl-radio__option {
-        transition-duration: $transition-duration-low;
+    > label > span {
+        transition-duration: constants.$transition-duration-low;
         font-weight: 500;
         font-size: 1em;
-        border-radius: $border-radius-inner;
-        border: 1px solid $input-color;
+        border-radius: constants.$border-radius-inner;
+        border: 1px solid var(--ipl-input-color);
         padding: 4px 8px;
         margin-right: 4px;
         margin-top: 4px;
-        user-select: none;
-        cursor: pointer;
+        display: block;
+    }
 
-        &:last-child {
-            margin-right: 0;
+    > label > input {
+        appearance: none;
+        position: absolute;
+        opacity: 0;
+
+        + span {
+            background-color: var(--ipl-input-color-alpha);
         }
 
-        &.disabled {
-            cursor: unset;
-            border-color: #6E6D6D;
-            color: $text-color-disabled;
-        }
+        &:focus-visible {
+            outline: none;
 
-        &:not(.disabled) {
-            &:hover {
-                border-color: $input-color-hover;
-                background-color: rgba(255, 255, 255, 0.05);
-            }
-
-            &:active {
-                border-color: $input-color-active;
-                background-color: rgba(255, 255, 255, 0.2);
+            + span {
+                outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
             }
         }
 
-        &.selected {
-            border-color: $blue;
-            background-color: $blue;
+        &:not(:disabled) {
+            + span:hover {
+                border-color: var(--ipl-input-color-hover);
+                background-color: var(--ipl-input-color-alpha-focus);
+            }
 
-            &:not(.disabled) {
-                &:hover {
-                    background-color: $blue-hover;
-                    border-color: $blue-hover;
+            + span:active {
+                border-color: var(--ipl-input-color-focus);
+                background-color: var(--ipl-input-color-alpha-active);
+            }
+        }
+
+        &:checked {
+            &:not(:disabled) {
+                + span:hover {
+                    background-color: colors.$blue-hover;
+                    border-color: colors.$blue-hover;
                 }
 
-                &:active {
-                    background-color: $blue-active;
-                    border-color: $blue-active;
+                + span:active {
+                    background-color: colors.$blue-active;
+                    border-color: colors.$blue-active;
                 }
             }
+
+            + span {
+                border-color: colors.$blue;
+                background-color: colors.$blue;
+                color: #FFF;
+            }
+        }
+
+        &:disabled + span {
+            cursor: not-allowed;
+            color: var(--ipl-disabled-body-text-color);
+            background-color: var(--ipl-input-color-alpha-disabled);
         }
     }
 }

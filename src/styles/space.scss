@@ -1,0 +1,44 @@
+@use 'colors';
+
+@mixin space-colors($selector-extra: "") {
+    &.color-light#{$selector-extra}, &.color-secondary#{$selector-extra} {
+        background-color: var(--ipl-bg-secondary);
+    }
+
+    &.color-dark#{$selector-extra}, &.color-primary#{$selector-extra} {
+        background-color: var(--ipl-bg-primary);
+    }
+
+    &.color-blue#{$selector-extra} {
+        color: white;
+        background-color: colors.$blue;
+    }
+}
+
+@mixin space-colors-hover($selector-extra: ":hover") {
+    &.color-light#{$selector-extra}, &.color-secondary#{$selector-extra} {
+        background-color: var(--ipl-bg-secondary-hover);
+    }
+
+    &.color-dark#{$selector-extra}, &.color-primary#{$selector-extra} {
+        background-color: var(--ipl-bg-primary-hover);
+    }
+
+    &.color-blue#{$selector-extra} {
+        background-color: colors.$blue-hover;
+    }
+}
+
+@mixin space-colors-active($selector-extra: ":active") {
+    &.color-light#{$selector-extra}, &.color-secondary#{$selector-extra} {
+        background-color: var(--ipl-bg-secondary-active);
+    }
+
+    &.color-dark#{$selector-extra}, &.color-primary#{$selector-extra} {
+        background-color: var(--ipl-bg-primary-active);
+    }
+
+    &.color-blue#{$selector-extra} {
+        background-color: colors.$blue-active;
+    }
+}

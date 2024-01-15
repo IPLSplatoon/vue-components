@@ -36,7 +36,7 @@ describe('IplSmallToggle', () => {
         expect(wrapper.html()).toMatchSnapshot();
     });
 
-    it('toggles value on wrapper click', async () => {
+    it('emits event in inner input change', () => {
         const wrapper = mount(IplSmallToggle, {
             props: {
                 label: 'Toggle!',
@@ -45,7 +45,9 @@ describe('IplSmallToggle', () => {
             }
         });
 
-        await wrapper.get('.ipl-small-toggle__wrapper').trigger('click');
+        const input = wrapper.find('input');
+        input.element.checked = false;
+        input.element.dispatchEvent(new Event('change'));
 
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted?.length).toEqual(1);

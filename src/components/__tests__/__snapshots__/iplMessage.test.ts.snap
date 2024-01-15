@@ -2,7 +2,7 @@
 
 exports[`IplMessage matches snapshot 1`] = `
 "<div class="ipl-message__wrapper ipl-message__type-info">
-  <font-awesome-icon-stub icon="info-circle" border="false" fixedwidth="false" flip="false" listitem="false" pulse="false" swapopacity="false" spin="false" symbol="false" inverse="false" bounce="false" shake="false" beat="false" fade="false" beatfade="false" flash="false" spinpulse="false" spinreverse="false" class="icon"></font-awesome-icon-stub>
+  <font-awesome-icon-stub icon="[object Object]" border="false" fixedwidth="false" flip="false" listitem="false" pulse="false" swapopacity="false" spin="false" symbol="false" inverse="false" bounce="false" shake="false" beat="false" fade="false" beatfade="false" flash="false" spinpulse="false" spinreverse="false" class="icon"></font-awesome-icon-stub>
   <div class="message-content">
     <!--v-if-->
   </div>
@@ -11,9 +11,9 @@ exports[`IplMessage matches snapshot 1`] = `
 
 exports[`IplMessage matches snapshot when closeable 1`] = `
 "<div class="ipl-message__wrapper ipl-message__type-info">
-  <font-awesome-icon-stub icon="info-circle" border="false" fixedwidth="false" flip="false" listitem="false" pulse="false" swapopacity="false" spin="false" symbol="false" inverse="false" bounce="false" shake="false" beat="false" fade="false" beatfade="false" flash="false" spinpulse="false" spinreverse="false" class="icon"></font-awesome-icon-stub>
+  <font-awesome-icon-stub icon="[object Object]" border="false" fixedwidth="false" flip="false" listitem="false" pulse="false" swapopacity="false" spin="false" symbol="false" inverse="false" bounce="false" shake="false" beat="false" fade="false" beatfade="false" flash="false" spinpulse="false" spinreverse="false" class="icon"></font-awesome-icon-stub>
   <div class="message-content">
-    <font-awesome-icon-stub icon="times" border="false" fixedwidth="false" flip="false" listitem="false" pulse="false" swapopacity="false" spin="false" symbol="false" inverse="false" bounce="false" shake="false" beat="false" fade="false" beatfade="false" flash="false" spinpulse="false" spinreverse="false" class="close-button"></font-awesome-icon-stub>
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true" class="close-button"></ipl-button-stub>
   </div>
 </div>"
 `;

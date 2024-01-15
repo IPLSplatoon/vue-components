@@ -1,37 +1,70 @@
 <template>
     <div class="ipl-data-row">
         <ipl-label>{{ label }}</ipl-label>
-        <div class="value">{{ value ?? '―' }}</div>
+        <div class="value">
+            <slot>
+                {{ isBlank(value) ? '―' : value }}
+            </slot>
+            <ipl-button
+                v-if="copiable"
+                class="copy-button"
+                :icon="faCopy"
+                color="transparent"
+                inline
+                @click="onCopy"
+            />
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import IplLabel from './iplLabel.vue';
+import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import { isBlank } from '../helpers/stringHelper';
+import IplButton from './iplButton.vue';
 
 export default defineComponent({
     name: 'IplDataRow',
-    components: { IplLabel },
+
+    components: { IplButton, IplLabel },
+
     props: {
         label: {
             type: String,
             required: true
         },
         value: {
-            type: String,
+            type: [String, Number, null] as PropType<string | number | undefined | null>,
             default: null
+        },
+        copiable: {
+            type: Boolean,
+            default: false
         }
+    },
+
+    setup(props) {
+        return {
+            onCopy() {
+                navigator.clipboard.writeText(String(props.value ?? '')).catch(e => {
+                    console.error('Failed to copy value', e);
+                });
+            },
+            isBlank,
+            faCopy
+        };
     }
 });
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
+@use 'src/styles/constants';
 
 .ipl-data-row {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid $input-color;
+    border-bottom: 1px solid var(--ipl-input-color);
     width: 100%;
     padding: 2px 0;
     margin-top: 6px;
@@ -47,6 +80,11 @@ export default defineComponent({
         align-self: flex-end;
         text-align: right;
         overflow-wrap: anywhere;
+    }
+
+    .copy-button {
+        margin-left: 2px;
+        font-size: 0.5em;
     }
 }
 </style>

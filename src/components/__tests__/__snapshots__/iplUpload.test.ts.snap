@@ -2,7 +2,7 @@
 
 exports[`IplUpload shows file data if a file is uploaded 1`] = `
 "<label class="ipl-upload">
-  <font-awesome-icon-stub icon="file" border="false" fixedwidth="false" flip="false" listitem="false" pulse="false" swapopacity="false" spin="false" symbol="false" inverse="false" bounce="false" shake="false" beat="false" fade="false" beatfade="false" flash="false" spinpulse="false" spinreverse="false" class="icon"></font-awesome-icon-stub><span>mock-file.jpg</span><input type="file">
+  <font-awesome-icon-stub icon="[object Object]" border="false" fixedwidth="false" flip="false" listitem="false" pulse="false" swapopacity="false" spin="false" symbol="false" inverse="false" bounce="false" shake="false" beat="false" fade="false" beatfade="false" flash="false" spinpulse="false" spinreverse="false" class="icon"></font-awesome-icon-stub><span>mock-file.jpg</span><input type="file">
 </label>"
 `;
 

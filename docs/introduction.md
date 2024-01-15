@@ -2,11 +2,18 @@
 
 ## Install
 
-`npm i @iplsplatoon/vue-components` or `yarn add @iplsplatoon/vue-components`
-
-To use the components, import them as follows:
-
-`import { IplButton } from '@iplsplatoon/vue-components';`
+- Install the library: `npm i @iplsplatoon/vue-components` or `yarn add @iplsplatoon/vue-components`
+- Import the library styles
+  - In JS/TS: `import '@iplsplatoon/vue-components/style.css';`
+  - In (S)CSS: `@import '@iplsplatoon/vue-components/style.css';`
+  - With Nuxt: 
+    ```ts
+    export default defineNuxtConfig({
+      // ...
+      css: ['@iplsplatoon/vue-components/style.css']
+    })
+    ```
+- To use the components, import them as follows: `import { IplButton } from '@iplsplatoon/vue-components';`
 
 ## Development
 

@@ -18,6 +18,8 @@ features:
     link: /ipl-message
   - title: ipl-input
     link: /ipl-input
+  - title: ipl-textarea
+    link: /ipl-textarea
   - title: ipl-radio
     link: /ipl-radio
   - title: ipl-select
@@ -34,4 +36,6 @@ features:
     link: /ipl-spinner
   - title: ipl-sidebar
     link: /ipl-sidebar
+  - title: ipl-pagination
+    link: /ipl-pagination
 ---

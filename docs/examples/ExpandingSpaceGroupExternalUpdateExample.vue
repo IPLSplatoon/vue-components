@@ -30,10 +30,12 @@
     <div class="horizontal-layout">
         <ipl-button
             label="Expand first space"
+            inline
             @click="activeSpace = 'space1'"
         />
         <ipl-button
             label="Toggle second space"
+            inline
             @click="secondSpaceExpanded = !secondSpaceExpanded"
         />
     </div>

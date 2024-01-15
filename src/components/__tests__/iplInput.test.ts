@@ -1,21 +1,26 @@
 import IplInput from '../iplInput.vue';
 import { mount } from '@vue/test-utils';
+import { ValidatorInjectionKey } from '../../validation/useValidator';
 
 describe('IplInput', () => {
     it('provides props to inner elements', () => {
         const wrapper = mount(IplInput, {
             props: {
                 label: 'Label',
+                placeholder: 'test-placeholder',
                 name: 'input',
                 type: 'number',
                 disabled: true,
-                modelValue: 'value!!'
+                modelValue: 'value!!',
+                theme: 'default'
             }
         });
 
+        expect(wrapper.element.classList).toContain('theme-default');
         const input = wrapper.get('input');
         expect(input.element.name).toEqual('input');
         expect(input.element.type).toEqual('number');
+        expect(input.element.placeholder).toEqual('test-placeholder');
         expect(input.element.disabled).toEqual(true);
         expect(input.element.classList).not.toContain('centered');
         expect(wrapper.find('.ipl-label').text()).toEqual('Label');
@@ -138,11 +143,18 @@ describe('IplInput', () => {
             },
             global: {
                 provide: {
-                    validators: {
-                        otherInput: {},
-                        input: {
-                            isValid: false,
-                            message: 'very bad!!!'
+                    [ValidatorInjectionKey as symbol]: {
+                        state: {
+                            otherInput: {},
+                            input: {
+                                definition: {
+                                    immediate: false
+                                },
+                                result: {
+                                    isValid: false,
+                                    message: 'very bad!!!'
+                                }
+                            }
                         }
                     }
                 }
@@ -162,10 +174,17 @@ describe('IplInput', () => {
             },
             global: {
                 provide: {
-                    validators: {
-                        input: {
-                            isValid: true,
-                            message: 'ok'
+                    [ValidatorInjectionKey as symbol]: {
+                        state: {
+                            input: {
+                                definition: {
+                                    immediate: false
+                                },
+                                result: {
+                                    isValid: true,
+                                    message: 'ok'
+                                }
+                            }
                         }
                     }
                 }
@@ -173,7 +192,7 @@ describe('IplInput', () => {
             }
         });
 
-        expect(wrapper.find('.error').isVisible()).toEqual(false);
+        expect(wrapper.find('.error').exists()).toEqual(false);
         expect(wrapper.find('.ipl-input__input-and-extras').classes()).not.toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).not.toContain('has-error');
     });
@@ -186,16 +205,23 @@ describe('IplInput', () => {
             },
             global: {
                 provide: {
-                    validators: {
-                        'input-name': {
-                            isValid: null
+                    [ValidatorInjectionKey as symbol]: {
+                        state: {
+                            'input-name': {
+                                definition: {
+                                    immediate: false
+                                },
+                                result: {
+                                    isValid: null
+                                }
+                            }
                         }
                     }
                 }
             }
         });
 
-        expect(wrapper.find('.error').isVisible()).toEqual(false);
+        expect(wrapper.find('.error').exists()).toEqual(false);
         expect(wrapper.find('.ipl-input__input-and-extras').classes()).not.toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).not.toContain('has-error');
     });

@@ -1,11 +1,14 @@
 <template>
-    <div class="ipl-input__wrapper">
+    <div
+        class="ipl-input__wrapper"
+        :class="{ [`theme-${theme}`]: true, 'disabled': disabled }"
+    >
         <div
             class="ipl-input__input-and-extras"
-            :class="{ 'has-error': !isValid, 'is-color': type === 'color' }"
+            :class="{ 'has-error': validator?.isValid === false, 'is-color': type === 'color' }"
         >
             <div class="ipl-input__input-wrapper">
-                <ipl-label :class="{ 'has-error': !isValid }">
+                <ipl-label :class="{ 'has-error': validator?.isValid === false }">
                     {{ label }}
                     <input
                         ref="input"
@@ -14,6 +17,7 @@
                         :type="type"
                         :class="{ centered: centered }"
                         :disabled="disabled"
+                        :placeholder="placeholder"
                         @focus="handleFocusEvent"
                         @blur="handleFocusEvent"
                         @input="handleFocusEvent($event), handleInputEvent()"
@@ -21,35 +25,36 @@
                 </ipl-label>
             </div>
             <div
+                v-if="!isBlank(extra) || loading"
                 class="extra"
                 @mousedown.prevent="focus"
             >
-                {{ extra }}
+                <span class="extra-text">{{ extra }}</span>
 
                 <ipl-spinner
                     v-if="loading"
-                    size="2px"
-                    width="24px"
-                    color="#FFFFFF"
+                    :size="theme === 'large' ? '3px' : '2px'"
+                    :width="theme === 'large' ? '28px' : '24px'"
+                    :color="disabled ? 'var(--ipl-disabled-body-text-color)' : 'var(--ipl-body-text-color)'"
                     data-test="loading-spinner"
                 />
             </div>
         </div>
         <span
-            v-if="!!validator"
-            v-show="!isValid"
+            v-if="validator?.isValid === false"
             class="error"
         >
-            {{ validator.message }}
+            {{ validator?.message }}
         </span>
     </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType, Ref, ref } from 'vue';
-import { ValidatorResult } from '../validation/validator';
+import { computed, defineComponent, PropType, Ref, ref } from 'vue';
 import IplLabel from './iplLabel.vue';
 import IplSpinner from './iplSpinner.vue';
+import { useValidator } from '../validation/useValidator';
+import { isBlank } from '../helpers/stringHelper';
 
 export default defineComponent({
     name: 'IplInput',
@@ -58,6 +63,10 @@ export default defineComponent({
 
     props: {
         label: {
+            type: String,
+            default: null
+        },
+        placeholder: {
             type: String,
             default: null
         },
@@ -95,6 +104,10 @@ export default defineComponent({
         loading: {
             type: Boolean,
             default: false
+        },
+        theme: {
+            type: String as PropType<'large' | 'default'>,
+            default: 'default'
         }
     },
 
@@ -102,8 +115,7 @@ export default defineComponent({
 
     setup(props, { emit }) {
         const input: Ref<HTMLInputElement | null> = ref(null);
-        const validators = inject<Record<string, ValidatorResult> | null>('validators', null);
-        const validator = computed(() => validators?.[props.name]);
+        const validator = useValidator(() => props.name, () => props.modelValue);
 
         return {
             model: computed({
@@ -113,9 +125,6 @@ export default defineComponent({
                 set(value: string) {
                     emit('update:modelValue', props.formatter ? props.formatter(value) : value);
                 }
-            }),
-            isValid: computed(() => {
-                return !validator.value ? true : validator.value?.isValid ?? true;
             }),
             validator,
             handleFocusEvent(e: Event) {
@@ -134,19 +143,56 @@ export default defineComponent({
                     input.value.focus();
                 }
             },
-            input
+            blur() {
+                input.value?.blur();
+            },
+            input,
+            isBlank
         };
     }
 });
 </script>
 
 <style lang="scss" scoped>
-@import './src/styles/colors';
-@import './src/styles/constants';
+@use 'src/styles/constants';
+
+.ipl-input__wrapper.theme-large {
+    &.disabled {
+        .ipl-input__input-and-extras {
+            background-color: var(--ipl-input-color-alpha-disabled);
+        }
+    }
+
+    .ipl-input__input-and-extras {
+        background-color: var(--ipl-input-color-alpha);
+        border-radius: constants.$border-radius-inner constants.$border-radius-inner 0 0;
+
+        &:not(.disabled):focus-within {
+            background-color: var(--ipl-input-color-alpha-focus);
+        }
+    }
+
+    .extra {
+        padding: 0 12px 8px 0;
+
+        .extra-text:not(:empty, :last-child) {
+            margin-right: 4px;
+        }
+    }
+
+    label {
+        display: block;
+        padding: 8px 12px;
+    }
+
+    input {
+        font-size: 1.75em;
+    }
+}
 
 .ipl-input__input-and-extras {
-    border-bottom: 1px solid $input-color;
-    transition-duration: $transition-duration-low;
+    border-bottom: 1px solid var(--ipl-input-color);
+    transition-duration: constants.$transition-duration-low;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -156,15 +202,15 @@ export default defineComponent({
     }
 
     &:focus-within {
-        border-color: $input-color-active;
+        border-color: var(--ipl-input-color-focus);
 
         label {
-            color: $input-color-active;
+            color: var(--ipl-input-color-focus);
         }
     }
 
     &.has-error {
-        border-color: $error-color;
+        border-color: var(--ipl-input-error-color);
     }
 
     &.is-color {
@@ -173,23 +219,27 @@ export default defineComponent({
 }
 
 label.has-error {
-    color: $error-color !important;
+    color: var(--ipl-input-error-color) !important;
 }
 
 input {
     background-color: transparent;
     border: 0;
     width: 100%;
-    color: $text-color;
+    color: var(--ipl-body-text-color);
     font-size: 1.4em;
-    font-family: 'Roboto', sans-serif;
+    font-family: constants.$body-font;
     display: block;
     box-sizing: border-box;
     margin: 2px 0;
     padding: 0;
 
     &:disabled {
-        color: $text-color-disabled;
+        color: var(--ipl-disabled-body-text-color);
+
+        &::placeholder {
+            opacity: 75%;
+        }
     }
 
     &:focus {
@@ -209,40 +259,53 @@ input {
     &[type='search'] {
         &::-webkit-search-cancel-button {
             -webkit-appearance: none;
-            // x-mark from font-awesome: https://fontawesome.com/icons/xmark?s=solid
-            background-image: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20512%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M310.6%20361.4c12.5%2012.5%2012.5%2032.75%200%2045.25C304.4%20412.9%20296.2%20416%20288%20416s-16.38-3.125-22.62-9.375L160%20301.3L54.63%20406.6C48.38%20412.9%2040.19%20416%2032%20416S15.63%20412.9%209.375%20406.6c-12.5-12.5-12.5-32.75%200-45.25l105.4-105.4L9.375%20150.6c-12.5-12.5-12.5-32.75%200-45.25s32.75-12.5%2045.25%200L160%20210.8l105.4-105.4c12.5-12.5%2032.75-12.5%2045.25%200s12.5%2032.75%200%2045.25l-105.4%20105.4L310.6%20361.4z%22%2F%3E%3C%2Fsvg%3E');
-            background-size: 12px;
-            width: 16px;
-            height: 16px;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition-duration: $transition-duration-low;
-            cursor: pointer;
-            opacity: 0;
-
-            &:hover {
-                opacity: 0.5 !important;
-            }
-
-            &:active {
-                opacity: 0.9 !important;
-            }
-        }
-
-        &:hover::-webkit-search-cancel-button {
-            opacity: 0.3;
         }
     }
 
     &[type='color'] {
-        background-color: $background-secondary;
+        background-color: var(--ipl-bg-secondary);
         padding: 5px;
-        height: 36px;
-        border-radius: $border-radius-inner;
+        border-radius: constants.$border-radius-inner;
+        transition-property: background-color;
+        transition-duration: constants.$transition-duration-low;
+        height: 32px;
 
         &:disabled {
-            background-color: $background-tertiary;
+            background-color: var(--ipl-bg-tertiary);
         }
+
+        &:not(:disabled) {
+            &:hover {
+                background-color: var(--ipl-bg-secondary-hover);
+            }
+
+            &:active {
+                background-color: var(--ipl-bg-secondary-active);
+            }
+        }
+
+        &:focus-visible {
+            outline: var(--ipl-focus-outline-width) solid var(--ipl-focus-outline-color);
+        }
+
+        &::-moz-color-swatch {
+            border-width: 0;
+            border-radius: 2px;
+        }
+
+        &::-webkit-color-swatch {
+            border-width: 0;
+            border-radius: 2px;
+        }
+
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+    }
+
+    &::placeholder {
+        color: var(--ipl-input-color-placeholder);
+        opacity: 100%;
     }
 
     &.centered {
@@ -251,7 +314,7 @@ input {
 }
 
 .error {
-    color: $error-color;
+    color: var(--ipl-input-error-color);
     font-size: 0.75em;
 }
 

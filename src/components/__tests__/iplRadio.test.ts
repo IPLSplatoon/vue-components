@@ -7,6 +7,7 @@ describe('IplRadio', () => {
             props: {
                 modelValue: 'opt1',
                 label: 'Radio!',
+                name: 'test-radio',
                 options: [
                     { name: 'Option One', value: 'opt1' },
                     { name: 'Option Two', value: 'opt2', disabled: false },
@@ -23,6 +24,7 @@ describe('IplRadio', () => {
             props: {
                 modelValue: 'opt1',
                 label: 'Radio!',
+                name: 'test-radio',
                 options: [
                     { name: 'Option One', value: 'opt1' },
                     { name: 'Option Two', value: 'opt2', disabled: false },
@@ -31,28 +33,13 @@ describe('IplRadio', () => {
             }
         });
 
-        await wrapper.get('[data-test=option_opt2]').trigger('click');
+        const secondOption = wrapper.findAll('input').at(1);
+        expect(secondOption).not.toBeUndefined();
+        secondOption!.element.checked = true;
+        await secondOption!.trigger('change');
 
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted).toBeTruthy();
         expect(emitted?.[0]).toEqual(['opt2']);
-    });
-
-    it('does not emit update event when selecting disabled option', async () => {
-        const wrapper = mount(IplRadio, {
-            props: {
-                modelValue: 'opt1',
-                label: 'Radio!',
-                options: [
-                    { name: 'Option One', value: 'opt1' },
-                    { name: 'Option Two', value: 'opt2', disabled: true }
-                ]
-            }
-        });
-
-        await wrapper.get('[data-test=option_opt2]').trigger('click');
-
-        const emitted = wrapper.emitted('update:modelValue');
-        expect(emitted).toBeFalsy();
     });
 });

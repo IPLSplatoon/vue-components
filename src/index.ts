@@ -1,3 +1,6 @@
+import './styles/variables.scss';
+import './styles/variables-light.scss';
+
 export { default as IplButton } from './components/iplButton.vue';
 export { default as IplCheckbox } from './components/iplCheckbox.vue';
 export { default as IplDataRow } from './components/iplDataRow.vue';
@@ -19,6 +22,8 @@ export { default as IplSmallToggle } from './components/iplSmallToggle.vue';
 export { default as IplRadio } from './components/iplRadio.vue';
 export { default as IplBadge } from './components/iplBadge.vue';
 export { default as IplSpinner } from './components/iplSpinner.vue';
+export { default as IplTextarea } from './components/iplTextarea.vue';
+export { default as IplPagination } from './components/iplPagination.vue';
 export * from './helpers/stringHelper';
 export * from './helpers/colorHelper';
 export * from './validation/validator';

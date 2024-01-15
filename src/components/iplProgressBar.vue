@@ -1,7 +1,7 @@
 <template>
     <div
         class="ipl-progress-bar__wrapper"
-        :style="{ backgroundColor: hexBackgroundColor }"
+        :class="`background-${backgroundColor}`"
     >
         <div
             class="progress-bar"
@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
-import { progressBarBackgroundColors, progressBarColors } from '../styles/colors';
+import { progressBarColors } from '../styles/colors';
 
 export default defineComponent({
     name: 'IplProgressBar',
@@ -30,10 +30,10 @@ export default defineComponent({
             }
         },
         backgroundColor: {
-            type: String as PropType<keyof typeof progressBarBackgroundColors>,
-            default: 'light',
+            type: String as PropType<'light' | 'dark' | 'primary' | 'secondary'>,
+            default: 'secondary',
             validator: (value: string) => {
-                return Object.keys(progressBarBackgroundColors).includes(value);
+                return value === 'dark' || value === 'light' || value === 'primary' || value === 'secondary';
             }
         }
     },
@@ -46,29 +46,36 @@ export default defineComponent({
                     return props.color;
                 }
                 return (progressBarColors as Record<string, string>)[props.color];
-            }),
-            hexBackgroundColor: computed(() => progressBarBackgroundColors[props.backgroundColor])
+            })
         };
     }
 });
 </script>
 
 <style lang="scss">
-@import './src/styles/constants';
+@use 'src/styles/constants';
 
 .ipl-progress-bar__wrapper {
     height: 16px;
     border-radius: 8px;
     padding: 3px;
     display: block;
-    transition-duration: $transition-duration-low;
+    transition-duration: constants.$transition-duration-low;
     box-sizing: border-box;
 
     .progress-bar {
         height: 100%;
         min-width: 10px;
         border-radius: 6px;
-        transition-duration: $transition-duration-low;
+        transition-duration: constants.$transition-duration-low;
+    }
+
+    &.background-light, &.background-secondary {
+        background-color: var(--ipl-bg-secondary);
+    }
+
+    &.background-dark, &.background-primary {
+        background-color: var(--ipl-bg-primary);
     }
 }
 </style>

@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IplToggle matches snapshot 1`] = `
-"<div class="ipl-toggle__container">
+"<div class="ipl-toggle__container" role="switch" tabindex="0">
   <div class="ipl-toggle__text"><span class="true-option">Show</span><span class="false-option selected">Hide</span></div>
   <div class="ipl-toggle__button"></div>
 </div>"
 `;
 
 exports[`IplToggle matches snapshot with custom labels 1`] = `
-"<div class="ipl-toggle__container">
+"<div class="ipl-toggle__container" role="switch" tabindex="0">
   <div class="ipl-toggle__text"><span class="true-option">Enable</span><span class="false-option selected">Disable</span></div>
   <div class="ipl-toggle__button"></div>
 </div>"

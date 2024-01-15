@@ -13,10 +13,6 @@
         "import/resolver": {
             "typescript": {
                 "project": "tsconfig.json"
-            },
-            "webpack": {
-                "config": "webpack.config.js",
-                "config-index": 0
             }
         },
         "import/extensions": [".js", ".ts"]
@@ -87,7 +83,9 @@
             "files": ["*.test.ts"],
             "rules": {
                 "@typescript-eslint/no-var-requires": 0,
-                "@typescript-eslint/no-this-alias": 0
+                "@typescript-eslint/no-this-alias": 0,
+                "@typescript-eslint/no-non-null-assertion": 0,
+                "vue/one-component-per-file": 0
             }
         },
         {

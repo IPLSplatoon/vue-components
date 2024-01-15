@@ -35,8 +35,7 @@ describe('IplProgressBar', () => {
     it('sets background color from props', () => {
         const wrapper = mount(IplProgressBar, { props: { value: 23, color: 'pink', backgroundColor: 'dark' } });
 
-        expect((wrapper.get('.ipl-progress-bar__wrapper').element as HTMLElement).style.backgroundColor)
-            .toEqual('rgb(38, 47, 64)');
+        expect((wrapper.get('.ipl-progress-bar__wrapper').element as HTMLElement).classList).toContain('background-dark');
     });
 
     describe('validator: color', () => {

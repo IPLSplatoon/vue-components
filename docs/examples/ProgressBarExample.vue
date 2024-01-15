@@ -33,12 +33,12 @@ import { ref } from 'vue';
 import IplProgressBar from '../../src/components/iplProgressBar.vue';
 import IplInput from '../../src/components/iplInput.vue';
 import IplSelect from '../../src/components/iplSelect.vue';
-import { progressBarBackgroundColors, progressBarColors } from '../../src/styles/colors';
+import { progressBarColors } from '../../src/styles/colors';
 
 const value = ref(50);
 
-const backgroundColor = ref<'dark' | 'light'>('dark');
-const backgroundColorOptions = Object.keys(progressBarBackgroundColors).map(color => ({ name: color, value: color }));
+const backgroundColor = ref<'primary' | 'secondary'>('primary');
+const backgroundColorOptions = [{ name: 'primary', value: 'primary' }, { name: 'secondary', value: 'secondary' }];
 
 const color = ref('blue');
 const colorOptions = Object.keys(progressBarColors).map(color => ({ name: color, value: color }));

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`iplTextarea matches snapshot 1`] = `
+"<div class="ipl-textarea__wrapper"><label class="ipl-label">Textarea! <textarea name="test-textarea" placeholder="Test Placeholder"></textarea></label>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`iplTextarea matches snapshot when invalid 1`] = `"<div class="ipl-textarea__wrapper has-error"><label class="ipl-label">Textarea! <textarea name="test-textarea" placeholder="Test Placeholder"></textarea></label><span class="error">error!!</span></div>"`;
+
+exports[`iplTextarea matches snapshot when valid 1`] = `
+"<div class="ipl-textarea__wrapper"><label class="ipl-label">Textarea! <textarea name="test-textarea" placeholder="Test Placeholder"></textarea></label>
+  <!--v-if-->
+</div>"
+`;

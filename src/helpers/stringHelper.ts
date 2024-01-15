@@ -17,6 +17,6 @@ export function formatNumber(value: number): string {
     return new Intl.NumberFormat('en-US').format(value);
 }
 
-export function isBlank(value?: string | null): boolean {
-    return value === null || value === undefined || value.trim() === '';
+export function isBlank(value?: unknown): boolean {
+    return value === null || value === undefined || String(value).trim() === '';
 }
