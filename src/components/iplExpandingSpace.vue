@@ -163,8 +163,12 @@ export default defineComponent({
             }
         }
 
-        > .header-extra:not(:empty) {
-            margin-left: 8px;
+        > .header-extra {
+            z-index: 1;
+
+            &:not(:empty) {
+                margin-left: 8px;
+            }
         }
 
         .ipl-expanding-space__title {

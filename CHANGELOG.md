@@ -1,3 +1,7 @@
+# 3.0.1
+
+- Fix content within the header-extra slot of ipl-expanding-space sometimes being invisible
+
 # 3.0.0
 
 ## Breaking
