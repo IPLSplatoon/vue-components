@@ -33,3 +33,7 @@ title: ipl-button
 ## Transparent
 
 ::: demo ButtonTransparentExample
+
+## Custom Content
+
+::: demo ButtonCustomContentExample

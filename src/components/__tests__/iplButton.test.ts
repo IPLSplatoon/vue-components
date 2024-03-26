@@ -18,6 +18,16 @@ describe('iplButton', () => {
         expect(wrapper.find('span.label').text()).toEqual('Button');
     });
 
+    it('applies content from default slot', () => {
+        const wrapper = shallowMount(IplButton, {
+            slots: {
+                default: () => 'test default slot'
+            }
+        });
+
+        expect(wrapper.find('span.label').text()).toEqual('test default slot');
+    });
+
     it('applies given href to button if present', () => {
         const wrapper = shallowMount(IplButton, { props: { label: 'Button', href: 'https://google.com/' } });
 
@@ -30,10 +40,10 @@ describe('iplButton', () => {
         expect(wrapper.find('font-awesome-icon-stub.icon').attributes().icon).toEqual('cool-icon');
     });
 
-    it('does not create label element if icon is given', () => {
+    it('creates icon element if icon is provided', () => {
         const wrapper = shallowMount(IplButton, { props: { icon: 'cool-icon', label: 'something' } });
 
-        expect(wrapper.find('span.label').exists()).toEqual(false);
+        expect(wrapper.find('span.label').text()).toEqual('');
         expect(wrapper.find('font-awesome-icon-stub.icon').exists()).toEqual(true);
     });
 

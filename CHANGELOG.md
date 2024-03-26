@@ -1,3 +1,9 @@
+# 3.1.0
+
+- Allow adding labels to ipl-button through its default slot
+  - For example, this can be used to make a button's label contain an icon and text simultaneously.
+- Allow disabling text capitalization on ipl-button
+
 # 3.0.1
 
 - Fix content within the header-extra slot of ipl-expanding-space sometimes being invisible

@@ -19,18 +19,36 @@
         @click="handleClick"
         @contextmenu="$emit('rightClick', $event)"
     >
-        <span
-            v-if="!isIconButton"
-            class="label"
-        >
-            {{ labelInternal }}
+        <span class="label">
+            <slot :state="labelState">
+                <span
+                    v-if="!isIconButton"
+                    class="default-label"
+                >
+                    <template v-if="labelState === 'idle'">
+                        {{ label }}
+                    </template>
+                    <template v-else-if="labelState === 'confirm'">
+                        {{ shortConfirmationMessage ? 'Confirm?' : 'Are you sure?' }}
+                    </template>
+                    <template v-else-if="labelState === 'error'">
+                        Error!
+                    </template>
+                    <template v-else-if="labelState === 'loading'">
+                        Loading...
+                    </template>
+                    <template v-else-if="labelState === 'success'">
+                        {{ successMessage }}
+                    </template>
+                </span>
+                <font-awesome-icon
+                    v-else
+                    :icon="icon"
+                    class="icon"
+                    fixed-width
+                />
+            </slot>
         </span>
-        <font-awesome-icon
-            v-else
-            :icon="icon"
-            class="icon"
-            fixed-width
-        />
     </component>
 </template>
 
@@ -110,10 +128,6 @@ export default defineComponent({
     emits: [ 'click', 'rightClick' ],
 
     setup(props, { emit }) {
-        if (props.icon == null && isBlank(props.label)) {
-            console.warn('ipl-button requires an icon or label to be provided.');
-        }
-
         const instance = getCurrentInstance();
         let resetTimeout: number | null = null;
         let confirmationResetTimeout: number | null = null;
@@ -210,22 +224,13 @@ export default defineComponent({
             buttonState,
             isIconButton: computed(() => props.icon != null),
             disabledInternal,
-            labelInternal: computed(() => {
+            labelState: computed<'idle' | 'error' | 'success' | 'loading' | 'confirm'>(() => {
                 if (props.requiresConfirmation && isClicked.value) {
-                    return props.shortConfirmationMessage ? 'Confirm?' : 'Are you sure?';
+                    return 'confirm';
                 }
-                if (!props.async && !props.disableOnSuccess) return props.label;
+                if (!props.async && !props.disableOnSuccess) return 'idle';
 
-                switch (buttonState.value) {
-                    case 'error':
-                        return 'Error!';
-                    case 'loading':
-                        return props.progressMessage;
-                    case 'success':
-                        return props.successMessage;
-                    default:
-                        return props.label;
-                }
+                return buttonState.value;
             }),
             isBlank,
             hasLink
@@ -239,7 +244,6 @@ export default defineComponent({
 
 .ipl-button {
     text-decoration: none !important;
-    text-transform: uppercase;
     font-size: 1em;
     font-weight: 700;
     font-family: constants.$body-font;
@@ -274,21 +278,29 @@ export default defineComponent({
         width: 2.4em;
         min-width: 2.4em;
         padding: 0.4em;
+
+        :deep(.icon) {
+            height: 100%;
+            width: 100%;
+        }
     }
 
     &.small {
         font-size: 0.75em;
     }
 
-    .label, .icon {
+    .label, :deep(.icon) {
         z-index: 3;
         position: relative;
         user-select: none;
     }
 
-    .icon {
-        height: 100%;
-        width: 100%;
+    .default-label {
+        text-transform: uppercase;
+    }
+
+    &.no-text-transform .default-label {
+        text-transform: none;
     }
 
     &.disabled {
