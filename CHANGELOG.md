@@ -1,6 +1,7 @@
 # 3.2.0
 
 - Allow changing the background color of ipl-dialog-title
+- Allow adding labels to ipl-small-toggle through its default slot 
 
 # 3.1.0
 

@@ -2,6 +2,19 @@ import IplSmallToggle from '../iplSmallToggle.vue';
 import { mount } from '@vue/test-utils';
 
 describe('IplSmallToggle', () => {
+    it('matches snapshot when adding label from slots', () => {
+        const wrapper = mount(IplSmallToggle, {
+            props: {
+                modelValue: true
+            },
+            slots: {
+                default: () => 'Toggle! (Label from slot)'
+            }
+        });
+
+        expect(wrapper.html()).toMatchSnapshot();
+    });
+
     it('matches snapshot when toggle value is true', () => {
         const wrapper = mount(IplSmallToggle, {
             props: {

@@ -3,7 +3,11 @@
         class="ipl-small-toggle__wrapper"
         :class="{ disabled: disabled }"
     >
-        {{ label }}
+        <span class="label">
+            <slot>
+                {{ label }}
+            </slot>
+        </span>
         <input
             v-model="model"
             type="checkbox"
@@ -22,7 +26,7 @@ export default defineComponent({
     props: {
         label: {
             type: String,
-            required: true
+            default: ''
         },
         modelValue: {
             type: Boolean as PropType<boolean>,

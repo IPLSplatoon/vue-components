@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`IplSmallToggle matches snapshot when toggle is disabled 1`] = `"<label class="ipl-small-toggle__wrapper disabled">Toggle! <input type="checkbox" role="switch" disabled=""></label>"`;
+exports[`IplSmallToggle matches snapshot when adding label from slots 1`] = `"<label class="ipl-small-toggle__wrapper"><span class="label">Toggle! (Label from slot)</span><input type="checkbox" role="switch"></label>"`;
 
-exports[`IplSmallToggle matches snapshot when toggle value is false 1`] = `"<label class="ipl-small-toggle__wrapper">Toggle! <input type="checkbox" role="switch"></label>"`;
+exports[`IplSmallToggle matches snapshot when toggle is disabled 1`] = `"<label class="ipl-small-toggle__wrapper disabled"><span class="label">Toggle!</span><input type="checkbox" role="switch" disabled=""></label>"`;
 
-exports[`IplSmallToggle matches snapshot when toggle value is true 1`] = `"<label class="ipl-small-toggle__wrapper">Toggle! <input type="checkbox" role="switch"></label>"`;
+exports[`IplSmallToggle matches snapshot when toggle value is false 1`] = `"<label class="ipl-small-toggle__wrapper"><span class="label">Toggle!</span><input type="checkbox" role="switch"></label>"`;
+
+exports[`IplSmallToggle matches snapshot when toggle value is true 1`] = `"<label class="ipl-small-toggle__wrapper"><span class="label">Toggle!</span><input type="checkbox" role="switch"></label>"`;
