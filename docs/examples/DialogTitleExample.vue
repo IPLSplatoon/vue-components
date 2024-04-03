@@ -1,9 +1,19 @@
 <template>
     <event-log>
-        <div class="resizable alt-background">
+        <div class="resizable gray-background vertical-layout">
             <!-- #region example -->
             <ipl-dialog-title
                 title="Dialog Title"
+                :closing-disabled="disableClosing"
+            />
+            <ipl-dialog-title
+                title="Dialog Title (Secondary Color)"
+                color="secondary"
+                :closing-disabled="disableClosing"
+            />
+            <ipl-dialog-title
+                title="Dialog Title (Blue)"
+                color="blue"
                 :closing-disabled="disableClosing"
             />
             <!-- #endregion example -->

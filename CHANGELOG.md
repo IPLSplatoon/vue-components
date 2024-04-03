@@ -1,3 +1,7 @@
+# 3.2.0
+
+- Allow changing the background color of ipl-dialog-title
+
 # 3.1.0
 
 - Allow adding labels to ipl-button through its default slot

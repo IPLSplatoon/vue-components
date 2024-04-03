@@ -1,5 +1,8 @@
 <template>
-    <div class="ipl-dialog-title">
+    <div
+        class="ipl-dialog-title"
+        :class="`color-${color}`"
+    >
         <span class="ipl-dialog-title__title-text">{{ title }}</span>
         <ipl-button
             data-test="close-button"
@@ -15,9 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import IplButton from './iplButton.vue';
+import { isValidSpaceColor, SpaceColor } from '../helpers/spaceColorHelper';
 
 export default defineComponent({
     name: 'IplDialogTitle',
@@ -32,6 +36,13 @@ export default defineComponent({
         closingDisabled: {
             type: Boolean,
             default: false
+        },
+        color: {
+            type: String as PropType<SpaceColor>,
+            default: 'primary',
+            validator: (value: string): boolean => {
+                return isValidSpaceColor(value);
+            }
         }
     },
 
@@ -50,15 +61,16 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use 'src/styles/constants';
+@use 'src/styles/space';
 
 .ipl-dialog-title {
+    @include space.space-colors();
+
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: var(--ipl-bg-primary);
     padding: 4px 8px;
     border-radius: constants.$border-radius-outer;
-    color: var(--ipl-body-text-color);
 
     .ipl-dialog-title__title-text {
         flex-grow: 1;
