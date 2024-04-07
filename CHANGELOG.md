@@ -1,3 +1,9 @@
+# 3.3.0
+
+- Add an `errorMessage` prop to ipl-button to allow changing the message that appears when an async action fails 
+- Fix the `progressMessage` prop of ipl-button doing nothing
+- Fix ipl-checkbox visuals sometimes disappearing with long labels
+
 # 3.2.0
 
 - Allow changing the background color of ipl-dialog-title
