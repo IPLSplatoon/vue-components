@@ -108,7 +108,7 @@ label {
         appearance: none;
         border-radius: constants.$border-radius-inner;
         background-color: var(--ipl-bg-tertiary);
-        width: 22px;
+        min-width: 22px;
         height: 22px;
         transition: background-color constants.$transition-duration-low;
         display: grid;
