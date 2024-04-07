@@ -14,6 +14,7 @@
             label="Failure"
             async
             progress-message="Failing..."
+            error-message="Failed!"
             :disable-on-success="disableOnSuccess"
             :color="useConflictingPresetColors ? 'red' : 'blue'"
             @click="asyncFailure"

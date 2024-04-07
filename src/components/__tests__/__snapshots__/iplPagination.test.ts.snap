@@ -7,8 +7,8 @@ exports[`iplPagination matches snapshot 1`] = `
   </div>
   <div class="page-buttons">
     <!--v-if-->
-    <ipl-button-stub icon="[object Object]" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
-    <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" errormessage="Error!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" errormessage="Error!" requiresconfirmation="false" shortconfirmationmessage="false" small="false" disableonsuccess="false" inline="true"></ipl-button-stub>
   </div>
 </div>"
 `;

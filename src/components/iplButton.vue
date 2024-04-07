@@ -29,13 +29,17 @@
                         {{ label }}
                     </template>
                     <template v-else-if="labelState === 'confirm'">
-                        {{ shortConfirmationMessage ? 'Confirm?' : 'Are you sure?' }}
+                        {{
+                            confirmationMessage == null
+                                ? shortConfirmationMessage ? 'Confirm?' : 'Are you sure?'
+                                : confirmationMessage
+                        }}
                     </template>
                     <template v-else-if="labelState === 'error'">
-                        Error!
+                        {{ errorMessage }}
                     </template>
                     <template v-else-if="labelState === 'loading'">
-                        Loading...
+                        {{ progressMessage }}
                     </template>
                     <template v-else-if="labelState === 'success'">
                         {{ successMessage }}
@@ -99,9 +103,17 @@ export default defineComponent({
             type: String,
             default: 'Done!'
         },
+        errorMessage: {
+            type: String,
+            default: 'Error!'
+        },
         requiresConfirmation: {
             type: Boolean,
             default: false
+        },
+        confirmationMessage: {
+            type: String,
+            default: null
         },
         shortConfirmationMessage: {
             type: Boolean,

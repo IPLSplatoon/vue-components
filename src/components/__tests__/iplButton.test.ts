@@ -158,6 +158,22 @@ describe('iplButton', () => {
             expect((wrapper.vm.buttonStyle as { backgroundColor: string }).backgroundColor).toEqual('#e74e36');
         });
 
+        it('has expected label and color when clicked once and custom confirmation message is defined', async () => {
+            const wrapper = shallowMount(IplButton, {
+                props: {
+                    label: 'Button',
+                    requiresConfirmation: true,
+                    confirmationMessage: 'Are you sure?!?!?!'
+                }
+            });
+            const button = wrapper.get('button');
+
+            await button.trigger('click');
+
+            expect(button.text()).toEqual('Are you sure?!?!?!');
+            expect((wrapper.vm.buttonStyle as { backgroundColor: string }).backgroundColor).toEqual('#e74e36');
+        });
+
         it('has expected label and color when clicked once and short confirmation message is enabled', async () => {
             const wrapper = shallowMount(IplButton, {
                 props: {
@@ -219,7 +235,7 @@ describe('iplButton', () => {
                 props: {
                     label: 'Button',
                     async: true,
-                    progressMessage: 'Loading...'
+                    progressMessage: 'Loading!!!'
                 }
             });
             if (!wrapper.vm.$.vnode.props) {
@@ -235,7 +251,7 @@ describe('iplButton', () => {
             expect(wrapper.vm.disabledInternal).toEqual(true);
             expect(button.classes()).toContain('disabled');
             expect(button.classes()).toContain('is-loading');
-            expect(button.text()).toEqual('Loading...');
+            expect(button.text()).toEqual('Loading!!!');
             expect(wrapper.vm.$.vnode.props.onClick).toHaveBeenCalled();
         });
 
@@ -343,7 +359,8 @@ describe('iplButton', () => {
             const wrapper = shallowMount(IplButton, {
                 props: {
                     label: 'Button',
-                    async: true
+                    async: true,
+                    errorMessage: 'Error!!!!',
                 }
             });
             if (!wrapper.vm.$.vnode.props) {
@@ -359,7 +376,7 @@ describe('iplButton', () => {
             } catch (e) {}
 
             expect(wrapper.vm.disabledInternal).toEqual(false);
-            expect(button.text()).toEqual('Error!');
+            expect(button.text()).toEqual('Error!!!!');
             expect((wrapper.vm.buttonStyle as { backgroundColor: string }).backgroundColor).toEqual('#e74e36');
             expect(wrapper.vm.$.vnode.props.onClick).toHaveBeenCalled();
         });
