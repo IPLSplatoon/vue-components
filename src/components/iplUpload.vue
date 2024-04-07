@@ -7,8 +7,7 @@
         @drop="handleDrop"
     >
         <span v-if="!modelValue">
-            Drag a file here or<br>
-            click to browse...
+            {{ placeholder }}
         </span>
         <template v-else>
             <font-awesome-icon
@@ -38,6 +37,10 @@ export default defineComponent({
         modelValue: {
             type: [File, null] as PropType<File | null>,
             required: true
+        },
+        placeholder: {
+            type: String,
+            default: 'Drag a file here or click to browse...',
         }
     },
 

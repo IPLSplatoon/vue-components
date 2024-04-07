@@ -1,6 +1,7 @@
 # 3.3.0
 
-- Add an `errorMessage` prop to ipl-button to allow changing the message that appears when an async action fails 
+- Add an `errorMessage` prop to ipl-button to allow changing the message that appears when an async action fails
+- Allow changing the placeholder text of ipl-upload
 - Fix the `progressMessage` prop of ipl-button doing nothing
 - Fix ipl-checkbox visuals sometimes disappearing with long labels
 

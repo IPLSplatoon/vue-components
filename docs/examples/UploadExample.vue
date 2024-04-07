@@ -2,7 +2,10 @@
     <div class="vertical-layout width-capped-content">
         <!-- #region example -->
         <div>Uploaded file: {{ file?.name }}</div>
-        <ipl-upload v-model="file" />
+        <ipl-upload
+            v-model="file"
+            placeholder="Click to upload a file..."
+        />
         <!-- #endregion example -->
     </div>
 </template>

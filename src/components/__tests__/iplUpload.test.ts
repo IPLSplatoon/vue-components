@@ -48,6 +48,12 @@ describe('IplUpload', () => {
         expect(wrapper.html()).toMatchSnapshot();
     });
 
+    it('shows custom message if no file is uploaded', () => {
+        const wrapper = mount(IplUpload, { props: { modelValue: null, placeholder: 'Upload a file!' } });
+
+        expect(wrapper.html()).toMatchSnapshot();
+    });
+
     it('emits update when a file is dropped onto the element', async () => {
         const mockFile = new File([], 'mock-file');
         const wrapper = mount(IplUpload, { props: { modelValue: null } });
