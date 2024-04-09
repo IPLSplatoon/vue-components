@@ -68,12 +68,13 @@ label {
         font-size: 0.75em;
 
         > input {
-            width: 16px;
+            min-width: 16px;
             height: 16px;
             margin: 0 5px 0 0;
 
             &:checked:before {
                 background-size: 14px;
+                width: 16px;
             }
         }
     }

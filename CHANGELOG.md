@@ -1,3 +1,7 @@
+# 3.3.1
+
+- Fix small checkboxes being really wide
+
 # 3.3.0
 
 - Add an `errorMessage` prop to ipl-button to allow changing the message that appears when an async action fails
