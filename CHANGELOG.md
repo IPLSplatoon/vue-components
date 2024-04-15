@@ -1,3 +1,7 @@
+# 3.3.2
+
+- Remove pointer cursors where they shouldn't be
+
 # 3.3.1
 
 - Fix small checkboxes being really wide
