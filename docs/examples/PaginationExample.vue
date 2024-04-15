@@ -1,10 +1,22 @@
 <template>
-    <div class="alt-background">
+    <div class="gray-background vertical-layout">
         <!-- #region example -->
         <ipl-pagination
             v-model="page"
             :max-page="10"
             :loading="loading"
+        />
+        <ipl-pagination
+            v-model="page"
+            :max-page="10"
+            :loading="loading"
+            color="secondary"
+        />
+        <ipl-pagination
+            v-model="page"
+            :max-page="10"
+            :loading="loading"
+            color="blue"
         />
         <!-- #endregion example -->
     </div>
