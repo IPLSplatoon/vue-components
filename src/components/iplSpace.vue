@@ -53,6 +53,7 @@ button.ipl-space {
     user-select: none;
     transition-property: background-color;
     transition-duration: constants.$transition-duration-low;
+    cursor: default;
 
     &:focus-visible {
         outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);

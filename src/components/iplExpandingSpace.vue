@@ -141,7 +141,6 @@ export default defineComponent({
     }
 
     .ipl-expanding-space__header {
-        cursor: pointer;
         user-select: none;
         display: flex;
         align-items: center;

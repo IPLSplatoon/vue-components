@@ -83,7 +83,6 @@ export default defineComponent({
     background-color: var(--ipl-bg-tertiary);
     border-radius: constants.$border-radius-inner;
     position: relative;
-    cursor: pointer;
     transition-duration: constants.$transition-duration-low;
     display: flex;
     flex-direction: row;
