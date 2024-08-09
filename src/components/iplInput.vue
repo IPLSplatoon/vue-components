@@ -1,32 +1,35 @@
 <template>
-    <div
+    <ipl-label
         class="ipl-input__wrapper"
-        :class="{ [`theme-${theme}`]: true, 'disabled': disabled }"
+        :class="{ [`theme-${theme}`]: true, 'disabled': disabled, 'has-error': validator?.isValid === false }"
     >
+        {{ label }}
         <div
             class="ipl-input__input-and-extras"
-            :class="{ 'has-error': validator?.isValid === false, 'is-color': type === 'color' }"
+            :class="{ 'is-color': type === 'color' }"
         >
-            <div class="ipl-input__input-wrapper">
-                <ipl-label :class="{ 'has-error': validator?.isValid === false }">
-                    {{ label }}
-                    <input
-                        ref="input"
-                        v-model="model"
-                        :name="name"
-                        :type="type"
-                        :class="{ centered: centered }"
-                        :disabled="disabled"
-                        :placeholder="placeholder"
-                        @focus="handleFocusEvent"
-                        @blur="handleFocusEvent"
-                        @input="handleFocusEvent($event), handleInputEvent()"
-                    >
-                </ipl-label>
+            <div
+                v-if="!isBlank(prefix)"
+                class="extra prefix"
+                @mousedown.prevent="focus"
+            >
+                <span class="extra-text">{{ prefix }}</span>
             </div>
+            <input
+                ref="input"
+                v-model="model"
+                :name="name"
+                :type="type"
+                :class="{ centered: centered }"
+                :disabled="disabled"
+                :placeholder="placeholder"
+                @focus="handleFocusEvent"
+                @blur="handleFocusEvent"
+                @input="handleFocusEvent($event), handleInputEvent()"
+            >
             <div
                 v-if="!isBlank(extra) || loading"
-                class="extra"
+                class="extra suffix"
                 @mousedown.prevent="focus"
             >
                 <span class="extra-text">{{ extra }}</span>
@@ -46,7 +49,7 @@
         >
             {{ validator?.message }}
         </span>
-    </div>
+    </ipl-label>
 </template>
 
 <script lang="ts">
@@ -98,6 +101,10 @@ export default defineComponent({
             default: false
         },
         extra: {
+            type: String,
+            default: null
+        },
+        prefix: {
             type: String,
             default: null
         },
@@ -156,37 +163,60 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use 'src/styles/constants';
 
-.ipl-input__wrapper.theme-large {
-    &.disabled {
+
+.ipl-input__wrapper {
+    display: block;
+    margin-top: 3px;
+
+    &.has-error {
+        color: var(--ipl-input-error-color) !important;
+
         .ipl-input__input-and-extras {
-            background-color: var(--ipl-input-color-alpha-disabled);
+            border-color: var(--ipl-input-error-color);
         }
     }
 
-    .ipl-input__input-and-extras {
-        background-color: var(--ipl-input-color-alpha);
-        border-radius: constants.$border-radius-inner constants.$border-radius-inner 0 0;
+    &:focus-within {
+        color: var(--ipl-input-color-focus);
+    }
 
-        &:not(.disabled):focus-within {
-            background-color: var(--ipl-input-color-alpha-focus);
+    &.theme-large {
+        margin-top: 0;
+
+        &.disabled {
+            .ipl-input__input-and-extras {
+                background-color: var(--ipl-input-color-alpha-disabled);
+            }
         }
-    }
 
-    .extra {
-        padding: 0 12px 8px 0;
+        .ipl-input__input-and-extras {
+            padding: 8px 12px;
+            background-color: var(--ipl-input-color-alpha);
+            border-radius: constants.$border-radius-inner constants.$border-radius-inner 0 0;
 
-        .extra-text:not(:empty, :last-child) {
-            margin-right: 4px;
+            &:not(.disabled):focus-within {
+                background-color: var(--ipl-input-color-alpha-focus);
+            }
         }
-    }
 
-    label {
-        display: block;
-        padding: 8px 12px;
-    }
+        .extra {
+            padding: 0 0 2px 0;
+            font-size: 1.75em;
 
-    input {
-        font-size: 1.75em;
+            &.suffix {
+                .extra-text:not(:empty, :last-child) {
+                    margin-right: 4px;
+                }
+            }
+
+            .extra-text {
+                padding-bottom: 0;
+            }
+        }
+
+        input {
+            font-size: 1.75em;
+        }
     }
 }
 
@@ -197,29 +227,17 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
 
-    > .ipl-input__input-wrapper {
+    > input {
         flex-grow: 1;
     }
 
     &:focus-within {
         border-color: var(--ipl-input-color-focus);
-
-        label {
-            color: var(--ipl-input-color-focus);
-        }
-    }
-
-    &.has-error {
-        border-color: var(--ipl-input-error-color);
     }
 
     &.is-color {
         border-bottom: unset !important;
     }
-}
-
-label.has-error {
-    color: var(--ipl-input-error-color) !important;
 }
 
 input {
@@ -315,15 +333,26 @@ input {
 
 .error {
     color: var(--ipl-input-error-color);
-    font-size: 0.75em;
+    font-size: 1em;
+    display: inline-block;
+    margin-top: 2px;
 }
 
 .extra {
     display: flex;
     align-items: flex-end;
-    padding-bottom: 2px;
-    padding-left: 4px;
     user-select: none;
     cursor: text;
+    font-size: 1.4em;
+    color: var(--ipl-body-text-color);
+    white-space: nowrap;
+
+    &.suffix {
+        padding-left: 4px;
+    }
+
+    .extra-text {
+         padding-bottom: 2px;
+    }
 }
 </style>

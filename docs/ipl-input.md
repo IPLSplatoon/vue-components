@@ -10,7 +10,7 @@ title: ipl-input
 
 ::: demo InputLargeExample
 
-## Extra text
+## Prefix/Suffix
 
 ::: demo InputExtraExample
 

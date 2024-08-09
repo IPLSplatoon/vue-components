@@ -1,12 +1,17 @@
 <template>
-    <div class="resizable">
+    <div class="resizable vertical-layout">
         <!-- #region example -->
         <ipl-input
             v-model="inputValue"
-            label="Input"
             name="input-example"
             type="number"
             extra="seconds"
+            :loading="loading"
+        />
+        <ipl-input
+            v-model="prefixedInputValue"
+            name="input-example"
+            prefix="/test/"
             :loading="loading"
         />
         <!-- #endregion example -->
@@ -25,5 +30,6 @@ import IplCheckbox from '../../src/components/iplCheckbox.vue';
 import { ref } from 'vue';
 
 const inputValue = ref(5);
+const prefixedInputValue = ref('test2');
 const loading = ref(false);
 </script>

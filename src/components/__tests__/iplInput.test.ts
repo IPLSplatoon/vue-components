@@ -162,7 +162,7 @@ describe('IplInput', () => {
         });
 
         expect(wrapper.find('.error').text()).toEqual('very bad!!!');
-        expect(wrapper.find('.ipl-input__input-and-extras').classes()).toContain('has-error');
+        expect(wrapper.classes()).toContain('has-error');
         expect(wrapper.find('.ipl-label').classes()).toContain('has-error');
     });
 
