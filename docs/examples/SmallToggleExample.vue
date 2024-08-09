@@ -12,7 +12,7 @@
             :disabled="disabled"
         >
             Label from slot<br>
-            <ipl-label>Extra line of text</ipl-label>
+            <small>Extra line of text</small>
         </ipl-small-toggle>
         <!-- #endregion example -->
     </div>
@@ -27,7 +27,6 @@
 <script setup lang="ts">
 import { IplSmallToggle, IplCheckbox } from '../../src';
 import { ref } from 'vue';
-import IplLabel from '../../src/components/iplLabel.vue';
 
 const value = ref(false);
 const disabled = ref(false);
