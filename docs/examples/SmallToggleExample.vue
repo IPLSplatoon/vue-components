@@ -14,6 +14,12 @@
             Label from slot<br>
             <small>Extra line of text</small>
         </ipl-small-toggle>
+        <div>
+            <ipl-small-toggle
+                v-model="value"
+                :disabled="disabled"
+            />
+        </div>
         <!-- #endregion example -->
     </div>
     <div class="horizontal-layout">

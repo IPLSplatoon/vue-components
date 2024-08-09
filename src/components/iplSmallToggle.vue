@@ -85,6 +85,14 @@ html.light .ipl-small-toggle__wrapper {
     padding: 2px 4px;
     transition: background-color constants.$transition-duration-low;
 
+    &:has(> span:empty) {
+        display: inline-flex;
+
+        > input {
+            margin: 0;
+        }
+    }
+
     &:not(.disabled) {
         &:hover {
             background-color: var(--ipl-hover-overlay-color);
