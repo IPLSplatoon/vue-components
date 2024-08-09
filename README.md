@@ -35,4 +35,4 @@ To run unit tests:
 
 ## Acknowledgements
 
-The `ipl-spinner` component contains code from the [Material Web](https://github.com/material-components/material-web) project, which is licensed under the [Apache License 2.0](https://github.com/material-components/material-web/blob/main/LICENSE)
+The `ipl-spinner` component contains code from the [Material Web](https://github.com/material-components/material-web) project, which is licensed under the [Apache License 2.0](https://github.com/material-components/material-web/blob/510a867f0d4e95663a6e311b368bc879fecb8361/LICENSE)
