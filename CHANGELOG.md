@@ -1,3 +1,14 @@
+# 3.4.0
+
+- Add `prefix` prop to ipl-input to display arbitrary text before the text input
+- Allow adding labels to ipl-checkbox through its default slot
+- Allow ipl-checkbox to be created without a label
+- Clean up styles for ipl-checkbox and ipl-small-toggle when they have no labels
+
+# 3.3.3
+
+- Update exports in package.json to export types correctly
+
 # 3.3.2
 
 - Remove pointer cursors where they shouldn't be
