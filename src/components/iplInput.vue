@@ -345,7 +345,7 @@ input {
     cursor: text;
     font-size: 1.4em;
     color: var(--ipl-body-text-color);
-    white-space: nowrap;
+    white-space: pre;
 
     &.suffix {
         padding-left: 4px;
