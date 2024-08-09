@@ -5,12 +5,17 @@
             type="checkbox"
             :disabled="disabled"
         >
-        {{ label }}
+        <span class="label">
+            <slot>
+                {{ label }}
+            </slot>
+        </span>
     </label>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue';
+import { isBlank } from '../helpers/stringHelper';
 
 export default defineComponent({
     name: 'IplCheckbox',
@@ -18,7 +23,7 @@ export default defineComponent({
     props: {
         label: {
             type: String,
-            required: true
+            default: null
         },
         modelValue: {
             type: Boolean as PropType<boolean>,
@@ -45,7 +50,8 @@ export default defineComponent({
                 set(value) {
                     emit('update:modelValue', value);
                 }
-            })
+            }),
+            isBlank
         };
     }
 });
@@ -76,6 +82,14 @@ label {
                 background-size: 14px;
                 width: 16px;
             }
+        }
+    }
+
+    &:has(> span:empty) {
+        display: inline-flex;
+
+        > input {
+            margin: 0;
         }
     }
 
@@ -112,7 +126,7 @@ label {
         min-width: 22px;
         height: 22px;
         transition: background-color constants.$transition-duration-low;
-        display: grid;
+        display: inline-grid;
         place-content: center;
         margin: 0 6px 0 0;
 

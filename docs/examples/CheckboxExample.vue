@@ -8,6 +8,21 @@
             :disabled="disabled"
             :small="small"
         />
+        <ipl-checkbox
+            v-model="value"
+            :disabled="disabled"
+            :small="small"
+        >
+            Label from slot<br>
+            <small>Extra line of text</small>
+        </ipl-checkbox>
+        <div>
+            <ipl-checkbox
+                v-model="value"
+                :disabled="disabled"
+                :small="small"
+            />
+        </div>
         <!-- #endregion example -->
     </div>
     <div class="horizontal-layout">
