@@ -232,7 +232,6 @@ export default defineComponent({
 .ipl-input__input-and-extras {
     border-bottom: 1px solid var(--ipl-input-color);
     transition-duration: constants.$transition-duration-low;
-    width: 100%;
     display: flex;
     flex-direction: row;
 
