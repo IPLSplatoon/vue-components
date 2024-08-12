@@ -1,7 +1,12 @@
 <template>
     <ipl-label
         class="ipl-input__wrapper"
-        :class="{ [`theme-${theme}`]: true, 'disabled': disabled, 'has-error': validator?.isValid === false }"
+        :class="{
+            [`theme-${theme}`]: true,
+            'disabled': disabled,
+            'has-error': validator?.isValid === false,
+            'has-label': !isBlank(label)
+        }"
     >
         {{ label }}
         <div
@@ -187,6 +192,10 @@ export default defineComponent({
             .ipl-input__input-and-extras {
                 background-color: var(--ipl-input-color-alpha-disabled);
             }
+        }
+
+        &.has-label .ipl-input__input-and-extras {
+            margin-top: 2px;
         }
 
         .ipl-input__input-and-extras {
