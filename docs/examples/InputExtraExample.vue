@@ -10,8 +10,25 @@
         />
         <ipl-input
             v-model="prefixedInputValue"
+            label="Input with prefix"
             name="input-example"
             prefix="/test/"
+            :loading="loading"
+        />
+        <ipl-input
+            v-model="inputValue"
+            name="input-example"
+            type="number"
+            extra="seconds"
+            theme="large"
+            :loading="loading"
+        />
+        <ipl-input
+            v-model="prefixedInputValue"
+            label="Input with prefix"
+            name="input-example"
+            prefix="/test/"
+            theme="large"
             :loading="loading"
         />
         <!-- #endregion example -->
