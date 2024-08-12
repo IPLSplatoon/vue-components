@@ -16,7 +16,7 @@ import { defineComponent, onMounted, ref, watch } from 'vue';
 import { dialogAnimationComplete } from '../helpers/dialogHelper';
 
 export default defineComponent({
-    name: 'IplSidebar',
+    name: 'IplDialog',
 
     props: {
         isOpen: {
@@ -34,7 +34,7 @@ export default defineComponent({
             if (!dialog.value) return;
             dialog.value.setAttribute('inert', '');
             await dialogAnimationComplete(dialog.value);
-            dialog.value.close();
+            dialog.value.close('dismiss');
         }
 
         onMounted(() => {
@@ -75,32 +75,30 @@ export default defineComponent({
 @use 'src/styles/dialogs';
 
 dialog {
-    @include dialogs.dialog-common;
+    @include dialogs.dialog-common(constants.$transition-duration-low, constants.$transition-duration-med, constants.$transition-duration-low, linear, linear);
 
-    transform: translateX(-85vw);
-    width: 85%;
-    height: 100%;
-
-    &:not([open]) {
-        opacity: 0;
-    }
+    opacity: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: constants.$border-radius-outer;
 }
 
 @include dialogs.dialog-common-animation;
 
 @keyframes dialog-enter {
     to {
-        transform: translateX(0vw);
+        opacity: 1;
     }
 }
 
 @keyframes dialog-exit {
     0% {
-        transform: translateX(0vw);
+        opacity: 1;
     }
 
     100% {
-        transform: translateX(-85vw);
+        opacity: 0;
     }
 }
 </style>

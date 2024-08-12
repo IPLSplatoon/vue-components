@@ -1,10 +1,16 @@
 ---
-title: ipl-sidebar
+title: Dialogs
 ---
 
-# ipl-sidebar
+# Dialogs
+
+## ipl-sidebar
 
 ::: demo SidebarExample
+
+## ipl-dialog
+
+::: demo DialogExample
 
 ## Known issues
 

@@ -34,7 +34,7 @@ export default defineConfig({
                     { text: 'Progress Bar', link: '/ipl-progress-bar' },
                     { text: 'Toggles', link: '/toggles' },
                     { text: 'Loading Spinner', link: '/ipl-spinner' },
-                    { text: 'Sidebar', link: '/ipl-sidebar' },
+                    { text: 'Dialogs', link: '/dialogs' },
                     { text: 'Pagination', link: '/ipl-pagination' }
                 ]
             }

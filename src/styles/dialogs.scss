@@ -1,0 +1,76 @@
+@use './constants';
+
+@mixin dialog-common-animation() {
+    @keyframes backdrop-fade-in {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes backdrop-fade-out {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+}
+
+@mixin dialog-common(
+    $transition-duration-dialog: constants.$transition-duration-med,
+    $transition-duration-backdrop-open: constants.$transition-duration-med,
+    $transition-duration-backdrop-close: constants.$transition-duration-med,
+    $timing-function-open: ease-out,
+    $timing-function-close: ease-in
+) {
+    border: none;
+    background-color: var(--ipl-bg-primary);
+    color: var(--ipl-body-text-color);
+    max-height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    inset: 0;
+    display: block;
+    position: fixed;
+    // Unfortunately, if you want animation, you'll have to put up with this.
+    z-index: 999999;
+
+    &:not([open]) {
+        pointer-events: none;
+    }
+
+    &[open] {
+        animation: dialog-enter $transition-duration-dialog $timing-function-open forwards;
+
+        &::backdrop {
+            animation: backdrop-fade-in $transition-duration-backdrop-open linear forwards;
+        }
+
+        &[inert] {
+            animation: dialog-exit $transition-duration-dialog $timing-function-close forwards;
+
+            &::backdrop {
+                animation: backdrop-fade-out $transition-duration-backdrop-close linear forwards;
+            }
+        }
+    }
+
+    &::backdrop {
+        background: var(--ipl-page-overlay-color);
+    }
+
+    > .content {
+        padding: 8px;
+    }
+
+    &:focus-visible {
+        outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);
+    }
+}

@@ -14,6 +14,7 @@ export { default as IplMultiSelect } from './components/iplMultiSelect.vue';
 export { default as IplProgressBar } from './components/iplProgressBar.vue';
 export { default as IplSelect } from './components/iplSelect.vue';
 export { default as IplSidebar } from './components/iplSidebar.vue';
+export { default as IplDialog } from './components/iplDialog.vue';
 export { default as IplSpace } from './components/iplSpace.vue';
 export { default as IplToggle } from './components/iplToggle.vue';
 export { default as IplToggleButton } from './components/iplToggleButton.vue';

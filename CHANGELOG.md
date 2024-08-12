@@ -1,3 +1,7 @@
+# 3.5.0
+
+- Add ipl-dialog component
+
 # 3.4.0
 
 - Add `prefix` prop to ipl-input to display arbitrary text before the text input
