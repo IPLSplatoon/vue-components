@@ -42,7 +42,7 @@
                 <ipl-spinner
                     v-if="loading"
                     :size="theme === 'large' ? '3px' : '2px'"
-                    :width="theme === 'large' ? '28px' : '24px'"
+                    :width="theme === 'large' ? '27px' : '24px'"
                     :color="disabled ? 'var(--ipl-disabled-body-text-color)' : 'var(--ipl-body-text-color)'"
                     data-test="loading-spinner"
                 />
