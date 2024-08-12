@@ -34,8 +34,8 @@ features:
     link: /toggles
   - title: ipl-spinner
     link: /ipl-spinner
-  - title: ipl-sidebar
-    link: /ipl-sidebar
+  - title: Dialogs
+    link: /dialogs
   - title: ipl-pagination
     link: /ipl-pagination
 ---
