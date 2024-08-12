@@ -1,3 +1,9 @@
+# 3.5.1
+
+- Fix ipl-input with the large theme growing too wide in some cases
+- Improve appearance of large inputs with labels
+- Fix large ipl-input growing slightly taller when loading
+
 # 3.5.0
 
 - Add ipl-dialog component
