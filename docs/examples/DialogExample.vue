@@ -7,6 +7,7 @@
         <ipl-dialog
             v-model:is-open="dialogOpen"
             style="width: 500px"
+            :persistent="persistent"
         >
             <div class="width-capped-content">
                 <ipl-space
@@ -31,13 +32,20 @@
         />
         <!-- #endregion example -->
     </div>
+    <div class="horizontal-layout">
+        <ipl-checkbox
+            v-model="persistent"
+            label="Persistent"
+        />
+    </div>
 </template>
 
 <script setup lang="ts">
-import { IplButton, IplSpace, IplDialog } from '../../src';
+import { IplButton, IplSpace, IplDialog, IplCheckbox } from '../../src';
 import { ref } from 'vue';
 
 const dialogOpen = ref(false);
+const persistent = ref(false);
 </script>
 
 <style lang="scss">

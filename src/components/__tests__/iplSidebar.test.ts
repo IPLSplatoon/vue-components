@@ -44,6 +44,19 @@ describe('IplSidebar', () => {
         expect(dialog.element.hasAttribute('inert')).toEqual(true);
     });
 
+    it('does not close the dialog when directly clicked and persistent', async () => {
+        const wrapper = mount(IplSidebar, { props: { isOpen: true, persistent: true } });
+
+        const dialog = wrapper.get('dialog');
+        const event = new Event('click');
+        Object.defineProperty(event, 'target', { value: dialog.element });
+        dialog.element.dispatchEvent(event);
+        await flushPromises();
+
+        expect(dialog.element.close).not.toHaveBeenCalled();
+        expect(dialog.element.hasAttribute('inert')).toEqual(false);
+    });
+
     it('does not close the dialog when clicking on a child of the dialog', async () => {
         const wrapper = mount(IplSidebar, { props: { isOpen: true } });
 

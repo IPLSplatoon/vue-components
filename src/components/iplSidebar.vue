@@ -22,6 +22,10 @@ export default defineComponent({
         isOpen: {
             type: Boolean,
             required: true
+        },
+        persistent: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -63,7 +67,9 @@ export default defineComponent({
                 onClose();
             },
             onClick() {
-                onClose();
+                if (!props.persistent) {
+                    onClose();
+                }
             }
         };
     }

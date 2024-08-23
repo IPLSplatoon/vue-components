@@ -1,3 +1,7 @@
+# 3.6.0
+
+- Add `persistent` prop to ipl-sidebar and ipl-dialog which disables closing the dialogs when clicking outside of them
+
 # 3.5.1
 
 - Fix ipl-input with the large theme growing too wide in some cases

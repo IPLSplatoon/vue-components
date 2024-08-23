@@ -4,7 +4,10 @@
         class="sidebar-example-layout"
     >
         <!-- #region example -->
-        <ipl-sidebar v-model:is-open="sidebarOpen">
+        <ipl-sidebar
+            v-model:is-open="sidebarOpen"
+            :persistent="persistent"
+        >
             <div class="width-capped-content">
                 <ipl-space
                     color="light"
@@ -28,13 +31,20 @@
         />
         <!-- #endregion example -->
     </div>
+    <div class="horizontal-layout">
+        <ipl-checkbox
+            v-model="persistent"
+            label="Persistent"
+        />
+    </div>
 </template>
 
 <script setup lang="ts">
-import { IplSidebar, IplButton, IplSpace } from '../../src';
+import { IplSidebar, IplButton, IplSpace, IplCheckbox } from '../../src';
 import { ref } from 'vue';
 
 const sidebarOpen = ref(false);
+const persistent = ref(false);
 </script>
 
 <style lang="scss">
