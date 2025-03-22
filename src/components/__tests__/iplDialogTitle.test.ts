@@ -12,6 +12,15 @@ describe('IplDialogTitle', () => {
         expect(wrapper.html()).toMatchSnapshot();
     });
 
+    it('matches snapshot with slots', () => {
+        const wrapper = mount(IplPanelTitle, { slots: {
+            default: () => 'Cool Dialog',
+            end: '<div>End Item</div>'
+        } });
+
+        expect(wrapper.html()).toMatchSnapshot();
+    });
+
     it('matches snapshot when closing is disabled', () => {
         const wrapper = mount(IplPanelTitle, { props: { title: 'Cool Dialog', closingDisabled: true } });
 

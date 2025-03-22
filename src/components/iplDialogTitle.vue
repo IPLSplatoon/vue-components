@@ -3,17 +3,24 @@
         class="ipl-dialog-title"
         :class="`color-${color}`"
     >
-        <span class="ipl-dialog-title__title-text">{{ title }}</span>
-        <ipl-button
-            data-test="close-button"
-            class="close-button"
-            :disabled="closingDisabled"
-            :icon="faTimes"
-            color="transparent"
-            inline
-            small
-            @click="close"
-        />
+        <span class="ipl-dialog-title__title-text">
+            <slot>
+                {{ title }}
+            </slot>
+        </span>
+        <div class="ipl-dialog-title__end">
+            <slot name="end" />
+            <ipl-button
+                data-test="close-button"
+                class="close-button"
+                :disabled="closingDisabled"
+                :icon="faTimes"
+                color="transparent"
+                inline
+                small
+                @click="close"
+            />
+        </div>
     </div>
 </template>
 
@@ -31,7 +38,7 @@ export default defineComponent({
     props: {
         title: {
             type: String,
-            required: true
+            default: ''
         },
         closingDisabled: {
             type: Boolean,
@@ -76,6 +83,16 @@ export default defineComponent({
         flex-grow: 1;
         font-size: 1.25em;
         font-weight: 500;
+    }
+
+    .ipl-dialog-title__end {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        :deep(> *:not(:last-child)) {
+            margin-right: 4px;
+        }
     }
 }
 </style>

@@ -2,12 +2,25 @@
 
 exports[`IplDialogTitle matches snapshot 1`] = `
 "<div class="ipl-dialog-title color-primary"><span class="ipl-dialog-title__title-text">Cool Dialog</span>
-  <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" errormessage="Error!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
+  <div class="ipl-dialog-title__end">
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" errormessage="Error!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
+  </div>
 </div>"
 `;
 
 exports[`IplDialogTitle matches snapshot when closing is disabled 1`] = `
 "<div class="ipl-dialog-title color-primary"><span class="ipl-dialog-title__title-text">Cool Dialog</span>
-  <ipl-button-stub icon="[object Object]" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" errormessage="Error!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
+  <div class="ipl-dialog-title__end">
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="true" async="false" progressmessage="Working..." successmessage="Done!" errormessage="Error!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
+  </div>
+</div>"
+`;
+
+exports[`IplDialogTitle matches snapshot with slots 1`] = `
+"<div class="ipl-dialog-title color-primary"><span class="ipl-dialog-title__title-text">Cool Dialog</span>
+  <div class="ipl-dialog-title__end">
+    <div>End Item</div>
+    <ipl-button-stub icon="[object Object]" color="transparent" disabled="false" async="false" progressmessage="Working..." successmessage="Done!" errormessage="Error!" requiresconfirmation="false" shortconfirmationmessage="false" small="true" disableonsuccess="false" inline="true" data-test="close-button" class="close-button"></ipl-button-stub>
+  </div>
 </div>"
 `;

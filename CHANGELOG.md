@@ -1,3 +1,7 @@
+# 3.7.0
+
+- Add default and `end` slot to ipl-dialog-title
+
 # 3.6.0
 
 - Add `persistent` prop to ipl-sidebar and ipl-dialog which disables closing the dialogs when clicking outside of them
