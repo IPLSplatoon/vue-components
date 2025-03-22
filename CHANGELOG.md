@@ -1,6 +1,7 @@
 # 3.7.0
 
 - Add default and `end` slot to ipl-dialog-title
+- Remove `data-test` attributes from built code
 
 # 3.6.0
 
