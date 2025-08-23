@@ -16,6 +16,8 @@ title: Dialogs
 
 ::: demo DialogHeaderFooterExample
 
+::: demo DialogPositionExample
+
 ## Known issues
 
 - The backdrop does not animate in Firefox ([Bugzilla](https://bugzilla.mozilla.org/show_bug.cgi?id=1725177))

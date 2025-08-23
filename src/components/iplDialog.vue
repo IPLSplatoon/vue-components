@@ -1,6 +1,7 @@
 <template>
     <dialog
         ref="dialog"
+        :class="[`anchor-x-${anchorX}`, `anchor-y-${anchorY}`]"
         @close="onClose"
         @cancel.prevent="onCancel"
         @click.self="onClick"
@@ -18,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from 'vue';
+import { defineComponent, onMounted, PropType, ref, watch } from 'vue';
 import { dialogAnimationComplete } from '../helpers/dialogHelper';
 
 export default defineComponent({
@@ -32,6 +33,14 @@ export default defineComponent({
         persistent: {
             type: Boolean,
             default: false
+        },
+        anchorY: {
+            type: String as PropType<'start' | 'center' | 'end'>,
+            default: 'center'
+        },
+        anchorX: {
+            type: String as PropType<'start' | 'center' | 'end'>,
+            default: 'center'
         }
     },
 
@@ -90,11 +99,65 @@ dialog {
     @include dialogs.dialog-common(constants.$transition-duration-low, constants.$transition-duration-med, constants.$transition-duration-low, linear, linear);
 
     opacity: 0;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     border-radius: constants.$border-radius-outer;
     max-height: calc(100dvh - 16px);
+
+    // I don't really like it, but it works!
+    &.anchor-x-start {
+        left: 8px;
+    }
+
+    &.anchor-x-center {
+        left: 50%;
+
+        &.anchor-y-start {
+            transform: translateX(-50%);
+        }
+
+        &.anchor-y-center {
+            transform: translate(-50%, -50%);
+        }
+
+        &.anchor-y-end {
+            transform: translate(-50%, -100%);
+        }
+    }
+
+    &.anchor-x-end {
+        left: calc(100% - 8px);
+
+        &.anchor-y-start {
+            transform: translateX(-100%);
+        }
+
+        &.anchor-y-center {
+            transform: translate(-100%, -50%);
+        }
+
+        &.anchor-y-end {
+            transform: translate(-100%, -100%);
+        }
+    }
+
+    &.anchor-y-start {
+        top: 8px;
+    }
+
+    &.anchor-y-center {
+        top: 50%;
+
+        &.anchor-x-start {
+            transform: translateY(-50%);
+        }
+    }
+
+    &.anchor-y-end {
+        top: calc(100% - 8px);
+
+        &.anchor-x-start {
+            transform: translateY(-100%);
+        }
+    }
 }
 
 // Touchscreen devices tend to have random UI elements loitering around the bottom of the screen
@@ -104,7 +167,14 @@ dialog {
 @media (pointer: coarse) {
     dialog {
         max-height: calc(100dvh - 32px);
-        top: calc(50% - 8px);
+
+        &.anchor-y-end {
+            top: calc(100% - 24px);
+        }
+
+        &.anchor-y-center {
+            top: calc(50% - 8px);
+        }
     }
 }
 
