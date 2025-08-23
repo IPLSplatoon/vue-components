@@ -5,8 +5,14 @@
         @cancel.prevent="onCancel"
         @click.self="onClick"
     >
+        <div class="header">
+            <slot name="header" />
+        </div>
         <div class="content">
             <slot />
+        </div>
+        <div class="footer">
+            <slot name="footer" />
         </div>
     </dialog>
 </template>
@@ -86,9 +92,20 @@ dialog {
     transform: translateX(-85vw);
     width: 85%;
     height: 100%;
+    max-height: 100%;
 
     &:not([open]) {
         opacity: 0;
+    }
+}
+
+// Touchscreen devices tend to have random UI elements loitering around the bottom of the screen
+// (e.g. the little bar you swipe up from to return to the home screen; I don't know what it's called.
+// I can see it on my iPad and my Pixel, so it isn't unique to one operating system.)
+// This media query addresses that by adding more empty space below dialogs on touchscreens.
+@media (pointer: coarse) {
+    dialog > .footer:not(:empty) {
+        padding-bottom: 24px;
     }
 }
 

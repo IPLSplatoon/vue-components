@@ -1,3 +1,7 @@
+# 3.8.0
+
+- Add optional `header` and `footer` slots to ipl-dialog and ipl-sidebar
+
 # 3.7.0
 
 - Add default and `end` slot to ipl-dialog-title

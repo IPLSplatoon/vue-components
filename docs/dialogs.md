@@ -8,9 +8,13 @@ title: Dialogs
 
 ::: demo SidebarExample
 
+::: demo SidebarHeaderFooterExample
+
 ## ipl-dialog
 
 ::: demo DialogExample
+
+::: demo DialogHeaderFooterExample
 
 ## Known issues
 

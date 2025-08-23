@@ -1,5 +1,6 @@
 import './styles/variables.scss';
 import './styles/variables-light.scss';
+import './styles/dialogs.scss';
 
 export { default as IplButton } from './components/iplButton.vue';
 export { default as IplCheckbox } from './components/iplCheckbox.vue';
