@@ -1,7 +1,7 @@
 # 3.9.0
 
 - Add `autocomplete` and `autofocus` attributes to ipl-input
-- 
+- Set color-scheme CSS property to fix some styling oddities
 
 # 3.8.0
 
