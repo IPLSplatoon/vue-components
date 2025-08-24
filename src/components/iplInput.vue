@@ -28,6 +28,8 @@
                 :class="{ centered: centered }"
                 :disabled="disabled"
                 :placeholder="placeholder"
+                :autocomplete="autocomplete"
+                :autofocus="autofocus"
                 @focus="handleFocusEvent"
                 @blur="handleFocusEvent"
                 @input="handleFocusEvent($event), handleInputEvent()"
@@ -120,6 +122,14 @@ export default defineComponent({
         theme: {
             type: String as PropType<'large' | 'default'>,
             default: 'default'
+        },
+        autofocus: {
+            type: Boolean,
+            default: false
+        },
+        autocomplete: {
+            type: String,
+            default: null
         }
     },
 

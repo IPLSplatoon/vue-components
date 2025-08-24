@@ -1,3 +1,8 @@
+# 3.9.0
+
+- Add `autocomplete` and `autofocus` attributes to ipl-input
+- 
+
 # 3.8.0
 
 - Add optional `header` and `footer` slots to ipl-dialog and ipl-sidebar
