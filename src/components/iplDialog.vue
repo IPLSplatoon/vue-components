@@ -101,7 +101,7 @@ dialog {
 
     opacity: 0;
     border-radius: constants.$border-radius-outer;
-    max-height: calc(100dvh - 16px);
+    max-height: calc(100% - 16px);
 
     // I don't really like it, but it works!
     &.anchor-x-start {
