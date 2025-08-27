@@ -1,6 +1,7 @@
 <template>
     <component
         :is="hasLink ? 'a' : 'button'"
+        ref="rootElement"
         :href="disabledInternal ? undefined : href"
         :target="hasLink ? '_blank' : undefined"
         class="ipl-button"
@@ -144,6 +145,7 @@ export default defineComponent({
         let resetTimeout: number | null = null;
         let confirmationResetTimeout: number | null = null;
         const buttonState: Ref<'idle' | 'error' | 'success' | 'loading'> = ref('idle');
+        const rootElement = ref<HTMLElement>();
         const setState = (state: 'error' | 'success') => {
             buttonState.value = state;
             if (resetTimeout !== null) {
@@ -193,7 +195,7 @@ export default defineComponent({
                     color: textColor.value
                 });
             }),
-            async handleClick(event: Event) {
+            async handleClick(event: MouseEvent) {
                 if (disabledInternal.value) {
                     return;
                 }
@@ -215,7 +217,12 @@ export default defineComponent({
                 }
 
                 if (!props.async && !props.disableOnSuccess) {
-                    emit('click');
+                    // Pretend the target was always the root button element.
+                    // There might be a really good reason not to do this I haven't found yet,
+                    // but at the moment I found it wasn't useful to specify whether the
+                    // element that was pressed was the button or its label.
+                    Object.defineProperty(event, 'target', { value: rootElement.value });
+                    emit('click', event);
                 } else {
                     try {
                         if (props.async) {
@@ -245,7 +252,8 @@ export default defineComponent({
                 return buttonState.value;
             }),
             isBlank,
-            hasLink
+            hasLink,
+            rootElement
         };
     }
 });

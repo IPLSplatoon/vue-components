@@ -1,9 +1,12 @@
 # 3.9.0
 
+- Allow adjusting the position of ipl-dialog
 - Add `autocomplete` and `autofocus` attributes to ipl-input
 - Set color-scheme CSS property to fix some styling oddities
 - Add `closeComplete` event to ipl-dialog
 - Add `select` method to ipl-input
+- Return native JS click event with ipl-button click events 
+  - This may be used to determine the clicked DOM element or the click's position
 
 # 3.8.0
 
