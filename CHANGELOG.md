@@ -3,6 +3,7 @@
 - Add `autocomplete` and `autofocus` attributes to ipl-input
 - Set color-scheme CSS property to fix some styling oddities
 - Add `closeComplete` event to ipl-dialog
+- Add `select` method to ipl-input
 
 # 3.8.0
 

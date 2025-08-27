@@ -165,6 +165,11 @@ export default defineComponent({
                     input.value.focus();
                 }
             },
+            select() {
+                if (input.value) {
+                    input.value.select();
+                }
+            },
             blur() {
                 input.value?.blur();
             },
