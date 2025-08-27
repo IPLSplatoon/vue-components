@@ -71,7 +71,6 @@
         padding: 8px;
         border-bottom: 1px solid var(--ipl-input-color);
         background-color: var(--ipl-bg-secondary);
-        border-radius: constants.$border-radius-outer constants.$border-radius-outer 0 0;
 
         > :deep(.ipl-dialog-title) {
             padding: 0 8px;
@@ -83,7 +82,6 @@
         padding: 8px;
         border-top: 1px solid var(--ipl-input-color);
         background-color: var(--ipl-bg-secondary);
-        border-radius: 0 0 constants.$border-radius-outer constants.$border-radius-outer;
     }
 
     > .content {

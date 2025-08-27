@@ -103,6 +103,14 @@ dialog {
     border-radius: constants.$border-radius-outer;
     max-height: calc(100% - 16px);
 
+    > .header {
+        border-radius: constants.$border-radius-outer constants.$border-radius-outer 0 0;
+    }
+
+    > .footer {
+        border-radius: 0 0 constants.$border-radius-outer constants.$border-radius-outer;
+    }
+
     // I don't really like it, but it works!
     &.anchor-x-start {
         left: 8px;
