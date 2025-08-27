@@ -44,7 +44,7 @@ export default defineComponent({
         }
     },
 
-    emits: ['update:isOpen'],
+    emits: ['update:isOpen', 'closeComplete'],
 
     setup(props, { emit }) {
         const dialog = ref<HTMLDialogElement | null>(null);
@@ -54,6 +54,7 @@ export default defineComponent({
             dialog.value.setAttribute('inert', '');
             await dialogAnimationComplete(dialog.value);
             dialog.value.close('dismiss');
+            emit('closeComplete');
         }
 
         onMounted(() => {
