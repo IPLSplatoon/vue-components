@@ -14,6 +14,8 @@ title: Dialogs
 
 ::: demo DialogExample
 
+::: demo DialogFormExample
+
 ::: demo DialogHeaderFooterExample
 
 ::: demo DialogPositionExample
