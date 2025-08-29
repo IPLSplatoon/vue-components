@@ -35,7 +35,7 @@ To embed the demo component into a markdown document, use the `demo` container -
 ::: demo ExampleFileName
 ```
 
-Component examples are typically named using the follwing format:<br>`{Component Name}{Details}Example.vue`
+Component examples are typically named using the following format:<br>`{Component Name}{Details}Example.vue`
 
 Examples saved under subdirectories (e.g. `docs/examples/new-component/NewComponentExample.vue`) will **not** function.
 
