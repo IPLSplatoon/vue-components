@@ -111,6 +111,15 @@ body {
     font-size: 24px;
 }
 
+.VPHero .main .text,
+.VPHero .main .tagline {
+    max-width: unset;
+}
+
+.VPButton.medium {
+    border-radius: constants.$border-radius-inner !important;
+}
+
 small {
     font-size: 0.75em;
     color: var(--ipl-input-color);

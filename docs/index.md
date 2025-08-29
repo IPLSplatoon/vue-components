@@ -1,5 +1,12 @@
 ---
 layout: home
+hero:
+  text: '@iplsplatoon/vue-components'
+  tagline: Vue components for internal Inkling Performance Labs tools
+  actions:
+    - theme: brand
+      text: Introduction
+      link: /introduction
 
 features:
   - title: ipl-button
