@@ -3,6 +3,7 @@
         :is="clickable ? 'button' : 'div'"
         class="ipl-space"
         :class="`color-${color}`"
+        :type="clickable ? 'button' : undefined"
     >
         <slot />
     </component>

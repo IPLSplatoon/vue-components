@@ -1,3 +1,7 @@
+# 3.9.1
+
+- Add `type` attributes to ipl-button and ipl-space (when clickable), making them more conscious of HTML forms
+
 # 3.9.0
 
 - Allow adjusting the position of ipl-dialog

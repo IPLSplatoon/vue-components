@@ -15,6 +15,7 @@
             'is-transparent': color === 'transparent',
             'inline': inline
         }"
+        :type="type"
         :disabled="hasLink ? undefined : disabledInternal"
         :autocomplete="hasLink ? undefined : 'off'"
         @click="handleClick"
@@ -135,6 +136,10 @@ export default defineComponent({
         inline: {
             type: Boolean,
             default: false
+        },
+        type: {
+            type: String,
+            default: 'button'
         }
     },
 
