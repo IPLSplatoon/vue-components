@@ -21,6 +21,7 @@ export default defineConfig({
                     { text: 'Button', link: '/ipl-button' },
                     { text: 'Data Row', link: '/ipl-data-row' },
                     { text: 'Dialog Title', link: '/ipl-dialog-title' },
+                    { text: 'Dialogs', link: '/dialogs' },
                     { text: 'Space', link: '/ipl-space' },
                     { text: 'Expanding Space', link: '/ipl-expanding-space' },
                     { text: 'Expanding Space Group', link: '/ipl-expanding-space-group' },
@@ -34,7 +35,6 @@ export default defineConfig({
                     { text: 'Progress Bar', link: '/ipl-progress-bar' },
                     { text: 'Toggles', link: '/toggles' },
                     { text: 'Loading Spinner', link: '/ipl-spinner' },
-                    { text: 'Dialogs', link: '/dialogs' },
                     { text: 'Pagination', link: '/ipl-pagination' }
                 ]
             }
