@@ -21,6 +21,7 @@
                 v-for="(option, index) in modelValue"
                 :key="option.value"
                 class="option"
+                type="button"
                 @click="deselectOption(index)"
             >
                 {{ option.name }}

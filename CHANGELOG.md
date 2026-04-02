@@ -1,3 +1,7 @@
+# 3.9.2
+
+- Fix forms including ipl-multi-select elements with selected options not submitting as expected
+
 # 3.9.1
 
 - Add `type` attributes to ipl-button and ipl-space (when clickable), making them more conscious of HTML forms
