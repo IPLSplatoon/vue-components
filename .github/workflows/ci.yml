@@ -61,4 +61,4 @@ jobs:
       - name: Install dependencies
         run: yarn
       - run: yarn build
-      - run: yarn npm publish
+      - run: yarn npm publish --provenance
