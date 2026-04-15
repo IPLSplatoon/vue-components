@@ -4,6 +4,7 @@
         class="ipl-space"
         :class="`color-${color}`"
         :type="clickable ? 'button' : undefined"
+        :disabled="clickable ? disabled : undefined"
     >
         <slot />
     </component>
@@ -27,6 +28,10 @@ export default defineComponent({
         clickable: {
             type: Boolean,
             default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     }
 });
@@ -38,9 +43,6 @@ export default defineComponent({
 @use 'src/styles/space';
 
 button.ipl-space {
-    @include space.space-colors-hover();
-    @include space.space-colors-active();
-
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
@@ -55,6 +57,15 @@ button.ipl-space {
     transition-property: background-color;
     transition-duration: constants.$transition-duration-low;
     cursor: default;
+
+    &:not(:disabled) {
+        @include space.space-colors-hover();
+        @include space.space-colors-active();
+    }
+
+    &:disabled {
+        color: var(--ipl-disabled-body-text-color);
+    }
 
     &:focus-visible {
         outline: var(--ipl-focus-outline-color) solid var(--ipl-focus-outline-width);

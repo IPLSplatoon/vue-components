@@ -1,3 +1,7 @@
+# 3.10.0
+
+- Add `disabled` property to clickable ipl-space
+
 # 3.9.2
 
 - Fix forms including ipl-multi-select elements with selected options not submitting as expected
