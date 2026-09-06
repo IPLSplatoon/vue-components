@@ -1,6 +1,7 @@
 # 3.11.0
 
 - ipl-dialog more properly respects device safe areas
+- Fix persistent ipl-dialogs being closeable by pressing the esc key 
 
 # 3.10.0
 

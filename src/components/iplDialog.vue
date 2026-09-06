@@ -2,6 +2,7 @@
     <dialog
         ref="dialog"
         :class="[`anchor-x-${anchorX}`, `anchor-y-${anchorY}`]"
+        @keydown.esc="onEscape"
         @close="onClose"
         @cancel.prevent="onCancel"
         @click.self="onClick"
@@ -50,7 +51,7 @@ export default defineComponent({
         const dialog = ref<HTMLDialogElement | null>(null);
 
         async function onClose() {
-            if (!dialog.value) return;
+            if (!dialog.value || dialog.value.hasAttribute('inert')) return;
             dialog.value.setAttribute('inert', '');
             await dialogAnimationComplete(dialog.value);
             dialog.value.close('dismiss');
@@ -76,6 +77,11 @@ export default defineComponent({
 
         return {
             dialog,
+            onEscape(event: Event) {
+                if (props.persistent) {
+                    event.preventDefault();
+                }
+            },
             onClose() {
                 emit('update:isOpen', false);
             },
