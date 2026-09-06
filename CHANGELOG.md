@@ -1,3 +1,7 @@
+# 3.11.0
+
+- ipl-dialog more properly respects device safe areas
+
 # 3.10.0
 
 - Add `disabled` property to clickable ipl-space

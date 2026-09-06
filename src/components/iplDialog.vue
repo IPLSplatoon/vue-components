@@ -101,7 +101,7 @@ dialog {
 
     opacity: 0;
     border-radius: constants.$border-radius-outer;
-    max-height: calc(100% - 16px);
+    max-height: calc(100dvh - 16px - env(safe-area-inset-bottom, 0px) - env(safe-area-inset-top, 0px));
 
     > .header {
         border-radius: constants.$border-radius-outer constants.$border-radius-outer 0 0;
@@ -153,7 +153,7 @@ dialog {
     }
 
     &.anchor-y-center {
-        top: 50%;
+        top: calc(50% - env(safe-area-inset-bottom, 0px) / 2);
 
         &.anchor-x-start {
             transform: translateY(-50%);
@@ -161,28 +161,10 @@ dialog {
     }
 
     &.anchor-y-end {
-        top: calc(100% - 8px);
+        top: calc(100% - 8px - env(safe-area-inset-bottom, 0px));
 
         &.anchor-x-start {
             transform: translateY(-100%);
-        }
-    }
-}
-
-// Touchscreen devices tend to have random UI elements loitering around the bottom of the screen
-// (e.g. the little bar you swipe up from to return to the home screen; I don't know what it's called.
-// I can see it on my iPad and my Pixel, so it isn't unique to one operating system.)
-// This media query addresses that by adding more empty space below dialogs on touchscreens.
-@media (pointer: coarse) {
-    dialog {
-        max-height: calc(100dvh - 32px);
-
-        &.anchor-y-end {
-            top: calc(100% - 24px);
-        }
-
-        &.anchor-y-center {
-            top: calc(50% - 8px);
         }
     }
 }
