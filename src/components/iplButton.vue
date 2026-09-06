@@ -3,7 +3,7 @@
         :is="hasLink ? 'a' : 'button'"
         ref="rootElement"
         :href="disabledInternal ? undefined : href"
-        :target="hasLink ? '_blank' : undefined"
+        :target="hasLink ? target : undefined"
         class="ipl-button"
         :style="buttonStyle"
         :class="{
@@ -140,6 +140,10 @@ export default defineComponent({
         type: {
             type: String,
             default: 'button'
+        },
+        target: {
+            type: String,
+            default: '_blank'
         }
     },
 

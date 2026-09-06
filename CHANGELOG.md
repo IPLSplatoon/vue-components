@@ -1,3 +1,7 @@
+# 3.12.0
+
+- Support `target` attribute on link-type ipl-button
+
 # 3.11.0
 
 - ipl-dialog more properly respects device safe areas
